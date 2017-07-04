@@ -1,0 +1,15 @@
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\bin\Microsoft.PythonTools.WebRole.dll
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\attach_server.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\visualstudio_py_debugger.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\visualstudio_py_repl.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\visualstudio_py_util.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\__init__.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\__main__.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\bin\AzureSetup.cfg
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\bin\Microsoft.PythonTools.AzureSetup.exe
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\bin\Microsoft.PythonTools.AzureSetup.exe.config
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\bin\wfastcgi.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\deployment-updated-pyvenv.cfg
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\ptvs_virtualenv_proxy.py
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\web.config
+c:\users\joyce\documents\mypigs\Thepigapp\Thepigapp\obj\Debug\web.debug.config

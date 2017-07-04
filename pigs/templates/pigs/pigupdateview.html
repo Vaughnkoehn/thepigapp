@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/formstyles.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/pigupdateviewstyles.css' %}" />
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width">
+    <title></title>
+</head>
+<body>
+    <h1>Change pig entry</h1>
+    {%if error%}{{error}}{%endif%}
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+
+        </table>
+        
+        <button class="button" type="submit" formmethod="post" formaction="{% url 'pigs:deadpigs' pigpen pigid %}">Dead</button>
+        <button class="button" type="submit" formmethod="post" formaction="{% url 'pigs:culledpigs' pigpen pigid %}">Culled</button>
+        <button class="button"><a class="nostyle block" href="{% url 'pigs:delete' pigpen 'Pigsinpen' pigid %}">Delete</a></button>
+        <button class="button"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
+        <button class="button" type="submit" formmethod="post" formaction="{% url 'pigs:ship' pigpen %}">Ship</button>
+        
+     </form>
+</body>
+</html>

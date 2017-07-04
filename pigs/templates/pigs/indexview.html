@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/indexviewstyles.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
+<script>
+    function testFunc(item) {
+        var divs = document.getElementsByClassName("containers");
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = 'none';
+        }
+        var myDiv = item.href;
+        var target = myDiv.split("#");
+        document.getElementById(target[1]).style.display = "block";
+    }
+</script>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Home</title>
+</head>
+<body>
+    <div class="header">
+        <h1>The Pig Farm</h1>
+        <ul>
+        <li class="feederpigs"><a class="nostyle" href="#Feeders" onclick="testFunc(this)">Feeders</a></li>
+        <li><a class="nostyle" href="#Sows" onclick="testFunc(this)">Sows</a></li>
+        <li><a class="nostyle" href="{% url 'pigs:shippedpigs' %}">Shipped</a></li>
+        </ul>
+    </div>
+
+        <div class="containers" id="Feeders">
+        {% for pen in pigpen_list %}
+
+        <a class="pens" href="{% url 'pigs:pen' pen %}">
+            <div class="penwrapper">
+                <h4>{{pen}}</h4>
+                {% for pig in pen.pigsinpen_set.all %}
+                {% if forloop.last %}
+                <h4>Pigs in pen: {{pig.pigs}} </h4>
+                {%endif%}
+                {%empty%}
+                <h4>Pigs in pen: 0</h4>
+                {%endfor%}
+            </div>
+        </a>
+            
+        {%endfor%}
+       </div> 
+       <div class="containers" id="Sows">
+           sow1
+           sow2
+           sow3
+       </div>
+
+
+
+
+
+</body>
+</html>

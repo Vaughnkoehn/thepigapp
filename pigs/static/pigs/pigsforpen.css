@@ -1,0 +1,31 @@
+﻿table, th, td {
+    border:1px solid black;
+    cursor:default;
+    font-size:4vmin;
+}
+td {
+  
+    text-align:center;
+    transition:all 1s ease-in-out;
+}
+td.overflow {
+    
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    max-width:15ch;
+}
+td.overflow:hover {
+    overflow:visible;
+    white-space:normal;
+    
+}
+div.nohover {
+    display:none;
+}
+td.hovertd:hover div.nohover {
+    display:block;
+}
+td.hovertd:hover div.hover {
+    display:none;
+}

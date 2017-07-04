@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/formstyles.css' %}" />
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width">
+    <title>Pigs</title>
+</head>
+<body>
+    <h1>Add pigs for {{pigpen}}</h1>
+    
+    {%if error %} {{error}} {%endif%}
+    <form method="post">
+        {% csrf_token %}
+        <table>
+        {{form.as_table}}
+        </table>
+        <input class="button" type="submit" value="Save" />
+        <button class="button"><a class="nostyle block" href="{% url 'pigs:pigsforpen' pigpen %}">Back</a></button>
+    </form>
+</body>
+</html>

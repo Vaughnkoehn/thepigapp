@@ -1,0 +1,16 @@
+﻿body
+{
+}
+form {
+    position:relative;
+    top:10px;
+}
+.button {
+    position:relative;
+    top:15px;
+    left:5%;
+    width:30%;
+}
+table input {
+    width:30vmin;
+}

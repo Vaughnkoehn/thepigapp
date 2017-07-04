@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
+<script src="{% static 'pigs/sorttable.js' %}"></script>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width">
+    <title></title>
+</head>
+<body>
+      <h1>Shipped</h1>
+      
+        <table class="border sortable">
+           
+                <tr>
+                    <th>Pigpen</th>
+                    <th>Date</th>
+                    <th>Pigs</th>
+                    <th>Pig Cost</th>
+                    <th>Ration</th>
+                    <th>Ration Cost</th>
+                    
+                </tr>
+                 {% for pig in object_list %}
+               
+            <tr>
+                <td>{{pig.pigpen}}</td>
+                <td>{{pig.shipped_date|date}}</td>
+                <td>{{pig.pigs}}</td>
+                <td>{{pig.pig_cost}}</td>
+                <td>{{pig.ration_amount}}</td>
+                <td>{{pig.pig_ration_cost}}</td>
+               
+            </tr>
+                {%endfor%}
+        </table>
+</body>
+</html>
