@@ -46,7 +46,7 @@ class pigration(models.Model):
     ration = models.ForeignKey(Ration, on_delete=models.CASCADE)
     pigsinapen = models.CharField(max_length=4)
     ration_amount = models.IntegerField()
-    date = models.DateTimeField()
+    date = models.DateTimeField(blank=True)
 
 class deadculled(models.Model):
     pigpen = models.ForeignKey(Pigpen, on_delete=models.CASCADE)

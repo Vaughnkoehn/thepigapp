@@ -13,6 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from collections import defaultdict
+from django.views.decorators.cache import never_cache
 # Create your views here.
 
 
@@ -48,6 +49,7 @@ class shippedpigs(LoginRequiredMixin,generic.ListView):
     template_name = 'pigs/shipped.html'
 
 @login_required
+@never_cache
 def addration(request,pigpen):
    
     try:
@@ -66,7 +68,9 @@ def addration(request,pigpen):
             ist.pigpen = Pigpen.objects.get(pk= pigpen)
             ist.pigs = pig
             ist.pigsinapen = piggy['id']
-            ist.date = timezone.now()
+            if not ist.date:
+                ist.date = timezone.now()
+
             ist.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:

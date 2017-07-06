@@ -1,10 +1,17 @@
 ﻿<!DOCTYPE html>
 
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-     <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width">
+    <i class="arrow"></i>
+
     <title>addration</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+   
 </head>
 <body>
     <h1>Addration for Pen {{pigpen}}</h1>
@@ -12,7 +19,7 @@
     <form method="post">
         {% csrf_token %}
         <table>
-        {{form.as_table}}
+            {{form.as_table}}
         </table>
         <input type="submit" value="Save" />
     </form>

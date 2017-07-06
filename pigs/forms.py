@@ -4,9 +4,10 @@ from pigs.models import *
 class addrationform(forms.ModelForm):
     class Meta:
         model = pigration
-        fields = ['ration', 'ration_amount']
+        fields = ['ration', 'ration_amount','date']
         exclude = {'pigpen','pigsinpen'}
-        widgets = {'ration_amount': forms.NumberInput(attrs={'step': '10','default':'2000'}),}
+        widgets = {'ration_amount': forms.NumberInput(attrs={'step': '10','default':'2000'}),'date': forms.DateInput(attrs={'type': 'date','default':timezone.now})}
+      
 
 
 class changepigsform(forms.ModelForm):
