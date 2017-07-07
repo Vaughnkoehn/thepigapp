@@ -11,7 +11,11 @@
     <title>Pigs</title>
 </head>
 <body>
-    <h1>Add pigs for {{pigpen}}</h1>
+     <div class="back displaynone" >
+        <i class="arrow"></i>
+        <h2><a class="nostyle block" href="{% url 'pigs:pigsforpen' pigpen %}">Pigs</a></h2>
+    </div>
+    <h1>Add pigs</h1>
     
     {%if error %} {{error}} {%endif%}
     <form method="post">
@@ -20,7 +24,7 @@
         {{form.as_table}}
         </table>
         <input class="button" type="submit" value="Save" />
-        <button class="button"><a class="nostyle block" href="{% url 'pigs:pigsforpen' pigpen %}">Back</a></button>
+        <button class="button displaynone-m displaynone-s"><a class="nostyle block" href="{% url 'pigs:pigsforpen' pigpen %}">Back</a></button>
     </form>
 </body>
 </html>

@@ -353,10 +353,10 @@ def shippigs(request,pigpen):
             shipped.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
-            return render(request, 'pigs/pigupdateview.html',{'error':"That did not work",'form':form,'pigpen':pigpen, 'pigid':id})
+            return render(request, 'pigs/Ship.html',{'error':"That did not work",'form':form,'pigpen':pigpen, 'pigid':id})
 
 
     else:
         form = changepigsform(pigpen=pigpen)
-        return render(request, 'pigs/pigupdateview.html', {'form':form, 'pigpen':pigpen, 'pigid':id})
+        return render(request, 'pigs/Ship.html', {'form':form, 'pigpen':pigpen, 'pigid':id})
         

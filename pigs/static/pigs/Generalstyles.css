@@ -47,6 +47,9 @@
     .col-s-12 {
         width: 100%;
     }
+    .displaynone-s {
+        display:none;
+    }
 }
 @media screen and (min-width: 400px) and (max-width:767px) {
     /* For tablets: */
@@ -96,6 +99,9 @@
 
     .col-m-12 {
         width: 100%;
+    }
+    .displaynone-m {
+        display:none;
     }
 }
 @media screen and (min-width: 768px) {
@@ -147,6 +153,9 @@
     .col-12 {
         width: 100%;
     }
+     .displaynone{
+        display:none;
+    }
 }
 a.nostyle {
     text-decoration:none;
@@ -160,6 +169,17 @@ a.block {
 table.border {
     border:1px solid black;
 }
-table.border th, td {
+table.border th, table.border td {
     border:1px solid black;
 }
+.arrow {
+        position:relative;
+        top:6px;
+        border: solid black;
+        border-width: 0 0 3px 3px;
+        display: inline-block;
+        padding:4.5px;
+        transform: rotate(45deg);
+        float:left;
+       
+    }

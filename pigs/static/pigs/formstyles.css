@@ -11,6 +11,10 @@ form {
     left:5%;
     width:30%;
 }
+
 table input {
     width:30vmin;
+}
+#id_ration {
+    display:block;
 }

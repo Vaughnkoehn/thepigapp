@@ -1,19 +1,23 @@
 ﻿<!DOCTYPE html>
-
+{%load static%}
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
-    <i class="arrow"></i>
-
-    <title>addration</title>
+   
+    <title>Add Ration</title>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'pigs/formstyles.css'%}" />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
    
 </head>
 <body>
+     <div class="back displaynone" >
+        <i class="arrow"></i>
+        <h2><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
+    </div>
     <h1>Addration for Pen {{pigpen}}</h1>
     {% if error %}{{error}}{%endif%}
     <form method="post">

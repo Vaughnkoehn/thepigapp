@@ -10,7 +10,11 @@
     <title></title>
 </head>
 <body>
-      <h1>Change ration for {{pigpen}}</h1>
+     <div class="back displaynone" >
+        <i class="arrow"></i>
+        <h2><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
+    </div>
+      <h1>Change ration</h1>
     {% if error %}{{error}}{%endif%}
     <form method="post">
         {% csrf_token %}

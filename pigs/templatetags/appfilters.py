@@ -16,7 +16,7 @@ def getfeed(ration,pigpen,date):
     feed = rat['ration_amount__sum']
     amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_text=ration))
     try:
-        pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).values_list('pigs', flat =True).filter(date__lte=date).latest('date'))
+        pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).values_list('pigs', flat =True).latest('date'))
     except:
         pigs = 0
     return amount*pigs-feed

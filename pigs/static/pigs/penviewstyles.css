@@ -114,9 +114,7 @@ label[for="toggle"] {
     .sidenav {
         display:none;
     }
-    .displaynone-m {
-        display:none;
-    }
+    
 }
 @media only screen and (min-width: 768px) {
     /* For desktop: */
@@ -131,9 +129,7 @@ label[for="toggle"] {
     .sidenav {
         display:none;
     }
-      .dispalynone{
-        display:none;
-    }
+     
 }
 
 .sidebar {

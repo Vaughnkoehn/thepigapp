@@ -76,6 +76,7 @@
     <Content Include="pigs\templates\pigs\pigsforpen.html" />
     <Content Include="pigs\templates\pigs\pigupdateview.html" />
     <Content Include="pigs\templates\pigs\rationview.html" />
+    <Content Include="pigs\templates\pigs\Ship.html" />
     <Content Include="pigs\templates\pigs\shipped.html" />
     <Content Include="pigs\templates\pigs\updateration.html" />
     <Content Include="pigs\templates\registration\logged_out.html" />
