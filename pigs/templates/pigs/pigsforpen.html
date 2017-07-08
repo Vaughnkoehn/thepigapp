@@ -12,63 +12,72 @@
     <title></title>
 </head>
 <body>
-    <div class="back displaynone" >
-        <i class="arrow"></i>
-        <h2><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
-    </div>
+    
+    <div class="headerwitharrow">
+        <div class="displaynone">
+            <i class="arrow"></i>
+            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
+        </div>
         <h1>Pigs</h1>
+    </div>
+    <div class="tablewrapper">
+    <div class="tablescroll">
+    <table class="col-s-12 col-m-12 col-12 sortable">
 
-        <table class="col-s-12 col-m-12 col-12 sortable">
-
-            <tr>
-                <th class="col-s-2">Date</th>
-                <th class="col-s-2 col-m-2">Pigs</th>
-                <th class="col-s-2">Ration amount</th>
-                <th class="col-s-2">
-                    Ration cost per pig
-                </th>
-                <th class="col-s-2">Pig cost per pig</th>
-                <th class="col-s-2">Deads/Culls</th>
-            </tr>
-
-
-
-            {% for pig in pigpen.pigsinpen_set.all %}
+        <tr>
+            <th class="col-s-2">Date</th>
+            <th class="col-s-2 col-m-2">Pigs</th>
+            <th class="col-s-2">Ration amount</th>
+            <th class="col-s-2">
+                Ration cost per pig
+            </th>
+            <th class="col-s-2">Pig cost per pig</th>
+            <th class="col-s-2">Deads/Culls</th>
+        </tr>
 
 
-            <tr>
-                <td class="col-s-2 cos-m-2 col-2">{{pig.date|date}}</td>
-                <td class="col-m-3 col-3 col-s-2">{{pig.pigs}}</td>
-                {% ration pigpen pig.id as ration %}
-                <td class="overflow">{{ration}}</td>
-                {% cost pigpen pig.id pig.pigs as cost %}
-                <td>{{cost}}</td>
 
-                {% divide pig.pig_cost_total pig.pigs as pigcost%}
-                <td>{{pigcost}}</td>
+        {% for pig in pigpen.pigsinpen_set.all %}
 
 
-                <td class="hovertd">
-                    <div class="hover">
-                        {% totaldead pigpen pig.date %}
-                    </div>
-                    <div class="nohover">
-                        {% deads pigpen pig.date %}
-                        {% culls pigpen pig.date %}
-                    </div>
-                </td>
-            </tr>
-            {%endfor%}
-        </table>
-        <button class="button"><a class="nostyle block" href="{% url 'pigs:addpigs' pigpen %}">Add pigs</a></button>
-         {% if pigpen.pigsinpen_set.exists %}
-        <button class="button"><a class="nostyle block" href="{% url 'pigs:movepigs' pigpen %}">Move pigs</a></button>
-        <button class="button"><a class="nostyle block" href="{% url 'pigs:ship' pigpen %}">Ship</a></button>
+        <tr>
+            <td class="col-s-2 cos-m-2 col-2">{{pig.date|date}}</td>
+            <td class="col-m-3 col-3 col-s-2">{{pig.pigs}}</td>
+            {% ration pigpen pig.id as ration %}
+            <td class="overflow">{{ration}}</td>
+            {% cost pigpen pig.id pig.pigs as cost %}
+            <td>{{cost}}</td>
+
+            {% divide pig.pig_cost_total pig.pigs as pigcost%}
+            <td>{{pigcost}}</td>
+
+
+            <td class="hovertd">
+                <div class="hover">
+                    {% totaldead pigpen pig.date %}
+                </div>
+                <div class="nohover">
+                    {% deads pigpen pig.date %}
+                    {% culls pigpen pig.date %}
+                </div>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+        </div>
+        </div>
+    <div class="navhide"></div>
+    <nav>
+        <button><a class="nostyle block" href="{% url 'pigs:addpigs' pigpen %}">Add pigs</a></button>
+        {% if pigpen.pigsinpen_set.exists %}
+        <button><a class="nostyle block" href="{% url 'pigs:movepigs' pigpen %}">Move pigs</a></button>
+        <button><a class="nostyle block" href="{% url 'pigs:ship' pigpen %}">Ship</a></button>
         {%else%}
-        <button class="button" disabled>Move pigs</button>
-        <button class="button" disabled>Ship</button>
+        <button disabled>Move pigs</button>
+        <button disabled>Ship</button>
         {%endif%}
-        
+
         <button class="button displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
+        </nav>
 </body>
 </html>

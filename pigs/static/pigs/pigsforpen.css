@@ -1,7 +1,11 @@
-﻿table, th, td {
+﻿body, html{
+    overflow:hidden;
+    height:100%;
+}
+table, th, td {
     border:1px solid black;
     cursor:default;
-    font-size:4vmin;
+    font-size:3vw;
 }
 td {
   
@@ -28,4 +32,14 @@ td.hovertd:hover div.nohover {
 }
 td.hovertd:hover div.hover {
     display:none;
+}
+.tablewrapper{
+    position:relative;
+    height:100%;
+}
+.tablescroll{
+    
+    height: calc(100% - 150px);
+    overflow:auto;
+    margin-top:50px;
 }

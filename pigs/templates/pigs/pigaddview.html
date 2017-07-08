@@ -11,11 +11,14 @@
     <title>Pigs</title>
 </head>
 <body>
-     <div class="back displaynone" >
-        <i class="arrow"></i>
-        <h2><a class="nostyle block" href="{% url 'pigs:pigsforpen' pigpen %}">Pigs</a></h2>
-    </div>
+    <div class="headerwitharrow">
+        <div class="displaynone">
+            <i class="arrow"></i>
+            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
+        </div>
     <h1>Add pigs</h1>
+
+          </div>
     
     {%if error %} {{error}} {%endif%}
     <form method="post">
