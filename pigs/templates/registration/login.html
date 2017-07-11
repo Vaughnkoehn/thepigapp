@@ -1,14 +1,15 @@
 ﻿<!DOCTYPE html>
-
+{%load static%}
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'pigs/registration.css' %}" />
     <title></title>
 </head>
 <body>
-     {% if form.errors %}
+  <!--   {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+{% endif %} -->
 
 {% if next %}
     {% if user.is_authenticated %}
@@ -19,23 +20,68 @@
     {% endif %}
 {% endif %}
 
-<form method="post" action="{% url 'login' %}">
+<!--<form method="post" action="{% url 'login' %}">
 {% csrf_token %}
+  
+       
+       <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
 
-<div>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</div>
-<div>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</div>
-
-<div>
-  <input type="submit" value="login" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</div>
+       
+            <input type="submit" value="login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+          
+       
 </form>
-    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>  -->
+    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+<!-- The Modal -->
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" method="post" action={%url 'login' %}>
+      {%csrf_token %}
+   
+
+    <div class="container">
+      <label><b>Username:</b></label>
+     
+      <div>{{ form.username }}</div>
+
+        <label><b>Password:</b></label>
+       <div>{{ form.password }}</div>
+
+      <button type="submit">Login</button>
+      <input type="checkbox" checked="checked"> Remember me
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+    <script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 </body>
-</html>
+</html>                                              

@@ -2,3 +2,19 @@
     font-size:4vmin;
     cursor:default;
 }
+body, html {
+    overflow:hidden;
+
+}
+
+.tablewrapper{
+    position:relative;
+   
+    height:100%;
+}
+.tablescroll{
+    
+    height: calc(100% - 150px);
+    overflow:auto;
+    margin-top:50px;
+}

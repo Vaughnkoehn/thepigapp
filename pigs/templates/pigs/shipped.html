@@ -12,11 +12,12 @@
     <div class="headerwitharrow">
         <div class="displaynone">
             <i class="arrow"></i>
-            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
+            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:index' %}">Pen {{pigpen}}</a></h2>
         </div>
       <h1>Shipped</h1>
         </div>
-      
+        <div class="tablewrapper">
+         <div class="tablescroll">
         <table class="border sortable">
            
                 <tr>
@@ -41,5 +42,7 @@
             </tr>
                 {%endfor%}
         </table>
+            </div>
+            </div>
 </body>
 </html>

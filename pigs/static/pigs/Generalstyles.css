@@ -162,6 +162,10 @@ a.nostyle {
     text-decoration:none;
     color:black;
 }
+a.nostyle:active{
+    color:black;
+    background-color:white;
+}
 a.block {
     display:block;
     height:100%;
@@ -178,20 +182,31 @@ table.border th, table.border td {
         top:14px;
         border: solid black;
         border-width: 0 0 3px 3px;
-       
+        left:3px;
         padding:5.5px;
         transform: rotate(45deg);
         float:left;
+        border-color:brown;
        
     }
 
 .arrowh {
     position:relative;
     top:-11.5px;
-    left:2px;
+    left:4px;
     float:left;
+    
 }
-
+.arrowh a {
+    color:brown;
+    
+}
+.arrowh a:active{
+    color:brown;
+}
+.arrowh a:focus{
+    outline:none;
+}
 .headerwitharrow h1{
     text-align:center;
     width:100px;
