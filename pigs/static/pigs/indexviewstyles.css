@@ -1,6 +1,6 @@
 ﻿body
 {
-    padding-top:80px;
+   
 }
 .header{
     position:fixed;
@@ -9,7 +9,16 @@
     left:10px;
     top:10px;
     height:70px;
+    z-index:3;
     
+}
+.headerhide {
+    position:fixed;
+    top:0;
+    width:100%;
+    height:90px;
+    background-color:white;
+    z-index:2;
 }
 .header h1 {
     margin:0;
@@ -33,16 +42,24 @@
   }
 .header li a
 #Feeders{
+   
     display:block;
+   
+}
+.scroll {
+    position:relative;
+    height:80px;
+   
 }
 #Sows {
     display:none;
 }
 .pens {
-   
+  
    text-align:center;
    text-decoration:none;
    color:black;
+  
   
 }
 
@@ -65,6 +82,9 @@
 }
 .penwrapper:hover  div.hidden{
     display:block;
+}
+.containers {
+  
 }
 
 .wrapper {

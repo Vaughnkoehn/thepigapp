@@ -148,7 +148,7 @@ label[for="toggle"] {
     line-height:0;
 }  
 .sidebar p {
-    line-height:10px;
+    line-height:14px;
    
 }
 .sidebar a {
@@ -202,6 +202,16 @@ div.longmessage {
 }
 .sidebar h3 {
     text-align:center;
+}
+.sidebarp {
+    overflow:hidden;
+    white-space:nowrap;
+    max-width:10ch;
+    text-overflow:ellipsis;
+}
+.sidebarphover:hover, .sidebarphover:active {
+    overflow:visible;
+    cursor:default;
 }
 a.nopigs {
     color:red;

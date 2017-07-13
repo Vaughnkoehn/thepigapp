@@ -7,9 +7,8 @@
     <title></title>
 </head>
 <body>
-  <!--   {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %} -->
+
+
 
 {% if next %}
     {% if user.is_authenticated %}
@@ -20,28 +19,7 @@
     {% endif %}
 {% endif %}
 
-<!--<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-  
-       
-       <table>
-            <tr>
-                <td>{{ form.username.label_tag }}</td>
-                <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
 
-       
-            <input type="submit" value="login" />
-            <input type="hidden" name="next" value="{{ next }}" />
-          
-       
-</form>
-    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>  -->
     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 
 <!-- The Modal -->
@@ -56,11 +34,11 @@ class="close" title="Close Modal">&times;</span>
 
     <div class="container">
       <label><b>Username:</b></label>
-     
-      <div>{{ form.username }}</div>
+       
+      <input type="text" name="username" placeholder="Enter Username">
 
         <label><b>Password:</b></label>
-       <div>{{ form.password }}</div>
+       <input type="password" name="password" placeholder="Enter Password">
 
       <button type="submit">Login</button>
       <input type="checkbox" checked="checked"> Remember me

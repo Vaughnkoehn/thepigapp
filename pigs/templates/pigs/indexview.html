@@ -3,17 +3,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/indexviewstyles.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
-<script>
-    function testFunc(item) {
-        var divs = document.getElementsByClassName("containers");
-        for (var i = 0; i < divs.length; i++) {
-            divs[i].style.display = 'none';
-        }
-        var myDiv = item.href;
-        var target = myDiv.split("#");
-        document.getElementById(target[1]).style.display = "block";
-    }
-</script>
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -22,6 +12,7 @@
     <title>Home</title>
 </head>
 <body>
+    <div class="headerhide"></div>
     <div class="header">
         <h1>The Pig Farm</h1>
         <ul>
@@ -32,6 +23,7 @@
     </div>
 
         <div class="containers" id="Feeders">
+        <div class="scroll"></div>
         {% for pen in pigpen_list %}
 
         <a class="pens" href="{% url 'pigs:pen' pen %}">
@@ -54,7 +46,18 @@
            sow2
            sow3
        </div>
-
+      <script>
+    function testFunc(item) {
+        var divs = document.getElementsByClassName("containers");
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = 'none';
+        }
+        var myDiv = item.href;
+        var target = myDiv.split("#");
+        document.getElementById(target[1]).style.display = "block";
+        
+    }
+</script>
 
 
 

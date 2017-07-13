@@ -31,10 +31,12 @@
 
             <a class="nostyle" href="{%url 'pigs:updatepigs' pigpen pig.id %}">
                 <h3>{{pig.date|date}}</h3>
-                <p>{{pig.pigs}}</p>
-                {%if pig.notes%}<h4>Notes</h4>
-                <p>{{pig.notes}}</p>{%endif%}
-            </a>
+                <p>Pigs: {{pig.pigs}}</p>
+                <p class="sidebarp">Cost: {{pig.pig_cost_total}}</p>
+                </a>
+                {%if pig.notes%}
+                <p class="sidebarp sidebarphover">Notes: {{pig.notes}}</p>{%endif%}
+            
             {%empty%} 
             <h3><a class="nostyle" href="{% url 'pigs:deletepig' pigpen %}">Clean out Pen?</a></h3>
             <h3><a class="nopigs" href="{% url 'pigs:addpigs' pigpen %}">Click to add pigs.</a></h3>

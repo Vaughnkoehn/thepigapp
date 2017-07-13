@@ -17,8 +17,9 @@ class changepigsform(forms.ModelForm):
         self.fields['pigs'] = forms.IntegerField(max_value=Pigsinpen.objects.values('pigs').filter(pigpen=pigpen).latest('date')['pigs'])
     class Meta:
         model = Pigsinpen
-        fields= ['pigs','notes']
-        exclude = {'pigpen','pig_cost_total'}
+        fields= ['pigs','notes','pig_cost_total']
+        exclude = {'pigpen'}
+        labels = {'pig_cost_total': 'Pig cost'}
 
 class addpigsform(forms.ModelForm):
     

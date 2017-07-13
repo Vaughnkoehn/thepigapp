@@ -18,9 +18,9 @@ td.overflow {
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
-    max-width:15ch;
+    max-width:8ch;
 }
-td.overflow:hover {
+td.overflow:hover, td.overflow:active {
     overflow:visible;
     white-space:normal;
     
@@ -28,10 +28,10 @@ td.overflow:hover {
 div.nohover {
     display:none;
 }
-td.hovertd:hover div.nohover {
+td.hovertd:hover div.nohover, td.hovertd:active div.nohover{
     display:block;
 }
-td.hovertd:hover div.hover {
+td.hovertd:hover div.hover, td.hovertd:active div.hover {
     display:none;
 }
 .tablewrapper{

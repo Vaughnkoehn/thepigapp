@@ -24,7 +24,7 @@ class indexview(LoginRequiredMixin, generic.ListView):
       
 def getlatestpigchange(pigpen,number):
     try:
-        latestpigs = Pigsinpen.objects.values('id','pigs','date','notes').filter(pigpen=pigpen).order_by('-date')[:number]
+        latestpigs = Pigsinpen.objects.values('id','pigs','pig_cost_total','date','notes').filter(pigpen=pigpen).order_by('-date')[:number]
        
     except:
         latestpigs = '0'
@@ -149,7 +149,7 @@ def changepigs(request,pigpen):
 
 @login_required
 def updatepigs(request,pigpen,pigid):
-    instance = get_object_or_404(Pigsinpen,id=pigid)
+    instance = get_object_or_404(Pigsinpen, id=pigid)
     pigbefore = Pigsinpen.objects.values('pigs').get(id = pigid)
     pigsbefore = pigbefore['pigs']
     pigcost = Pigsinpen.objects.values('pig_cost_total').get(id=pigid)['pig_cost_total']
@@ -176,7 +176,7 @@ def updatepigs(request,pigpen,pigid):
 
 
     else:
-        form = changepigsform(pigpen=pigpen)
+        form = changepigsform(instance = instance, pigpen=pigpen)
         return render(request, 'pigs/pigupdateview.html', {'form':form, 'pigpen':pigpen, 'pigid':pigid})
 
 @login_required
@@ -324,7 +324,7 @@ def shippigs(request,pigpen):
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk = pigpen)
             ist.pigs = pigsbefore - form.cleaned_data['pigs']
-            ist.pig_cost_total = pigscost / pigsbefore * form.cleaned_data['pigs']
+            ist.pig_cost_total = (pigscost / pigsbefore) * form.cleaned_data['pigs']
             if ist.notes == "":
                 ist.notes = str(form.cleaned_data['pigs']) + ' Shipped'
 
@@ -345,11 +345,9 @@ def shippigs(request,pigpen):
                     newpigration[key] += newrationamount
             newpigration = '; '.join(str(e) for e in newpigration.items())
             newpigration = str(newpigration)
-           
-               
             newpigration = newpigration.translate({ord(r): None for r in "defaultictns[]{}<>()'"})
      
-            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],pig_cost = pigscost/pigsbefore*form.cleaned_data['pigs'],ration_amount= newpigration,pig_ration_cost = rationcost) 
+            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],pig_cost = pigscost/pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost) 
             shipped.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
