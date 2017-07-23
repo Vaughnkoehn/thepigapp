@@ -17,7 +17,7 @@
         top: 0;
         right: 0;
         z-index: 54;
-        transform: translate(110%)
+        transform: translate(115%)
 
     }
     .headerbuttons {
@@ -195,7 +195,7 @@ div.longmessage {
     }
 
     10%, 90% {
-        -webkit-transform: translateY(0px);
+        -webkit-transform:translateY(0px);
         transform: translateY(0px);
        
     }
@@ -204,15 +204,9 @@ div.longmessage {
     text-align:center;
 }
 .sidebarp {
-    overflow:hidden;
     white-space:nowrap;
-    max-width:10ch;
-    text-overflow:ellipsis;
 }
-.sidebarphover:hover, .sidebarphover:active {
-    overflow:visible;
-    cursor:default;
-}
+
 a.nopigs {
     color:red;
     text-decoration:none;
@@ -347,4 +341,27 @@ td a {
 }
 .dropbtn:hover {
     background-color:#3e8e41;
+}
+.custom-menu {
+    display: none;
+    z-index: 1000;
+    position:absolute;
+    border: 1px solid #CCC;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    width:60px;
+}
+
+.custom-menu li {
+    margin:5px 10px 5px;
+    cursor: pointer;
+    list-style:none;
+    
+}
+
+
+.custom-menu li:hover {
+    background-color: #DEF;
+  
 }

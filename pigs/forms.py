@@ -15,9 +15,10 @@ class changepigsform(forms.ModelForm):
         pigpen = kwargs.pop("pigpen")
         super(changepigsform,self).__init__(*args,**kwargs)
         self.fields['pigs'] = forms.IntegerField(max_value=Pigsinpen.objects.values('pigs').filter(pigpen=pigpen).latest('date')['pigs'])
+       
     class Meta:
         model = Pigsinpen
-        fields= ['pigs','notes','pig_cost_total']
+        fields= ['pigs','pig_cost_total','notes']
         exclude = {'pigpen'}
         labels = {'pig_cost_total': 'Pig cost'}
 
@@ -25,7 +26,7 @@ class addpigsform(forms.ModelForm):
     
     class Meta:
         model = Pigsinpen
-        fields = ['pigs','notes','pig_cost_total']
+        fields = ['pigs','pig_cost_total','notes']
         exclude = {'pigpen'} 
 
 class movepigsform(forms.ModelForm):

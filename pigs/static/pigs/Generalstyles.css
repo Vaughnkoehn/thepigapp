@@ -177,9 +177,24 @@ table.border {
 table.border th, table.border td {
     border:1px solid black;
 }
+table.tablescroll {
+    margin-top:60px;
+}
+
+.stickyhead tbody, .stickyhead thead {
+    display:block;
+}
+.stickyhead tbody {
+    overflow:auto;
+    height:calc(100% - 70px);
+}
+.container{
+    overflow-y:auto;
+
+}
 .arrow {
         position:relative;
-        top:14px;
+        top:8px;
         border: solid black;
         border-width: 0 0 3px 3px;
         left:3px;
@@ -192,8 +207,8 @@ table.border th, table.border td {
 
 .arrowh {
     position:relative;
-    top:-11.5px;
-    left:4px;
+    top:-16.5px;
+    left:1px;
     float:left;
     
 }
@@ -207,11 +222,29 @@ table.border th, table.border td {
 .arrowh a:focus{
     outline:none;
 }
+.headerhide{
+    background:white;
+    position:fixed;
+    right:0;
+    left:0;
+    top:0;
+    height:50px;
+    z-index:3;
+}
+.headerwitharrow {
+    position:fixed;
+    width:100%;
+    display:inline-block;
+    top:10px;
+    z-index:4;
+}
 .headerwitharrow h1{
-    text-align:center;
    
-    width:100px;
-    margin:0  auto;
+    text-align:center;
+    font-size:25px;
+    white-space:nowrap;
+    width:100%;
+    margin:0 5px 0 5px;
 
 }
 nav {
@@ -226,10 +259,10 @@ nav {
     line-height:30px;
     display:inline-block;
 }
-nav button{
+nav .navbutton {
     position:relative;
     vertical-align:middle;
-     left:5%;
+    left:5%;
     width:30%;
 }
 .navhide{

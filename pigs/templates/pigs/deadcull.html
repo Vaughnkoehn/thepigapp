@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{%static 'pigs/Generalstyles.css' %}" />
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Deads and culls</title>
+</head>
+<body>
+      <div class="headerhide"></div>
+      <div class="headerwitharrow">
+        <div class="displaynone">
+            <i class="arrow"></i>
+            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:pigsforpen' pigpen %}">Pigs</a></h2>
+        </div>
+        <h1>Deads and Culls</h1>
+    </div>
+   
+    <table class="col-s-12 col-m-12 col-12 sortable border tablescroll stickyhead">
+        <thead>
+        <tr>
+            <th class="col-4 col-m-4 col-s-4">Date</th>
+            <th class="col-4 col-m-4 col-s-4">Dead</th>
+            <th class="col-4 col-m-4 col-s-4">Cull</th>
+        </tr>
+        </thead>
+            {% for pig in pigpen.deadculled_set.all %}
+            <tr>
+                <td class="col-4 col-m-4 col-s-4">{{pig.date|date}}</td>
+                <td class="col-4 col-m-4 col-s-4">{{pig.dead|default_if_none:""}}</td>
+                <td class="col-4 col-m-4 col-s-4">{{pig.culled|default_if_none:""}}</td>
+            </tr>
+            {%endfor%}
+    </table>
+       
+   
+</body>
+</html>

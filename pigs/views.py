@@ -36,13 +36,17 @@ class penview(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['pens'] = Pigpen.objects.all()
-        context['latestpigs'] = getlatestpigchange(self.kwargs['pk'],3)
+        context['latestpigs'] = getlatestpigchange(self.kwargs['pk'],1)
         return context
 
 
 class pigsforpen(LoginRequiredMixin, generic.DetailView):
     model = Pigpen
     template_name = 'pigs/pigsforpen.html'
+
+class deadcull(LoginRequiredMixin, generic.DetailView):
+    model = Pigpen
+    template_name = 'pigs/deadcull.html'
 
 class shippedpigs(LoginRequiredMixin,generic.ListView):
     model = Shipped
@@ -129,7 +133,7 @@ def changepigs(request,pigpen):
         else:
             pigs = 0
             pigscost = 0
-
+        pig_cost = pigscost / pigs
         if form.is_valid():
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk = pigpen)
@@ -143,6 +147,7 @@ def changepigs(request,pigpen):
 
 
     else:
+        
         form = addpigsform()
         return render(request, 'pigs/pigaddview.html', {'form':form, 'pigpen':pigpen})
 
@@ -153,7 +158,7 @@ def updatepigs(request,pigpen,pigid):
     pigbefore = Pigsinpen.objects.values('pigs').get(id = pigid)
     pigsbefore = pigbefore['pigs']
     pigcost = Pigsinpen.objects.values('pig_cost_total').get(id=pigid)['pig_cost_total']
-    
+    pig_cost = round(pigcost / pigsbefore,2)
 
     if request.method =='POST':
         form = changepigsform(request.POST,instance=instance,pigpen=pigpen)
@@ -161,14 +166,14 @@ def updatepigs(request,pigpen,pigid):
         if form.is_valid():
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk = pigpen)
-            ist.pigs = pigsbefore + form.cleaned_data['pigs']
-            ist.pig_cost_total = pigcost
+            ist.pigs = form.cleaned_data['pigs']
+            ist.pig_cost_total = form.cleaned_data['pig_cost_total']* form.cleaned_data['pigs']
             if ist.notes == "":
                 ist.notes = str(form.cleaned_data['pigs']) + ' Added'
 
             ist.date = timezone.now()
             ist.save()
-            pigration.objects.filter(pigsinpen=pigsbefore).update(pigsinpen=str(pigsbefore + form.cleaned_data['pigs']))
+            pigration.objects.filter(pigsinapen=pigsbefore).update(pigsinapen=str(pigsbefore + form.cleaned_data['pigs']))
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
             
         else:
@@ -176,83 +181,60 @@ def updatepigs(request,pigpen,pigid):
 
 
     else:
-        form = changepigsform(instance = instance, pigpen=pigpen)
+        form = changepigsform(instance = instance, pigpen=pigpen, initial={'pig_cost_total':pig_cost})
         return render(request, 'pigs/pigupdateview.html', {'form':form, 'pigpen':pigpen, 'pigid':pigid})
 
 @login_required
-def dead(request,pigpen,pigid):
-    pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').get(id=pigid)
+def dead(request,pigpen):
+    pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').filter(pigpen=pigpen).latest('date')
     pigsbefore = pigbefore['pigs']
     pigscost = pigbefore['pig_cost_total']
     id = pigbefore['id']
 
    
-    if request.method =='POST':
-        form = changepigsform(request.POST,pigpen=pigpen)
+    if request.method =='GET':
+       
 
-        if form.is_valid():
+    
+            pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - 1, pig_cost_total=pigscost+(pigsbefore / pigscost),date = timezone.now(),notes= "1 Dead")
+            pigdead.save()
 
-            ist = form.save(commit=False)
-            ist.pigpen = Pigpen.objects.get(pk = pigpen)
-            ist.pigs = pigsbefore - form.cleaned_data['pigs']
-            try:
-                ist.pig_cost_total = pigscost + (pigsbefore / pigscost * (pigsbefore - form.cleaned_data['pigs']))
-            except:
-                ist.pig_cost_total = 0
-            if ist.notes == "":
-                ist.notes = str(form.cleaned_data['pigs']) + ' Died'
-           
-            ist.date = timezone.now()
-            ist.save()
-            pigration.objects.filter(pigsinapen=id).update(pigsinapen = ist.id)
-            dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),dead = form.cleaned_data['pigs'])
-            dead.save() 
+            
+            dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),dead = 1)
+            dead.save()                                                  
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
-        else:
-            return render(request, 'pigs/pigupdateview.html',{'error':"That did not work",'form':form,'pigpen':pigpen,'pidid':pigid})
-
+       
 
     else:
-        form = changepigsform(pigpen=pigpen)
-        return render(request, 'pigs/pigupdateview.html', {'form':form, 'pigpen':pigpen, 'pigid':pigid})
+        messages.info(request, "Adding dead pig did not work. Please try again!")
+        return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 
 
 @login_required
-def culled(request,pigpen,pigid):
-    pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').get(id=pigid)
+def culled(request,pigpen):
+    pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').filter(pigpen=pigpen).latest('date')
     pigsbefore = pigbefore['pigs']
     pigscost = pigbefore['pig_cost_total']
     id = pigbefore['id']
 
    
-    if request.method =='POST':
-        form = changepigsform(request.POST,pigpen=pigpen)
+    if request.method =='GET':
+       
 
-        if form.is_valid():
+    
+            pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - 1, pig_cost_total=pigscost+(pigsbefore / pigscost),date = timezone.now(),notes= "Culled 1")
+            pigdead.save()
 
-            ist = form.save(commit=False)
-            ist.pigpen = Pigpen.objects.get(pk = pigpen)
-            ist.pigs = pigsbefore - form.cleaned_data['pigs']
-            try:
-                ist.pig_cost_total = pigscost + (pigsbefore / pigscost * (pigsbefore - form.cleaned_data['pigs']))
-            except:
-                ist.pig_cost_total = 0
-            if ist.notes == "":
-                ist.notes = str(form.cleaned_data['pigs']) + ' Culled'
-           
-            ist.date = timezone.now()
-            ist.save()
-            pigration.objects.filter(pigsinapen=id).update(pigsinapen = ist.id)
-            culled = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen), culled = form.cleaned_data['pigs'])
-            culled.save()
+            
+            dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),culled = 1)
+            dead.save()                                                  
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
-        else:
-            return render(request, 'pigs/pigupdateview.html',{'error':"That did not work",'form':form,'pigpen':pigpen,'pidid':pigid})
-
+       
 
     else:
-        form = changepigsform(pigpen=pigpen)
-        return render(request, 'pigs/pigupdateview.html', {'form':form, 'pigpen':pigpen, 'pigid':pigid})
+        messages.info(request, "Adding culled pig did not work. Please try again!")
+        return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
+
 
 @login_required
 def movepigs(request,pigpen):

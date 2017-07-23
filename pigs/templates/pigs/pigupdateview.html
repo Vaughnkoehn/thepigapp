@@ -15,24 +15,23 @@
             <i class="arrow"></i>
             <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
         </div>
-    <h1>Change pig entry</h1>
+    <h1>Update pig entry</h1>
        </div>
     {%if error%}{{error}}{%endif%}
 
     <form method="post">
         {% csrf_token %}
-       
+
         <table>
             {{form.as_table}}
 
         </table>
-        
-        <button class="button" type="submit" formmethod="post" formaction="{% url 'pigs:deadpigs' pigpen pigid %}">Dead</button>
-        <button class="button" type="submit" formmethod="post" formaction="{% url 'pigs:culledpigs' pigpen pigid %}">Culled</button>
-        <button class="button"><a class="nostyle block" href="{% url 'pigs:delete' pigpen 'Pigsinpen' pigid %}">Delete</a></button>
-       
-        
-        
-     </form>
+        <nav>
+            <input class="navbutton" type="submit" value="Save" />
+            <button class="navbutton"><a class="nostyle block" href="{% url 'pigs:delete' pigpen 'Pigsinpen' pigid %}">Delete</a></button>
+        </nav>
+
+
+    </form>
 </body>
 </html>

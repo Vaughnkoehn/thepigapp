@@ -11,12 +11,12 @@ register = template.Library()
 
 
 @register.simple_tag
-def getfeed(ration,pigpen,date):
+def getfeed(ration,pigpen,inpen,date):
     rat = pigration.objects.filter(pigpen=pigpen).filter(ration=ration).filter(date__lte=date).aggregate(Sum('ration_amount'))
     feed = rat['ration_amount__sum']
     amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_text=ration))
     try:
-        pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).values_list('pigs', flat =True).latest('date'))
+        pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=inpen).values_list('pigs', flat =True).latest('date'))
     except:
         pigs = 0
     return amount*pigs-feed
@@ -46,13 +46,13 @@ def ration(pigpen,pigs):
     return result.translate({ord(r): None for r in "()"})
 @register.simple_tag
 def deads(pigpen,date):
-    d = str(deadculled.objects.filter(pigpen=pigpen).filter(date__lte=date).values_list('dead').exclude(dead__isnull=True).aggregate(culls = Coalesce(Sum(F('dead')),0)))
+    d = str(deadculled.objects.filter(pigpen=pigpen).filter(date__lte=date).values_list('dead').exclude(dead__isnull=True).aggregate(deads = Coalesce(Sum(F('dead')),0)))
     mod = d.translate({ord(r): None for r in "{}'"}) 
     return mod
 
 @register.simple_tag
 def culls(pigpen,date):
-    c = str(deadculled.objects.filter(pigpen=pigpen).filter(date__lte=date).values_list('culled').exclude(culled__isnull = True).aggregate(deads = Coalesce(Sum(F('culled')),0)))
+    c = str(deadculled.objects.filter(pigpen=pigpen).filter(date__lte=date).values_list('culled').exclude(culled__isnull = True).aggregate(culls = Coalesce(Sum(F('culled')),0)))
     mod = c.translate({ord(r): None for r in "{}'"}) 
     return mod
 

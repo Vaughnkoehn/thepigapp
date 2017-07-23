@@ -51,8 +51,9 @@
             {% divide pig.pig_cost_total pig.pigs as pigcost%}
             <td>{{pigcost}}</td>
 
-
+            
             <td class="hovertd">
+                <a class="nostyle block" href="{% url 'pigs:deadculls' pigpen %}">
                 <div class="hover">
                     {% totaldead pigpen pig.date %}
                 </div>
@@ -60,6 +61,7 @@
                     {% deads pigpen pig.date %}
                     {% culls pigpen pig.date %}
                 </div>
+                </a>
             </td>
         </tr>
         {%endfor%}
@@ -68,16 +70,16 @@
         </div>
     <div class="navhide"></div>
     <nav>
-        <button><a class="nostyle block" href="{% url 'pigs:addpigs' pigpen %}">Add pigs</a></button>
+        <button class="navbutton"><a class="nostyle block" href="{% url 'pigs:addpigs' pigpen %}">Add pigs</a></button>
         {% if pigpen.pigsinpen_set.exists %}
-        <button><a class="nostyle block" href="{% url 'pigs:movepigs' pigpen %}">Move pigs</a></button>
-        <button><a class="nostyle block" href="{% url 'pigs:ship' pigpen %}">Ship</a></button>
+        <button class="navbutton"><a class="nostyle block" href="{% url 'pigs:movepigs' pigpen %}">Move pigs</a></button>
+        <button class="navbutton"><a class="nostyle block" href="{% url 'pigs:ship' pigpen %}">Ship</a></button>
         {%else%}
-        <button disabled>Move pigs</button>
-        <button disabled>Ship</button>
+        <button disabled class="navbutton">Move pigs</button>
+        <button disabled class="navbutton">Ship</button>
         {%endif%}
 
-        <button class="button displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
+        <button class="navbutton displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
         </nav>
 </body>
 </html>
