@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-                        
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-  
+
 ]
 
 MIDDLEWARE = [
@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'Thepigapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Vaughn$default',
+        'USER': 'Vaughn',
+        'PASSWORD': 'vkccsscs',
+        'HOST': 'Vaughn.mysql.pythonanywhere-services.com',
     }
 }
 
