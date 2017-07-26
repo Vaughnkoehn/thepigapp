@@ -11,8 +11,8 @@ class Pigpen(models.Model):
         return self.pen
 
 class Ration(models.Model):
-   
-    ration_text = models.CharField(max_length=2)
+
+    ration_text = models.CharField(max_length=15)
     ration_price = models.DecimalField(max_digits=19,decimal_places=4)
     feed_per_pig = models.CharField(max_length=3,default = 55)
     milo = models.CharField(max_length=4)
@@ -27,7 +27,7 @@ class Ration(models.Model):
     oats = models.CharField(max_length=3,default = 0)
     sowonehundred = models.CharField(max_length=3,default = 0)
     porkperformance = models.CharField(max_length=3,default = 0)
-    safeguard = models.CharField(max_length=3,default = 0)                      
+    safeguard = models.CharField(max_length=3,default = 0)
     spicepak = models.CharField(max_length=3,default = 0)
     def __str__(self):
         return self.ration_text
@@ -53,7 +53,7 @@ class deadculled(models.Model):
     dead = models.PositiveIntegerField(null = True,blank = True)
     culled = models.PositiveIntegerField(null=True, blank= True)
     date = models.DateTimeField(auto_now_add = True)
-    
+
 
 class Shipped(models.Model):
     pigpen = models.PositiveIntegerField()

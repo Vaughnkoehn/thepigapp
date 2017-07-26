@@ -3,14 +3,13 @@ from django.views import generic
 from pigs.models import *
 from pigs.forms import *
 from django.utils import timezone
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Sum, F
 from django.db.models.functions import Coalesce
 from pigs import models
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from collections import defaultdict
 from django.views.decorators.cache import never_cache
@@ -20,12 +19,12 @@ from django.views.decorators.cache import never_cache
 class indexview(LoginRequiredMixin, generic.ListView):
     model = Pigpen
     template_name = 'pigs/indexview.html'
-   
-      
+
+
 def getlatestpigchange(pigpen,number):
     try:
         latestpigs = Pigsinpen.objects.values('id','pigs','pig_cost_total','date','notes').filter(pigpen=pigpen).order_by('-date')[:number]
-       
+
     except:
         latestpigs = '0'
     return latestpigs
@@ -55,18 +54,18 @@ class shippedpigs(LoginRequiredMixin,generic.ListView):
 @login_required
 @never_cache
 def addration(request,pigpen):
-   
+
     try:
-        piggy = Pigsinpen.objects.values('id').filter(pigpen=pigpen).latest('date') 
+        piggy = Pigsinpen.objects.values('id').filter(pigpen=pigpen).latest('date')
         pig = Pigsinpen.objects.filter(pigpen=pigpen).latest('date')
     except:
         messages.info(request,'Please add pigs!')
-        return  HttpResponseRedirect(reverse('pigs:pen', args=(pigpen))) 
+        return  HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 
-    
+
     if request.method == 'POST':
         form = addrationform(request.POST)
-        
+
         if form.is_valid():
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk= pigpen)
@@ -78,7 +77,7 @@ def addration(request,pigpen):
             ist.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
-            
+
             return render(request, 'pigs/rationview.html',{'error':"That did not perform correctly!",'form':form})
 
 
@@ -92,14 +91,14 @@ def updateration(request,pigpen,rationid):
 
     if request.method == 'POST':
         form = addrationform(request.POST, instance=instance)
-        
+
         if form.is_valid():
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk= pigpen)
             ist.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
-            
+
             return render(request, 'pigs/updateration.html',{'error':"That did not perform correctly!",'form':form,'pigpen':pigpen,'rationid':rationid})
 
 
@@ -133,7 +132,7 @@ def changepigs(request,pigpen):
         else:
             pigs = 0
             pigscost = 0
-        pig_cost = pigscost / pigs
+
         if form.is_valid():
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk = pigpen)
@@ -147,7 +146,7 @@ def changepigs(request,pigpen):
 
 
     else:
-        
+
         form = addpigsform()
         return render(request, 'pigs/pigaddview.html', {'form':form, 'pigpen':pigpen})
 
@@ -175,7 +174,7 @@ def updatepigs(request,pigpen,pigid):
             ist.save()
             pigration.objects.filter(pigsinapen=pigsbefore).update(pigsinapen=str(pigsbefore + form.cleaned_data['pigs']))
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
-            
+
         else:
             return render(request, 'pigs/pigupdateview.html',{'error':"That did not work",'form':form,'pigpen':pigpen,'pidid':pigid})
 
@@ -189,21 +188,21 @@ def dead(request,pigpen):
     pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').filter(pigpen=pigpen).latest('date')
     pigsbefore = pigbefore['pigs']
     pigscost = pigbefore['pig_cost_total']
-    id = pigbefore['id']
 
-   
+
+
     if request.method =='GET':
-       
 
-    
+
+
             pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - 1, pig_cost_total=pigscost+(pigsbefore / pigscost),date = timezone.now(),notes= "1 Dead")
             pigdead.save()
 
-            
+
             dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),dead = 1)
-            dead.save()                                                  
+            dead.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
-       
+
 
     else:
         messages.info(request, "Adding dead pig did not work. Please try again!")
@@ -215,21 +214,21 @@ def culled(request,pigpen):
     pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').filter(pigpen=pigpen).latest('date')
     pigsbefore = pigbefore['pigs']
     pigscost = pigbefore['pig_cost_total']
-    id = pigbefore['id']
 
-   
+
+
     if request.method =='GET':
-       
 
-    
+
+
             pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - 1, pig_cost_total=pigscost+(pigsbefore / pigscost),date = timezone.now(),notes= "Culled 1")
             pigdead.save()
 
-            
+
             dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),culled = 1)
-            dead.save()                                                  
+            dead.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
-       
+
 
     else:
         messages.info(request, "Adding culled pig did not work. Please try again!")
@@ -247,9 +246,9 @@ def movepigs(request,pigpen):
         perpigcost = pigscost / pignumber
         piggypen = Pigpen.objects.get(id=pigpen)
         pigrations = pigration.objects.values_list('ration','ration_amount','date').filter(pigpen=pigpen).filter(pigsinapen = pigid)
-        
 
-       
+
+
         if request.method =='POST':
             form = movepigsform(request.POST,pigpen=pigpen)
 
@@ -261,7 +260,7 @@ def movepigs(request,pigpen):
                    pigs = Pigsinpen.objects.values('pigs').filter(pigpen = ist.pigpen).latest('date')['pigs']
                 except:
                     pigs = 0
-                
+
                 ist.pigs = form.cleaned_data['pigs'] + pigs
                 if ist.notes == "":
                     ist.notes = str(form.cleaned_data['pigs']) + ' added from pen ' + pigpen
@@ -270,7 +269,7 @@ def movepigs(request,pigpen):
                 ist.save()
 
                 pigafter = pignumber-form.cleaned_data['pigs']
-               
+
                 newpig = models.Pigsinpen(pigpen=piggypen,pigs=pigafter, pig_cost_total=perpigcost * pigafter, date=timezone.now(), notes='Moved ' + str(form.cleaned_data['pigs']) + ' to ' + str(form.cleaned_data['pigpen']))
                 newpig.save()
 
@@ -281,9 +280,9 @@ def movepigs(request,pigpen):
                     newration = models.pigration(pigpen= form.cleaned_data['pigpen'], ration=Ration.objects.get(id=key),pigsinapen=ist.id, ration_amount = newrationamount,date = date)
                     newration.save()
 
-               
+
                 return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
-            
+
             else:
                 return render(request, 'pigs/pigmoveview.html',{'error':"That did not work",'form':form,'pigpen':pigpen})
 
@@ -298,7 +297,7 @@ def shippigs(request,pigpen):
     pigsbefore = pigbefore['pigs']
     pigscost = pigbefore['pig_cost_total']
     id = pigbefore['id']
-  
+
     if request.method =='POST':
         form = changepigsform(request.POST,pigpen=pigpen)
 
@@ -312,7 +311,7 @@ def shippigs(request,pigpen):
 
             ist.date = timezone.now()
             ist.save()
-            
+
             pigafter = pigsbefore - form.cleaned_data['pigs']
             pigrations=pigration.objects.values_list('ration','ration_amount','date').filter(pigpen=pigpen).filter(pigsinapen=id)
             ration = pigration.objects.filter(pigpen=pigpen).filter(pigsinapen=id).aggregate(total=Coalesce(Sum(F('ration__ration_price') * F('ration_amount')),0))['total']
@@ -320,7 +319,7 @@ def shippigs(request,pigpen):
             newpigration = defaultdict(int)
 
             for key,value,date in pigrations:
-              
+
                     ration = value / pigsbefore * pigafter
                     newrationamount = int(round(value / pigsbefore * form.cleaned_data['pigs'],1))
                     pigration.objects.filter(pigpen=pigpen).filter(ration=key).update(ration_amount = ration,pigsinapen = ist.id)
@@ -328,8 +327,8 @@ def shippigs(request,pigpen):
             newpigration = '; '.join(str(e) for e in newpigration.items())
             newpigration = str(newpigration)
             newpigration = newpigration.translate({ord(r): None for r in "defaultictns[]{}<>()'"})
-     
-            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],pig_cost = pigscost/pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost) 
+
+            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],pig_cost = pigscost/pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost)
             shipped.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
@@ -339,4 +338,3 @@ def shippigs(request,pigpen):
     else:
         form = changepigsform(pigpen=pigpen)
         return render(request, 'pigs/Ship.html', {'form':form, 'pigpen':pigpen, 'pigid':id})
-        
