@@ -3,7 +3,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="{% static 'pigs/registration.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
     <title></title>
 </head>
 <body>
@@ -28,16 +30,16 @@
 class="close" title="Close Modal">&times;</span>
 
   <!-- Modal Content -->
-  <form class="modal-content animate" method="post" action={%url 'login' %}>
+  <form class="modal-content animate col-s-12" method="post" action={%url 'login' %}>
       {%csrf_token %}
    
-
+   
     <div class="container">
-      <label><b>Username:</b></label>
+      <label class="label"><b>Username:</b></label>
        
       <input type="text" name="username" placeholder="Enter Username">
 
-        <label><b>Password:</b></label>
+        <label class="label"><b>Password:</b></label>
        <input type="password" name="password" placeholder="Enter Password">
 
       <button type="submit">Login</button>
@@ -48,6 +50,7 @@ class="close" title="Close Modal">&times;</span>
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
       <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
+   
   </form>
 </div>
     <script>
