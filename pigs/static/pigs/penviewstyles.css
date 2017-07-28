@@ -53,7 +53,7 @@
     
    
       input[type=radio] {
-     
+          display:none;
    
 }
 label[for="toggle"] {

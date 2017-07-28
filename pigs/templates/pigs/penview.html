@@ -73,7 +73,7 @@ $(document).bind("mousedown", function (e) {
         {% for pig in latestpigs %}
              
            
-            <a class="nostyle" id="rightclick" href="{%url 'pigs:updatepigs' pigpen pig.id %}">
+            <a class="nostyle" id="rightclick" href="{%url 'pigs:updatepigs' pigpen pig.id %}" onclick="void('ios needs this')">
                 
                 <h3>{{pig.date|date}}</h3>
                 <p>Pigs: {{pig.pigs}}</p>
