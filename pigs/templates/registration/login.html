@@ -14,15 +14,15 @@
 
     {% if next %}
         {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
+        <p class="cl2">Your account doesn't have access to this page. To proceed,
         please login with an account that has access.</p>
         {% else %}
-        <p>Please login to see this page.</p>
+        <p class="cl2">Please login to see this page.</p>
         {% endif %}
     {% endif %}
 
 
-    <button class="login" onclick="document.getElementById('id01').style.display='block'">Login</button>
+    <button class="login" onclick="document.getElementById('id01').style.display = 'block'">Login</button>
 
 <!-- The Modal -->
 <div id="id01" class="modal">

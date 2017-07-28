@@ -107,9 +107,9 @@ def updateration(request,pigpen,rationid):
         return render(request, 'pigs/updateration.html',{'form':form,'pigpen':pigpen, 'rationid':rationid})
 
 @login_required
-def delete(request,pigpen,model,rationid):
+def delete(request,pigpen,model):
     mod = getattr(models, model)
-    mod.objects.get(id=rationid).delete()
+    mod.objects.latest('date').delete()
     return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 @login_required
 def deleteallfrompen(request,pigpen):

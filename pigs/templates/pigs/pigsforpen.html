@@ -53,7 +53,7 @@
 
             
             <td class="hovertd">
-                <a class="nostyle block" href="{% url 'pigs:deadculls' pigpen %}">
+                
                 <div class="hover">
                     {% totaldead pigpen pig.date %}
                 </div>
@@ -61,7 +61,7 @@
                     {% deads pigpen pig.date %}
                     {% culls pigpen pig.date %}
                 </div>
-                </a>
+               
             </td>
         </tr>
         {%endfor%}
