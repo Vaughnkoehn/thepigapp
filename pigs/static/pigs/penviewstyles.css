@@ -99,6 +99,9 @@ label[for="toggle"] {
 #pen {
     text-align:center;  
 }
+#rightclick {-webkit-touch-callout:none !important;
+             -webkit-user-select:none !important;
+}
 
 }
 @media only screen and (min-width: 400px) {
