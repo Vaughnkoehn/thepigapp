@@ -2,6 +2,7 @@
     
     padding-top:75px;
     padding-bottom:60px;
+    -webkit-touch-callout: none !important;
 }
 @media only screen and (max-width: 400px) {
     /* For phone: */
@@ -99,7 +100,7 @@ label[for="toggle"] {
 #pen {
     text-align:center;  
 }
-#rightclick {-webkit-touch-callout:none !important;
+#rightclick {
              -webkit-user-select:none !important;
 }
 
@@ -277,7 +278,7 @@ a.nopigs {
    color:black;
    
 }
-
+#rightclick
 
 
 table, th, td  {

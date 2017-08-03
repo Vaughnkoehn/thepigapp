@@ -161,6 +161,7 @@
 a.nostyle {
     text-decoration:none;
     color:black;
+    cursor:pointer;
 }
 a.nostyle:active{
     color:black;

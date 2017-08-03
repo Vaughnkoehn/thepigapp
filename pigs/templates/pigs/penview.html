@@ -38,10 +38,16 @@ $(document).bind("mousedown", function (e) {
 </script>
 <script>
     var timer;
-    $('#rightclick').on("mousedown", function () {
+    $(document).on("mousedown",'#rightclick', function () {
         timer = setTimeout(function () {
-            alert("WORKY");
-        }, 2 * 1000);
+            $(".custom-menu").finish().toggle(100).
+
+        // In the right position (the mouse)
+        css({
+            top: event.pageY + "px",
+            right: 100 + "px"
+        });
+        }, 1 * 1000);
     }).on("mouseup mouseleave", function () {
         clearTimeout(timer);
     });
