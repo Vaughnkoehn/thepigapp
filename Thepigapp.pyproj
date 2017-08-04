@@ -69,6 +69,7 @@
     <Content Include="pigs\static\pigs\registration.css" />
     <Content Include="pigs\static\pigs\shippedstyles.css" />
     <Content Include="pigs\static\pigs\sorttable.js" />
+    <Content Include="pigs\static\pigs\touch.js" />
     <Content Include="pigs\templates\pigs\deadcull.html" />
     <Content Include="pigs\templates\pigs\deadculled.html" />
     <Content Include="pigs\templates\pigs\pigmoveview.html" />

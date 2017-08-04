@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^pen(?P<pigpen>[0-9]+)/updateration(?P<rationid>[0-9]+)/$', views.updateration, name = 'updateration'),
     url(r'^pen(?P<pigpen>[0-9]+)/delete(?P<model>[a-zA-Z]+)/$', views.delete, name = 'delete'),
     url(r'^pen(?P<pigpen>[0-9]+)/deletepigs/$', views.deleteallfrompen, name= 'deletepig'),
+    url(r'^pen(?P<pigpen>[0-9]+)/deleteration(?P<id>[0-9]+)/$', views.deleteration, name='deleteration'),
     url(r'^pen(?P<pigpen>[0-9]+)/addpigs/$', views.changepigs, name= 'addpigs'),
     url(r'^pen(?P<pigpen>[0-9]+)/deadpigs/$', views.dead, name= 'deadpigs'),
     url(r'^pen(?P<pigpen>[0-9]+)/culledpigs/$', views.culled, name= 'culledpigs'),

@@ -5,7 +5,22 @@
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/penviewstyles.css'%}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
+<script src="https://raw.github.com/pisi/Longclick/master/jquery.longclick-min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+<script type="text/javascript">
+/*
+ Longclick Event
+ Copyright (c) 2010 Petr Vostrel (http://petr.vostrel.cz/)
+ Dual licensed under the MIT (MIT-LICENSE.txt)
+ and GPL (GPL-LICENSE.txt) licenses.
+
+ Version: 0.3.2
+ Updated: 2010-06-22
+*/
+(function(a){function n(b){a.each("touchstart touchmove touchend touchcancel".split(/ /),function(d,e){b.addEventListener(e,function(){a(b).trigger(e)},false)});return a(b)}function j(b){function d(){a(e).data(h,true);b.type=f;jQuery.event.handle.apply(e,o)}if(!a(this).data(g)){var e=this,o=arguments;a(this).data(h,false).data(g,setTimeout(d,a(this).data(i)||a.longclick.duration))}}function k(){a(this).data(g,clearTimeout(a(this).data(g))||null)}function l(b){if(a(this).data(h))return b.stopImmediatePropagation()||
+false}var p=a.fn.click;a.fn.click=function(b,d){if(!d)return p.apply(this,arguments);return a(this).data(i,b||null).bind(f,d)};a.fn.longclick=function(){var b=[].splice.call(arguments,0),d=b.pop();b=b.pop();var e=a(this).data(i,b||null);return d?e.click(b,d):e.trigger(f)};a.longclick={duration:500};a.event.special.longclick={setup:function(){/iphone|ipad|ipod/i.test(navigator.userAgent)?n(this).bind(q,j).bind([r,s,t].join(" "),k).bind(m,l).css({WebkitUserSelect:"none"}):a(this).bind(u,j).bind([v,
+w,x,y].join(" "),k).bind(m,l)},teardown:function(){a(this).unbind(c)}};var f="longclick",c="."+f,u="mousedown"+c,m="click"+c,v="mousemove"+c,w="mouseup"+c,x="mouseout"+c,y="contextmenu"+c,q="touchstart"+c,r="touchend"+c,s="touchmove"+c,t="touchcancel"+c,i="duration"+c,g="timer"+c,h="fired"+c})(jQuery);    
+</script>
 <script>
         // Trigger action when the contexmenu is about to be shown
 $(document).on("contextmenu", '#rightclick', function (event) {
@@ -37,20 +52,13 @@ $(document).bind("mousedown", function (e) {
 
 </script>
 <script>
-    var timer;
-    $(document).on("mousedown",'#rightclick', function () {
-        timer = setTimeout(function () {
-            $(".custom-menu").finish().toggle(100).
+    function longClickHandler(e){
+        e.preventDefault();
+        $("body").append("<p>You longclicked. Nice!</p>");
+    }
 
-        // In the right position (the mouse)
-        css({
-            top: event.pageY + "px",
-            right: 100 + "px"
-        });
-        }, 1 * 1000);
-    }).on("mouseup mouseleave", function () {
-        clearTimeout(timer);
-    });
+    $("p a").longclick(250, longClickHandler);
+
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,7 +69,9 @@ $(document).bind("mousedown", function (e) {
     <meta name="viewport" content="width=device-width">
     <title>Pen {{pigpen}}</title>
 </head>
-<body >
+<body>
+      
+<p><a href="http://www.google.com/">Longclick me!</a></p>
 
       <div class='custom-menu col-4 col-m-4 col-s-3'>
                 <li><a class="nostyle block" href="{%url 'pigs:deadpigs' pigpen %}">1 Died</a></li>
@@ -87,15 +97,15 @@ $(document).bind("mousedown", function (e) {
         {% for pig in latestpigs %}
 
 
-            <a class="nostyle" id="rightclick" href="{%url 'pigs:updatepigs' pigpen pig.id %}" onclick="void('ios needs this')">
+            <a class="nostyle" id="rightclick" href="{%url 'pigs:updatepigs' pigpen pig.id %}" >
 
                 <h3>{{pig.date|date}}</h3>
                 <p>Pigs: {{pig.pigs}}</p>
                 <p class="sidebarp">Cost: {{pig.pig_cost_total}}</p>
-                </a>
+               
                 {%if pig.notes%}
                 <p class="sidebarp sidebarphover">Notes: {{pig.notes}}</p>{%endif%}
-
+                </a>
 
             {%empty%}
             <h3><a class="nostyle" href="{% url 'pigs:deletepig' pigpen %}">Clean out Pen?</a></h3>

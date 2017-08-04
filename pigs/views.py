@@ -111,6 +111,12 @@ def delete(request,pigpen,model):
     mod = getattr(models, model)
     mod.objects.latest('date').delete()
     return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
+
+@login_required
+def deleteration(request,pigpen,id):
+    Ration.objects.filter(id=id).delete()
+    return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
+
 @login_required
 def deleteallfrompen(request,pigpen):
     Pigsinpen.objects.filter(pigpen=pigpen).delete()
