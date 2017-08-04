@@ -100,7 +100,7 @@ label[for="toggle"] {
 #pen {
     text-align:center;  
 }
-#rightclick {
+.rightclick {
     -webkit-user-select:none !important;
     -webkit-touch-callout:none !important;
 }

@@ -8,4 +8,4 @@
             w, x, y].join(" "), k).bind(m, l)
         }, teardown: function () { a(this).unbind(c) }
     }; var f = "longclick", c = "." + f, u = "mousedown" + c, m = "click" + c, v = "mousemove" + c, w = "mouseup" + c, x = "mouseout" + c, y = "contextmenu" + c, q = "touchstart" + c, r = "touchend" + c, s = "touchmove" + c, t = "touchcancel" + c, i = "duration" + c, g = "timer" + c, h = "fired" + c
-})(jQuery);
+});
