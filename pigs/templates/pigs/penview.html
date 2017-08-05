@@ -37,23 +37,22 @@ $(document).bind("mousedown touchstart", function (e) {
         $(".custom-menu").hide(100);
     }
 });
-
+</script>
+<script>
 
      var timer = null
      var longtouch = false
      $(document).on('touchstart', ".rightclick", function(event){
-         event.preventDefault();
+        
          // Show contextmenu
          timer = setTimeout(function(){
              longtouch=true
-             $(".custom-menu").finish().toggle(100).
-             css({
-                 top: event.pageY + "px",
-                 right: 10 + "px"
-             });
-
+             $(".custom-menu").finish().toggle(100)
          }, 2000);
      })
+    .on('touchend', ".rightclick", function () {
+        clearTimeout(timer);
+    })
 
     
    

@@ -352,6 +352,8 @@ td a {
 }
 .custom-menu {
     display: none;
+    top:175px;
+    right:35px;
     z-index: 1000;
     position:absolute;
     border: 1px solid #CCC;
