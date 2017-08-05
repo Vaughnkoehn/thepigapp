@@ -105,6 +105,7 @@ label[for="toggle"] {
     user-select:none !important;
     -webkit-touch-callout:none !important;
     cursor:pointer;
+    touch-action:none;
 }
 
 }

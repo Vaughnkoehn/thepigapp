@@ -9,7 +9,7 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
-<scrip>
+<script>
         // Trigger action when the contexmenu is about to be shown
 $(document).on("contextmenu", ".rightclick", function (event) {
         // Avoid the real one
@@ -28,7 +28,7 @@ $(document).on("contextmenu", ".rightclick", function (event) {
 
 
 // If the document is clicked somewhere
-$(document).bind("mousedown", function (e) {
+$(document).bind("mousedown touchstart", function (e) {
 
     // If the clicked element is not the menu
     if (!$(e.target).parents(".custom-menu").length > 0) {
@@ -38,23 +38,24 @@ $(document).bind("mousedown", function (e) {
     }
 });
 
-</scrip>
- <script>
+
      var timer = null
      var longtouch = false
      $(document).on('touchstart', ".rightclick", function(event){
          event.preventDefault();
          // Show contextmenu
-         timer = setTimeout(function () {
-             longtouch = true;
+         timer = setTimeout(function(){
+             longtouch=true
              $(".custom-menu").finish().toggle(100).
-
              css({
                  top: event.pageY + "px",
                  right: 10 + "px"
              });
-         }, 1000);
+
+         }, 2000);
      })
+
+    
    
  
    
