@@ -43,7 +43,7 @@ $(document).bind("mousedown touchstart", function (e) {
      var timer = null
      var longtouch = false
      $(document).on('touchstart', ".rightclick", function(event){
-        
+         event.preventDefault();
          // Show contextmenu
          timer = setTimeout(function(){
              longtouch=true
