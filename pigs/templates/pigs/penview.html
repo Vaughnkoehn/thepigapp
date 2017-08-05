@@ -38,7 +38,44 @@ $(document).bind("mousedown", function (e) {
 });
 
 </script>
+ <script>
+     var presstimer;
+     var longtouch = false
+     $("a.rightclick").on('touchstart', function (event) {
+         event.preventDefault()
+         presstimer = setTimeout(function () {
+             longtouch = true;
 
+             // Show contextmenu
+             $(".custom-menu").finish().toggle(100).
+
+             css({
+                 top: event.pageY + "px",
+                 right: 10 + "px"
+             });
+         }, 1000);
+     })
+     .on("touchmove", function(event){
+         event.preventDefault()
+         clearTimeout(presstimer);
+         if (longtouch){
+             longtouch = false;
+         }
+     })
+     
+
+            event.preventDefault();
+
+            // Show contextmenu
+            $(".custom-menu").finish().toggle(100).
+
+            css({
+                top: event.pageY + "px",
+                right: 10 + "px"
+            });},1000);
+           
+   
+</script>
 
    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -150,27 +187,8 @@ $(document).bind("mousedown", function (e) {
             <label for="togglein" class="overlay"></label>
         </div>
 
-       <script>
-    var presstimer;
-    $("a.rightclick").mouseup(function () {
-        clearTimeout(presstimer);
-        return false;
-    }).mousedown(function (event) {
-        presstimer = window.setTimeout(function () {
+      
 
-            event.preventDefault();
-
-            // Show contextmenu
-            $(".custom-menu").finish().toggle(100).
-
-            css({
-                top: event.pageY + "px",
-                right: 10 + "px"
-            });},1000);
-            return false;
-        })
-   
-</script>
 
 </body>
 </html>
