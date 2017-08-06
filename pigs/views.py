@@ -82,7 +82,35 @@ def addration(request,pigpen):
 
 
     else:
-        form = addrationform()
+        try:
+            rt = pigration.objects.values('ration').filter(pigpen=pigpen).latest('date')['ration']
+            rat = pigration.objects.filter(pigpen=pigpen).filter(ration=rt).aggregate(Sum('ration_amount'))
+            feed = rat['ration_amount__sum']
+            amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_text=rt))
+            try:
+                pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=piggy['id']).values_list('pigs', flat =True).latest('date'))
+            except:
+                pigs = 0
+
+            total = amount*pigs-feed
+
+            if total < 50:
+                total = 2000
+                rt = int(rt) + 1 
+               
+             
+
+            form = addrationform(initial={'ration_amount':total,'ration':rt})
+        except:
+            amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_text='1'))
+            try:
+                pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=piggy['id']).values_list('pigs', flat =True).latest('date'))
+            except:
+                pigs = 0
+
+            total = amount*pigs
+            form= addrationform(initial={'ration_amount':total, 'ration':'1'})
+
         return render(request, 'pigs/rationview.html',{'form':form,'pigpen':pigpen})
 
 @login_required
@@ -114,7 +142,7 @@ def delete(request,pigpen,model):
 
 @login_required
 def deleteration(request,pigpen,id):
-    Ration.objects.filter(id=id).delete()
+    pigration.objects.filter(id=id).delete()
     return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 
 @login_required

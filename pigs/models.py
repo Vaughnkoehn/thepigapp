@@ -12,7 +12,7 @@ class Pigpen(models.Model):
 
 class Ration(models.Model):
 
-    ration_text = models.CharField(max_length=15)
+    ration_text = models.CharField(max_length=15, unique=True)
     ration_price = models.DecimalField(max_digits=19,decimal_places=4)
     feed_per_pig = models.CharField(max_length=3,default = 55)
     milo = models.CharField(max_length=4)
@@ -43,7 +43,7 @@ class Pigsinpen(models.Model):
 
 class pigration(models.Model):
     pigpen = models.ForeignKey(Pigpen, on_delete= models.CASCADE)
-    ration = models.ForeignKey(Ration, on_delete=models.CASCADE)
+    ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_text')
     pigsinapen = models.CharField(max_length=4)
     ration_amount = models.IntegerField()
     date = models.DateTimeField(blank=True)
