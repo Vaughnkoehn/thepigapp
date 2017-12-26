@@ -19,9 +19,9 @@ class changepigsform(forms.ModelForm):
        
     class Meta:
         model = Pigsinpen
-        fields= ['pigs','pig_cost_total','notes']
+        fields= ['pigs','notes']
         exclude = {'pigpen'}
-        labels = {'pig_cost_total': 'Pig cost'}
+        
 
 class addpigsform(forms.ModelForm):
     

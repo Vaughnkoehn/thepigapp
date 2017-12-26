@@ -12,7 +12,7 @@ class Pigpen(models.Model):
 
 class Ration(models.Model):
 
-    ration_text = models.CharField(max_length=15, unique=True)
+    ration_number = models.CharField(max_length=15, unique=True)
     ration_price = models.DecimalField(max_digits=19,decimal_places=4)
     feed_per_pig = models.CharField(max_length=3,default = 55)
     milo = models.CharField(max_length=4)
@@ -30,7 +30,7 @@ class Ration(models.Model):
     safeguard = models.CharField(max_length=3,default = 0)
     spicepak = models.CharField(max_length=3,default = 0)
     def __str__(self):
-        return self.ration_text
+        return self.ration_number
 
 class Pigsinpen(models.Model):
     pigpen = models.ForeignKey(Pigpen,on_delete=models.CASCADE)
@@ -43,8 +43,9 @@ class Pigsinpen(models.Model):
 
 class pigration(models.Model):
     pigpen = models.ForeignKey(Pigpen, on_delete= models.CASCADE)
-    ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_text')
+    ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_number')
     pigsinapen = models.CharField(max_length=4)
+    extras = models.CharField(max_length=6, null = True, blank=True)
     ration_amount = models.IntegerField()
     date = models.DateTimeField(blank=True)
 
@@ -58,6 +59,7 @@ class deadculled(models.Model):
 class Shipped(models.Model):
     pigpen = models.PositiveIntegerField()
     pigs = models.PositiveIntegerField()
+    sold_price = models.DecimalField(max_digits=6,decimal_places=2)
     pig_cost = models.DecimalField(max_digits=6, decimal_places=2)
     ration_amount = models.CharField(max_length=500)
     pig_ration_cost = models.DecimalField(max_digits=6,decimal_places=2)

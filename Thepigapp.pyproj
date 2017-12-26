@@ -4,8 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>Thepigapp</Name>
     <RootNamespace>Thepigapp</RootNamespace>
-    <InterpreterId>{1b866783-707e-4cd7-bde9-2058ad2f542c}</InterpreterId>
-    <InterpreterVersion>3.4</InterpreterVersion>
+    <InterpreterId>MSBuild|{1b866783-707e-4cd7-bde9-2058ad2f542c}|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -20,6 +19,7 @@
     <LaunchProvider>Django launcher</LaunchProvider>
     <DjangoSettingsModule>Thepigapp.settings</DjangoSettingsModule>
     <OutputPath>.</OutputPath>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +62,7 @@
     <Content Include="download.jpeg" />
     <Content Include="pigs\static\pigs\Generalstyles.css" />
     <Content Include="pigs\static\pigs\indexviewstyles.css" />
+    <Content Include="pigs\static\pigs\Mixsheetstyles.css" />
     <Content Include="pigs\static\pigs\penviewstyles.css" />
     <Content Include="pigs\static\pigs\formstyles.css" />
     <Content Include="pigs\static\pigs\pigsforpen.css" />
@@ -72,6 +73,7 @@
     <Content Include="pigs\static\pigs\touch.js" />
     <Content Include="pigs\templates\pigs\deadcull.html" />
     <Content Include="pigs\templates\pigs\deadculled.html" />
+    <Content Include="pigs\templates\pigs\Mixsheet.html" />
     <Content Include="pigs\templates\pigs\pigmoveview.html" />
     <Content Include="pigs\templates\pigs\indexview.html" />
     <Content Include="pigs\templates\pigs\penview.html" />
@@ -105,7 +107,6 @@
   <ItemGroup>
     <Interpreter Include="env\">
       <Id>{1b866783-707e-4cd7-bde9-2058ad2f542c}</Id>
-      <BaseInterpreter>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</BaseInterpreter>
       <Version>3.4</Version>
       <Description>env (Python 3.4)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
@@ -155,4 +156,5 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>

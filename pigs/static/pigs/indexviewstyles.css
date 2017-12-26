@@ -30,10 +30,9 @@
     display:flex;
     margin:0 2px;
     overflow:hidden;
-    height:1.3rem;
     left:5%;
     padding:0;
-    bottom:10px;
+    bottom:8px;
     
 }
 .header li {

@@ -20,7 +20,7 @@
             <i class="arrow"></i>
             <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:pen' pigpen %}">Pen {{pigpen}}</a></h2>
         </div>
-    <h1>Addration for Pen {{pigpen}}</h1>
+    <h1>Addration</h1>
         </div>
     {% if error %}{{error}}{%endif%}
     <form method="post">
@@ -29,6 +29,7 @@
             {{form.as_table}}
         </table>
         <input type="submit" value="Save" />
+        <input type="submit" value="Mix Sheet" name="list"/>
     </form>
 </body>
 </html>

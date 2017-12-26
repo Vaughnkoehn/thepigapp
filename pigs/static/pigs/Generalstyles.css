@@ -162,10 +162,10 @@ a.nostyle {
     text-decoration:none;
     color:black;
     cursor:pointer;
+    display:block;
 }
 a.nostyle:active{
     color:black;
-    background-color:white;
 }
 a.block {
     display:block;
@@ -195,7 +195,7 @@ table.tablescroll {
 }
 .arrow {
         position:relative;
-        top:8px;
+        top:7.5px;
         border: solid black;
         border-width: 0 0 3px 3px;
         left:3px;
@@ -208,8 +208,8 @@ table.tablescroll {
 
 .arrowh {
     position:relative;
-    top:-16.5px;
-    left:1px;
+    top:-19px;
+    left:4px;
     float:left;
     
 }
@@ -235,7 +235,8 @@ table.tablescroll {
 .headerwitharrow {
     position:fixed;
     width:100%;
-    display:inline-block;
+    height:40px;
+    display:block;
     top:10px;
     z-index:4;
 }
@@ -246,7 +247,6 @@ table.tablescroll {
     white-space:nowrap;
     width:100%;
     margin:0 5px 0 5px;
-
 }
 nav {
     position:fixed;
@@ -259,6 +259,7 @@ nav {
     z-index:99;
     line-height:30px;
     display:inline-block;
+    padding-right:5px;
 }
 nav .navbutton {
     position:relative;

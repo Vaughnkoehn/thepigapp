@@ -1,17 +1,25 @@
 ﻿body, html{
     overflow:hidden;
-   
+ 
     height:100%;
 }
+table{
+    margin-right:17px;
+    margin-bottom:20px;
+    table-layout:auto;
+}
 table, th, td {
+    
     border:1px solid black;
     cursor:default;
-    font-size:3vw;
+    font-size:1em;
+    margin-right:17px;
 }
+
 td {
   
     text-align:center;
-    transition:all 1s ease-in-out;
+    transition:all 3s ease-in-out;
 }
 td.overflow {
     
@@ -37,10 +45,20 @@ td.hovertd:hover div.hover, td.hovertd:active div.hover {
 .tablewrapper{
     position:relative;
     height:100%;
+    
+    
+    
+    
 }
 .tablescroll{
     
-    height: calc(100% - 150px);
-    overflow:auto;
+    height: calc(100% - 100px);
+    width:100%;
+    overflow-y:auto;
     margin-top:50px;
+    overflow-x:hidden;
+    padding-right:27px;
+    
+    
+
 }

@@ -7,14 +7,27 @@ body, html {
 
 }
 
-.tablewrapper{
-    position:relative;
-   
-    height:100%;
+.tablewrapper {
+    position: relative;
+    height: 100%;
 }
-.tablescroll{
-    
-    height: calc(100% - 150px);
-    overflow:auto;
-    margin-top:50px;
+
+.tablescroll {
+    height: calc(100% - 100px);
+    width: 100%;
+    overflow-y: auto;
+    margin-top: 50px;
+    overflow-x: hidden;
+    padding-right: 27px;
 }
+td.overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 8ch;
+}
+
+    td.overflow:hover, td.overflow:active {
+        overflow: visible;
+        white-space: normal;
+    }

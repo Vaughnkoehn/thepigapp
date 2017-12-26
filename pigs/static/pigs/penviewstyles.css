@@ -44,10 +44,10 @@
     }
    
     
-     .arrowdiv:hover {
+     .arrowdiv:hover  {
        color:gray; 
      }  
-    .arrowdiv:hover .arrow {
+    .arrowdiv:hover #arrow {
         border-color:gray;
     }
 
@@ -63,7 +63,7 @@ label[for="toggle"] {
    z-index: 100;
    display: block;
    
-   color: #444;
+   color: gainsboro;
    cursor: pointer;
 }
 
@@ -363,7 +363,7 @@ td a {
     width:80px;
 }
 
-.custom-menu li {
+.custom-menu li{
     margin:5px 10px 5px;
     cursor: pointer;
     list-style:none;
@@ -371,7 +371,37 @@ td a {
 }
 
 
-.custom-menu li:hover {
+.custom-menu li:hover{
     background-color: #DEF;
   
+}
+.custom-menu-table {
+    
+    display:none;
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid #CCC;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    width: 80px;
+   
+    
+}
+.custom-menu-table a {
+        margin: 5px 10px 5px 10px;
+        cursor: pointer;
+        list-style: none;
+}
+.custom-menu-table a:hover {
+        background-color: #DEF;
+}
+.dropdownsub{
+    position:relative;
+}
+.dropdownsub .dropdownmenu {
+    display:none;
+    top:0;
+    right:100%;
+    margin-top:-1px;
 }

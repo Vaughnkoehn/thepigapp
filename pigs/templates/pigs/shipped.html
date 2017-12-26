@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/shippedstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
 
 
@@ -17,8 +18,8 @@
             <i class="arrow"></i>
             <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:index' %}">Pen {{pigpen}}</a></h2>
         </div>
-      <h1>Shipped</h1>
-        </div>
+        <h1>Shipped</h1>
+    </div>
         <div class="tablewrapper">
          <div class="tablescroll">
         <table class="border sortable">
@@ -39,7 +40,7 @@
                 <td>{{pig.shipped_date|date}}</td>
                 <td>{{pig.pigs}}</td>
                 <td>{{pig.pig_cost}}</td>
-                <td>{{pig.ration_amount}}</td>
+                <td class="overflow">{{pig.ration_amount}}</td>
                 <td>{{pig.pig_ration_cost}}</td>
                
             </tr>
