@@ -221,7 +221,7 @@ a.nopigs {
 }
 .header{
     position:fixed;
-    background:brown;
+    background-color:maroon;
     color:white;
     right:10px;
     left:10px;
@@ -247,7 +247,7 @@ a.nopigs {
     height:75px;
 }
 .headerdropbtn {
-  background-color:brown;
+  background-color:maroon;
   border:none;
   
 }

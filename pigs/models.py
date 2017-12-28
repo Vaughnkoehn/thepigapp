@@ -27,10 +27,15 @@ class Ration(models.Model):
     oats = models.CharField(max_length=3,default = 0)
     sowonehundred = models.CharField(max_length=3,default = 0)
     porkperformance = models.CharField(max_length=3,default = 0)
-    safeguard = models.CharField(max_length=3,default = 0)
     spicepak = models.CharField(max_length=3,default = 0)
+    safeguard = models.CharField(max_length=3,default=0)
     def __str__(self):
         return self.ration_number
+
+class additives(models.Model):
+    additivename = models.CharField(max_length=15,unique=True)
+    price = models.DecimalField(max_digits=19, decimal_places=4)
+    amount_per_ton = models.DecimalField(max_digits=19, decimal_places=4)
 
 class Pigsinpen(models.Model):
     pigpen = models.ForeignKey(Pigpen,on_delete=models.CASCADE)
@@ -44,6 +49,7 @@ class Pigsinpen(models.Model):
 class pigration(models.Model):
     pigpen = models.ForeignKey(Pigpen, on_delete= models.CASCADE)
     ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_number')
+    ration_price = models.DecimalField(max_digits=19, decimal_places=4)
     pigsinapen = models.CharField(max_length=4)
     extras = models.CharField(max_length=6, null = True, blank=True)
     ration_amount = models.IntegerField()

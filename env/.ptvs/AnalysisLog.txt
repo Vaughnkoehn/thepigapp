@@ -3461,3 +3461,234 @@ System.InvalidOperationException: Cannot obtain search paths ---> System.Invalid
    at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T12:29:24: Start analysis
+2017-12-26T12:29:28: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T18:57:10: Start analysis
+2017-12-26T18:57:11: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T18:57:13: Start analysis
+2017-12-26T18:57:15: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T18:57:30: Start analysis
+2017-12-26T18:57:31: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T18:57:53: Start analysis
+2017-12-26T18:57:55: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T19:00:11: Start analysis
+2017-12-26T19:00:13: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T19:05:07: Start analysis
+2017-12-26T19:05:09: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T20:53:21: Start analysis
+2017-12-26T20:53:22: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T20:53:28: Start analysis
+2017-12-26T20:53:30: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T21:00:50: Start analysis
+2017-12-26T21:00:51: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()
+
+2017-12-26T21:10:17: Start analysis
+2017-12-26T21:10:19: [ERROR] Analysis failed
+System.InvalidOperationException: Cannot obtain search paths ---> System.InvalidOperationException: Cannot obtain list of paths
+
+   at Microsoft.PythonTools.Interpreter.PythonTypeDatabase.<GetUncachedDatabaseSearchPathsAsync>d__58.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+   --- End of inner exception stack trace ---
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Prepare>d__46.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<RunWorker>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.PythonTools.Analysis.PyLibAnalyzer.<Run>d__33.MoveNext()

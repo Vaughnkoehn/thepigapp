@@ -62,10 +62,9 @@ def mixsheet(request,id,amount,ration,pigpen):
         if int(v) != 0:
             rat[k]= round(int(v)/ 2000 * int(amount))
    
-    today= date.today()
+   
 
-    if pigration.objects.filter(pigpen=pigpen, date__month=today.month).count() == 1:
-        messages.info(request,"Add Pork Performance!")
+    
     
   
 
@@ -92,10 +91,12 @@ def addration(request,pigpen):
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk= pigpen)
             ist.pigsinapen = piggy['id']
+            ist.ration_price = int(Ration.objects.values_list('ration_price', flat = True).get(ration_number=ist.ration)) / 2000 * ist.ration_amount
             if not ist.date:
                 ist.date = timezone.now()
             ist.save()
-            
+            if 'performance' in request.POST:
+                ist.ration_price += int(additives.objects.values_list('price', flat = True).get(additivename="porkperformance"))
             if 'list' in request.POST:
 
                 return HttpResponseRedirect(reverse('pigs:mixsheet', kwargs={'id':ist.id, 'ration':ist.ration, 'amount':ist.ration_amount, 'pigpen':pigpen}))
@@ -136,6 +137,9 @@ def addration(request,pigpen):
 
             total = amount*pigs
             form= addrationform(initial={'ration_amount':total, 'ration':'1'})
+        today= date.today()
+        if pigration.objects.filter(pigpen=pigpen, date__month=today.month).count() == 1:
+             messages.info(request,"Add Pork Performance!")
 
         return render(request, 'pigs/rationview.html',{'form':form,'pigpen':pigpen})
 
@@ -366,7 +370,7 @@ def shippigs(request,pigpen):
     id = pigbefore['id']
 
     if request.method =='POST':
-        form = changepigsform(request.POST,pigpen=pigpen)
+        form = shippigsform(request.POST,pigpen=pigpen)
 
         if form.is_valid():
             ist = form.save(commit=False)
@@ -395,7 +399,7 @@ def shippigs(request,pigpen):
             newpigration = str(newpigration)
             newpigration = newpigration.translate({ord(r): None for r in "defaultictns[]{}<>()'"})
 
-            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],pig_cost = pigscost/pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost)
+            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],sold_price= form.cleaned_data['sold_price'], pig_cost = pigscost/pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost)
             shipped.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
@@ -403,5 +407,6 @@ def shippigs(request,pigpen):
 
 
     else:
-        form = changepigsform(pigpen=pigpen)
+        form = shippigsform(pigpen=pigpen)
         return render(request, 'pigs/Ship.html', {'form':form, 'pigpen':pigpen, 'pigid':id})
+

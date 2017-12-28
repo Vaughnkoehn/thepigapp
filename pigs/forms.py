@@ -38,6 +38,20 @@ class movepigsform(forms.ModelForm):
     class Meta:
         model = Pigsinpen
         fields = ['pigpen','pigs','notes']
-       
+      
+class shippigsform(forms.ModelForm):
+
+    def __init__(self,*args,**kwargs):
+        pigpen = kwargs.pop("pigpen")
+        super(shippigsform,self).__init__(*args,**kwargs)
+        self.fields['pigs'] = forms.IntegerField(max_value=Pigsinpen.objects.values('pigs').filter(pigpen=pigpen).latest('date')['pigs'])
+   
+    sold_price= forms.CharField()
+
+    class Meta:
+        model = Pigsinpen
+        fields= ['pigs','notes']
+        exclude = {'pigpen'}
+
 
             

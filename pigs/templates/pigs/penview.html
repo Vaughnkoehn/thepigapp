@@ -10,10 +10,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
 <script>
-        // Trigger action when the contexmenu is about to be shown
-$(document).on("contextmenu", ".rightclick", function (event) {
-        // Avoid the real one
-        event.preventDefault();
+       
+$(document).on("click", ".rightclick", function (event) {
+        
 
         // Show contextmenu
         $(".custom-menu").finish().toggle(100).
@@ -48,7 +47,7 @@ $(document).bind("mousedown touchstart", function (e) {
          timer = setTimeout(function(){
              longtouch=true
              $(".custom-menu").finish().toggle(100)
-         }, 2000);
+         }, 700);
      })
     .on('touchend', ".rightclick", function () {
         clearTimeout(timer);
@@ -100,7 +99,7 @@ $(document).bind("mousedown touchstart", function (e) {
          timer = setTimeout(function(){
              longtouch=true
              $(".custom-menu-table","#" + i).finish().toggle(100)
-         }, 2000);
+         }, 700);
      })
     .on('touchend', ".rightclicktable", function () {
         clearTimeout(timer);
@@ -154,7 +153,7 @@ $(document).bind("mousedown touchstart", function (e) {
                         
                     </ul>
                 </li>
-                <li><a class="nostyle block" href="{% url 'pigs:delete' pigpen 'Pigsinpen' %}">Delete</a></li>
+                <li><a class="nostyle block" href="{% url 'pigs:ship' pigpen  %}">Ship</a></li>
         </div>
 
     
@@ -176,7 +175,7 @@ $(document).bind("mousedown touchstart", function (e) {
         {% for pig in latestpigs %}
 
 
-            <a class="nostyle rightclick" href="{%url 'pigs:updatepigs' pigpen pig.id %}" >
+            <a class="nostyle rightclick" href="#" >
 
                 <h3>{{pig.date|date}}</h3>
                 <p>Pigs: {{pig.pigs}}</p>
