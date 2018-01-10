@@ -10,9 +10,9 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
 <script>
-       
+
 $(document).on("click", ".rightclick", function (event) {
-        
+
 
         // Show contextmenu
         $(".custom-menu").finish().toggle(100).
@@ -36,8 +36,7 @@ $(document).bind("mousedown touchstart", function (e) {
         $(".custom-menu").hide(100);
     }
 });
-</script>
-<script>
+
 
      var timer = null
      var longtouch = false
@@ -53,14 +52,9 @@ $(document).bind("mousedown touchstart", function (e) {
         clearTimeout(timer);
     })
 
-    
-   
- 
-   
-   
 </script>
-
 <script>
+
     var i = null
         // Trigger action when the contexmenu is about to be shown
 $(document).on("contextmenu", ".rightclicktable", function (event) {
@@ -76,8 +70,7 @@ $(document).on("contextmenu", ".rightclicktable", function (event) {
             left: event.pageX + "px"
         });
 
-});
-
+    });
 
 // If the document is clicked somewhere
 $(document).bind("mousedown touchstart", function (e) {
@@ -90,7 +83,8 @@ $(document).bind("mousedown touchstart", function (e) {
     }
 });
 
-
+</script>
+<script>
      var timer = null
      var longtouch = false
      $(document).on('touchstart', ".rightclicktable", function(event){
@@ -99,27 +93,13 @@ $(document).bind("mousedown touchstart", function (e) {
          timer = setTimeout(function(){
              longtouch=true
              $(".custom-menu-table","#" + i).finish().toggle(100)
-         }, 700);
+         }, 1000);
      })
     .on('touchend', ".rightclicktable", function () {
         clearTimeout(timer);
     })
 
-    
-   
- 
-   
-   
-</script>
-<script>
-    $(document).ready(function () {
-        $('ul.dropdownsub').hide();
-  $('.dropdownmenu a.test').on("click", function(e){
-    $(this).next('ul.dropdownsub').toggle(100);
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
+
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -131,32 +111,35 @@ $(document).bind("mousedown touchstart", function (e) {
     <title>Pen {{pigpen}}</title>
 </head>
 <body>
-      
 
 
-      <div class='custom-menu col-4 col-m-4 col-s-5'>
-                <li class="dropdownmenu"><a class="test nostyle block" href="#">Died</a>
-                    <ul class="dropdownsub">
-                        <li><a class="nostyle block" href="{% url 'pigs:deadpigs' pigpen 1 %}">1</a></li>
-                        <li><a class="nostyle block" href="{% url 'pigs:deadpigs' pigpen 2 %}">2</a></li>
-                        <li><a class="nostyle block" href="{% url 'pigs:deadpigs' pigpen 3 %}">3</a></li>
-                        <li><a class="nostyle block" href="{% url 'pigs:deadpigs' pigpen 4 %}">4</a></li>
-                    </ul>
-                </li>
-                <li class="dropdownmenu"><a class="test nostyle block" href="">Culled</a>
-                    <ul class="dropdownsub">
-                       
-                        <li><a class="nostyle block" href="{% url 'pigs:culledpigs' pigpen 1 %}">1</a></li>
-                        <li><a class="nostyle block" href="{% url 'pigs:culledpigs' pigpen 2 %}">2</a></li>
-                        <li><a class="nostyle block" href="{% url 'pigs:culledpigs' pigpen 3 %}">3</a></li>
-                        <li><a class="nostyle block" href="{% url 'pigs:culledpigs' pigpen 4 %}">4</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a class="nostyle block" href="{% url 'pigs:ship' pigpen  %}">Ship</a></li>
+
+      <div class='custom-menu col-4 col-m-5 col-s-6'>
+               <form action="{% url 'pigs:deadpigs' pigpen %}" method="get">
+                   <input type="submit" value="Dead" class="killinputs col-s-5"/>
+                   <select name="amount" class="killselect col-s-6 col-m-6 col-6">
+                       {% for i in "xxxxx" %}
+                           <option>{{forloop.counter}}</option>
+                       {% endfor %}
+                   </select>
+                    
+               </form> 
+              <form action="{% url 'pigs:culledpigs' pigpen %}" method="get">
+                   <input type="submit" value="Culled" class="killinputs col-s-5"/>
+                   <select name="amount" class="killselect col-s-6 col-m-6 col-6">
+                       <option>1</option>
+                       <option>2</option>
+                       <option>3</option>
+                       <option>4</option>
+                   </select>
+                    
+               </form> 
+               <form action="{% url 'pigs:ship' pigpen %}" method="get">
+                <input class="killinputs col-s-5" value="Ship" type="submit" />
+               </form>
         </div>
 
-    
+
 
     <input id="toggle" name="nav" class="displaynone-m displaynone" type="radio" />
 
@@ -180,7 +163,7 @@ $(document).bind("mousedown touchstart", function (e) {
                 <h3>{{pig.date|date}}</h3>
                 <p>Pigs: {{pig.pigs}}</p>
                 <p class="sidebarp">Cost: {{pig.pig_cost_total}}</p>
-               
+
                 {%if pig.notes%}
                 <p class="sidebarp sidebarphover">Notes: {{pig.notes}}</p>{%endif%}
                 </a>
@@ -218,7 +201,7 @@ $(document).bind("mousedown touchstart", function (e) {
                     <i id="arrow"></i>
                 </label>
             </div>
-           
+
             <table class="col-6 col-m-6 col-s-10 sortable">
                 <tr>
                     <th class="col-s-3">Ration</th>
@@ -229,7 +212,7 @@ $(document).bind("mousedown touchstart", function (e) {
                 </tr>
 
                 {% for pig in pigpen.pigration_set.all %}
-                                   
+
                 <tr class="rightclicktable" id="{{forloop.counter}}">
                     <td><a href="{% url 'pigs:updateration' pig.pigpen pig.id %}">{{pig.ration}}</a></td>
                     <td><a href="{% url 'pigs:updateration' pig.pigpen pig.id %}">{{pig.ration_amount}}</a></td>
@@ -239,12 +222,12 @@ $(document).bind("mousedown touchstart", function (e) {
                     <td class="custom-menu-table col-2 col-m-2 col-s-3" id="{{forloop.counter}}">
                          <a class="nostyle" href="{% url 'pigs:mixsheet' pig.id pig.pigpen pig.ration pig.ration_amount %}">MixSheet</a>
                          <a class="nostyle" href="{% url 'pigs:deleteration' pigpen pig.id %}">Delete</a>
-                    </td>            
+                    </td>
 
                 </tr>
-                {%endfor%} 
+                {%endfor%}
             </table>
-             
+
 
             <!--navigation menu-->
             <div class="navhide displaynone displaynone-m"></div>
@@ -257,7 +240,7 @@ $(document).bind("mousedown touchstart", function (e) {
             <label for="togglein" class="overlay"></label>
         </div>
 
-      
+
 
 
 </body>

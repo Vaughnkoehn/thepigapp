@@ -1,17 +1,17 @@
-﻿body{
-    
+body{
+
     padding-top:75px;
     padding-bottom:60px;
-   
+
 }
 @media only screen and (max-width: 400px) {
     /* For phone: */
-    
+
     table{
         margin-left:5%;
-      
+
     }
-   
+
 
     .sidebar{
         position:fixed;
@@ -26,43 +26,43 @@
     }
     .arrowdiv {
         top:27px;
-        
+
         right:30px;
         color:gainsboro;
-        background-color:brown;
-        border:none; 
+        background-color:maroon;
+        border:none;
     }
-    
+
     #arrow {
            border: solid gainsboro;
         border-width: 0 3px 3px 0;
         display: inline-block;
         padding:4.5px;
         transform: rotate(-45deg);
-       
-       
+
+
     }
-   
-    
+
+
      .arrowdiv:hover  {
-       color:gray; 
-     }  
+       color:gray;
+     }
     .arrowdiv:hover #arrow {
         border-color:gray;
     }
 
-    
-   
+
+
       input[type=radio] {
           display:none;
-   
+
 }
 label[for="toggle"] {
     position:fixed;
     font-size:25px;
    z-index: 100;
    display: block;
-   
+
    color: gainsboro;
    cursor: pointer;
 }
@@ -70,7 +70,7 @@ label[for="toggle"] {
 #toggle:checked ~ .sidebar  {
     transform: translate(0);
     z-index:105;
-    
+
 }
 #togglein:checked ~ .sidebar {
     transform:translate(110%)
@@ -85,7 +85,7 @@ label[for="toggle"] {
     top:0;
     height:100%;
     z-index:104;
-    transition: opacity .3s;  
+    transition: opacity .3s;
 }
 #togglein:checked + .content > .overlay {
     bottom:0;
@@ -98,7 +98,7 @@ label[for="toggle"] {
     width:0;
 }
 #pen {
-    text-align:center;  
+    text-align:center;
 }
 .rightclick {
     -webkit-user-select:none !important;
@@ -111,33 +111,33 @@ label[for="toggle"] {
 }
 @media only screen and (min-width: 400px) {
     /* For tablets: */
-    
+
     table{
         margin-left:30px;
     }
-    
+
     .displaydrop {
         display:none;
     }
     .sidenav {
         display:none;
     }
-    
+
 }
 @media only screen and (min-width: 768px) {
     /* For desktop: */
-    
+
     table{
         margin-left:40px;
     }
-   
+
     .displaydrop{
         display:none;
     }
     .sidenav {
         display:none;
     }
-     
+
 }
 
 .sidebar {
@@ -154,18 +154,18 @@ label[for="toggle"] {
 
 .sidebar h4 {
     line-height:0;
-}  
+}
 .sidebar p {
     line-height:14px;
-   
+
 }
 .sidebar a {
     color:black;
-   
+
 }
 div.messages {
      position:fixed;
-    
+
      z-index:200;
      top:0;
      left:0;
@@ -180,7 +180,7 @@ div.messages {
 }
 div.longmessage {
      position:fixed;
-     
+
      z-index:200;
      top:0;
      left:0;
@@ -195,9 +195,9 @@ div.longmessage {
 }
 
 @keyframes slidedown {
-   
+
     0%, 100% {
-       
+
         -webkit-transform:translateY(-50px);
         transform: translateY(-50px);
     }
@@ -205,7 +205,7 @@ div.longmessage {
     10%, 90% {
         -webkit-transform:translateY(0px);
         transform: translateY(0px);
-       
+
     }
 }
 .sidebar h3 {
@@ -226,8 +226,8 @@ a.nopigs {
     right:10px;
     left:10px;
     top:10px;
-    
-   
+
+
     padding:0 10px 0 10px;
     height:65px;
     z-index:99;
@@ -249,7 +249,7 @@ a.nopigs {
 .headerdropbtn {
   background-color:maroon;
   border:none;
-  
+
 }
 .nav {
     position:fixed;
@@ -280,7 +280,7 @@ a.nopigs {
 .fa {
    text-decoration:none;
    color:black;
-   
+
 }
 #rightclick
 
@@ -318,8 +318,8 @@ td a {
     position: relative;
     display: inline-block;
     transition:ease-in-out;
-    
-}                                                   
+
+}
 .dropdown-content {
     display: none;
     text-align:center;
@@ -367,16 +367,16 @@ td a {
     margin:5px 10px 5px;
     cursor: pointer;
     list-style:none;
-    
+
 }
 
 
 .custom-menu li:hover{
     background-color: #DEF;
-  
+
 }
 .custom-menu-table {
-    
+
     display:none;
     z-index: 1000;
     position: absolute;
@@ -385,8 +385,8 @@ td a {
     color: #333;
     border-radius: 5px;
     width: 80px;
-   
-    
+
+
 }
 .custom-menu-table a {
         margin: 5px 10px 5px 10px;
@@ -404,4 +404,14 @@ td a {
     top:0;
     right:100%;
     margin-top:-1px;
+}
+.killinputs{
+    margin-top:3px;
+    margin-bottom:3px;
+    border:none;
+    background-color:#fff;
+    font-size:16px;
+}
+select.killselect{
+    
 }

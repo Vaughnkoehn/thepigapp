@@ -253,7 +253,8 @@ def updatepigs(request,pigpen,pigid):
         return render(request, 'pigs/pigupdateview.html', {'form':form, 'pigpen':pigpen, 'pigid':pigid})
 
 @login_required
-def dead(request,pigpen,amount):
+def dead(request,pigpen):
+
     pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').filter(pigpen=pigpen).latest('date')
     pigsbefore = pigbefore['pigs']
     pigscost = pigbefore['pig_cost_total']
@@ -261,7 +262,8 @@ def dead(request,pigpen,amount):
 
 
     if request.method =='GET':
-
+        if 'amount' in request.GET:
+            amount = request.GET['amount']
 
         if pigsbefore - int(amount) >= 0:
 
@@ -284,7 +286,7 @@ def dead(request,pigpen,amount):
 
 
 @login_required
-def culled(request,pigpen,amount):
+def culled(request,pigpen):
     pigbefore= Pigsinpen.objects.values('id','pigs','pig_cost_total').filter(pigpen=pigpen).latest('date')
     pigsbefore = pigbefore['pigs']
     pigscost = pigbefore['pig_cost_total']
@@ -292,6 +294,8 @@ def culled(request,pigpen,amount):
 
 
     if request.method =='GET':
+        if 'amount' in request.GET:
+            amount = request.GET['amount']
 
             dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),culled = 1)
             dead.save()

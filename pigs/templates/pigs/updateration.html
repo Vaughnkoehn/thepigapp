@@ -6,7 +6,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-     <meta name="viewport" content="width=device-width">
+     <meta name="viewport" content="width=device-width maximum-scale= 1.5">
     <title></title>
 </head>
 <body>
@@ -23,10 +23,11 @@
         <table>
             {{form.as_table}}
         </table>
-        <input class="button" type="submit" value="Save" />
-        <input class="button" type="submit" value="Mix Sheet" name="list" />
-        <button class="button"><a class="nostyle block" href="{% url 'pigs:deleteration' pigpen rationid %}">Delete </a></button>
-        <button class="button"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
+        <nav>
+        <input class="navbutton" type="submit" value="Save" />
+        <input class="navbutton" type="submit" value="Mix Sheet" name="list" />
+        <button class="navbutton displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
+        </nav>
     </form>
 
 </body>
