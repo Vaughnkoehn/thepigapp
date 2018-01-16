@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^pen(?P<pigpen>[0-9]+)/updatepigs(?P<pigid>[0-9]+)/$', views.updatepigs, name= 'updatepigs'),
     url(r'^pen(?P<pigpen>[0-9]+)/movepigs/$', views.movepigs, name= 'movepigs'),
     url(r'^Mixsheet(?P<id>[0-9]+)/(?P<pigpen>[0-9]+)/(?P<ration>[0-9]+)/(?P<amount>[0-9]+)/$', views.mixsheet, name= 'mixsheet'),
+    url(r'^additive(?P<pigpen>[0-9]+)/(?P<id>[0-9]+)/(?P<addn>.+)/$', views.additive, name='additive')
 ]

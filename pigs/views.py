@@ -3,7 +3,7 @@ from django.views import generic
 from pigs.models import *
 from pigs.forms import *
 from django.utils import timezone
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.urls import reverse
 from django.db.models import Sum, F
 from django.db.models.functions import Coalesce
@@ -14,6 +14,10 @@ from django.contrib import messages
 from collections import defaultdict
 from django.views.decorators.cache import never_cache
 from datetime import date
+import json
+from django.db.models import FloatField
+from django.db.models.functions import Cast
+
 # Create your views here.
 
 
@@ -62,15 +66,32 @@ def mixsheet(request,id,amount,ration,pigpen):
         if int(v) != 0:
             rat[k]= round(int(v)/ 2000 * int(amount))
    
-   
-
-    
-    
+    add = additives.objects.all().values_list('additivename').annotate(price=Cast(F('amount_per_ton'),FloatField()) / 2000 * int(amount))
   
+    return render(request,'pigs/mixsheet.html',{'id':id, 'rat':rat,'ration':ration, 'amount':amount, 'pigpen':pigpen,'add':add})
 
-    return render(request,'pigs/mixsheet.html',{'id':id, 'rat':rat,'ration':ration, 'amount':amount, 'pigpen':pigpen})
+@login_required
+def additive(request,pigpen,id,addn):
+    if request.method == 'POST':
 
+        if 'amount' in request.POST:
+            am = request.POST['amount']
 
+        rat = pigration.objects.get(id=id,pigpen=pigpen)
+        newprice = int(additives.objects.values_list('price',flat = True).get(additivename=addn)) * int(am)
+        
+        rat.ration_price += newprice
+        try:
+            rat.extras += addn[0] + am + ' '
+        except:
+            rat.extras = addn[0] + am + ' '
+        rat.save()
+        response_data = {}
+        response_data['msg'] = 'it worked'
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
 
 @login_required
 @never_cache
@@ -95,8 +116,6 @@ def addration(request,pigpen):
             if not ist.date:
                 ist.date = timezone.now()
             ist.save()
-            if 'performance' in request.POST:
-                ist.ration_price += int(additives.objects.values_list('price', flat = True).get(additivename="porkperformance"))
             if 'list' in request.POST:
 
                 return HttpResponseRedirect(reverse('pigs:mixsheet', kwargs={'id':ist.id, 'ration':ist.ration, 'amount':ist.ration_amount, 'pigpen':pigpen}))
@@ -261,17 +280,17 @@ def dead(request,pigpen):
 
 
 
-    if request.method =='GET':
-        if 'amount' in request.GET:
-            amount = request.GET['amount']
+    if request.method =='POST':
+        if 'amount' in request.POST:
+            amount = request.POST['amount']
 
         if pigsbefore - int(amount) >= 0:
 
             
-            dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),dead = amount)
+            dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),dead = int(amount))
             dead.save()
 
-            pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - int(amount), pig_cost_total=pigscost+(pigsbefore / pigscost),date=timezone.now(),notes= amount + " Dead")
+            pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - int(amount), pig_cost_total=pigscost,date=timezone.now(),notes= amount + " Dead")
             pigdead.save()
 
 
@@ -293,16 +312,21 @@ def culled(request,pigpen):
 
 
 
-    if request.method =='GET':
-        if 'amount' in request.GET:
-            amount = request.GET['amount']
+    if request.method =='POST':
+         if 'amount' in request.POST:
+            amount = request.POST['amount']
 
-            dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),culled = 1)
-            dead.save()
+            if pigsbefore - int(amount) >= 0:
+                dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),culled = int(amount))
+                dead.save()
 
-            pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - 1, pig_cost_total=pigscost+(pigsbefore / pigscost),date = timezone.now(),notes= "Culled 1")
-            pigdead.save()
-            return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
+                pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - int(amount), pig_cost_total=pigscost,date = timezone.now(),notes= "Culled " + amount)
+                pigdead.save()
+                return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
+
+            else:
+                messages.info(request,"Cant have less than 0 pigs!")
+                return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 
 
     else:

@@ -8,7 +8,7 @@ class addrationform(forms.ModelForm):
         fields = ['ration', 'ration_amount','date']
         exclude = {'pigpen','pigsinpen'}
         widgets = {'ration_amount': forms.NumberInput(attrs={'step': '10',}),'date': forms.DateInput(attrs={'type': 'date','default':timezone.now})}
-      
+        labels = {'ration_amount': 'Amount'}
 
 
 class changepigsform(forms.ModelForm):
@@ -29,6 +29,7 @@ class addpigsform(forms.ModelForm):
         model = Pigsinpen
         fields = ['pigs','pig_cost_total','notes']
         exclude = {'pigpen'} 
+        labels = {'pig_cost_total': 'Cost Per Pig'}
 
 class movepigsform(forms.ModelForm):
     def __init__(self,*args,**kwargs):

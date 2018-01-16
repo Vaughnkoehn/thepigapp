@@ -33,9 +33,11 @@ class Ration(models.Model):
         return self.ration_number
 
 class additives(models.Model):
-    additivename = models.CharField(max_length=15,unique=True)
+    additivename = models.CharField(max_length=20,unique=True)
     price = models.DecimalField(max_digits=19, decimal_places=4)
     amount_per_ton = models.DecimalField(max_digits=19, decimal_places=4)
+    def __str__(self):
+        return str(self.additivename)
 
 class Pigsinpen(models.Model):
     pigpen = models.ForeignKey(Pigpen,on_delete=models.CASCADE)
@@ -51,9 +53,11 @@ class pigration(models.Model):
     ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_number')
     ration_price = models.DecimalField(max_digits=19, decimal_places=4)
     pigsinapen = models.CharField(max_length=4)
-    extras = models.CharField(max_length=6, null = True, blank=True)
+    extras = models.CharField(max_length=15, null = True, blank=True)
     ration_amount = models.IntegerField()
     date = models.DateTimeField(blank=True)
+    def __str__(self):
+        return str(self.pk)
 
 class deadculled(models.Model):
     pigpen = models.ForeignKey(Pigpen, on_delete=models.CASCADE)

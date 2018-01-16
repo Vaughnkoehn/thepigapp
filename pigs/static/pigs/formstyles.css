@@ -4,7 +4,8 @@
 form {
     position:fixed;
     top:70px;
-    left:30px;
+    left:8%;
+    font-size:1.2em;
 }
 .button {
     position:relative;
@@ -16,7 +17,20 @@ form {
 table input {
     width:30vmin;
     margin-top:5px;
+    margin-left:5px;
 }
 #id_ration {
     display:block;
+    margin-left:5px;
+    height:90%;
+}
+#id_date, #id_ration_amount{
+    width:90%;
+    height:90%;
+}
+label {
+    height:90%;
+}
+td {
+    height:25px;
 }

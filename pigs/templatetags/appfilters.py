@@ -28,17 +28,17 @@ def deleteration(instance):
 @register.simple_tag
 def cost(pigpen,pigs,pigs_in_pen):
     try:
-        return round(pigration.objects.filter(pigpen=pigpen).filter(pigsinapen=pigs).aggregate(total=Sum(F('ration__ration_price') * F('ration_amount')))['total'] / pigs_in_pen,2)
-       
+        return round(pigration.objects.filter(pigpen=pigpen).filter(pigsinapen=pigs).aggregate(total = Sum('ration_price'))['total'] / pigs_in_pen ,2)
     except:
         return 0
+    
 
 @register.simple_tag
 def totalcost(pigpen):
-    try:
-        return round(pigration.objects.filter(pigpen=pigpen).aggregate(total=Sum(F('ration__ration_price') * F('ration_amount')))['total'] ,2)
+   try:
+        return round(pigration.objects.filter(pigpen=pigpen).aggregate(total= Sum('ration_price'))['total'],2)
        
-    except:
+   except:
         return 0
 
 @register.simple_tag

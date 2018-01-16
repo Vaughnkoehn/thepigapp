@@ -7,10 +7,7 @@ body{
 @media only screen and (max-width: 400px) {
     /* For phone: */
 
-    table{
-        margin-left:5%;
-
-    }
+   
 
 
     .sidebar{
@@ -282,11 +279,9 @@ a.nopigs {
    color:black;
 
 }
-#rightclick
-
 
 table, th, td  {
-    border:1px solid #4a4747;
+    border:.9px solid #4a4747;
     cursor:default;
     font-size:1em;
 }
@@ -296,6 +291,9 @@ td a {
     padding:0;
     text-decoration: none;
     color:black;
+}
+th {
+    font-size:.96em;
 }
 .headerbuttons {
     text-align:right;
@@ -400,10 +398,10 @@ td a {
     position:relative;
 }
 .dropdownsub .dropdownmenu {
-    display:none;
-    top:0;
-    right:100%;
-    margin-top:-1px;
+    display: none;
+    top: 0;
+    right: 100%;
+    margin-top: -1px;
 }
 .killinputs{
     margin-top:3px;
@@ -412,6 +410,19 @@ td a {
     background-color:#fff;
     font-size:16px;
 }
-select.killselect{
-    
+
+td.overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width:4ch;
+}
+
+td.overflow:hover, td.overflow:active {
+    overflow: visible;
+    white-space: normal;
+}
+
+.hide {
+    display:none;
 }
