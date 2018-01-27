@@ -17,7 +17,7 @@ from datetime import date
 import json
 from django.db.models import FloatField
 from django.db.models.functions import Cast
-
+from django.template.loader import render_to_string
 # Create your views here.
 
 
@@ -59,44 +59,49 @@ class shippedpigs(LoginRequiredMixin,generic.ListView):
 
 @login_required
 @never_cache
-def mixsheet(request,id,amount,ration,pigpen):
-    ratdict = Ration.objects.filter(ration_number=ration).values('milo','sbm','sixtyeighty','control','pigpak','dynamin','optimax','molderase','hitpork','oats','sowonehundred','porkperformance','safeguard','spicepak')[0]
-    rat = {}
-    for k,v in ratdict.items():
-        if int(v) != 0:
-            rat[k]= round(int(v)/ 2000 * int(amount))
+def mixsheet(request,pigpen):
+    if request.method == "GET":
+        try:
+            pigpk = pigration.objects.values_list('id', flat = True).filter(pigpen=pigpen).latest('date')
+            pigpk += 1
+        except:
+            pigpk = "1"
+        amount = request.GET['ration_amount']
+        ration = request.GET['ration']
+        ratdict = Ration.objects.filter(ration_number=ration).values()[0]
+        rat = {}
+        for k,v in ratdict.items():
+            if k != 'feed_per_pig' and k != 'id' and k != 'ration_number':
+                if int(v) != 0:
+                    rat[k]= round(int(v)/ 2000 * int(amount))
    
-    add = additives.objects.all().values_list('additivename').annotate(price=Cast(F('amount_per_ton'),FloatField()) / 2000 * int(amount))
-  
-    return render(request,'pigs/mixsheet.html',{'id':id, 'rat':rat,'ration':ration, 'amount':amount, 'pigpen':pigpen,'add':add})
+        add = additives.objects.all().values_list('additivename').annotate(price=Cast(F('amount_per_ton'),FloatField()) / 2000 * int(amount))
+    
+        data = render_to_string('pigs/mixsheet.html',{'rat':rat,'ration':ration, 'amount':amount, 'pigpen':pigpen,'add':add,'pigpk':pigpk})
+        return HttpResponse(data)
 
 @login_required
 def additive(request,pigpen,id,addn):
-    if request.method == 'POST':
+    if request.method == 'GET':
 
-        if 'amount' in request.POST:
-            am = request.POST['amount']
-
-        rat = pigration.objects.get(id=id,pigpen=pigpen)
+        if 'amount' in request.GET:
+            am = request.GET['amount']
+       
+        
         newprice = int(additives.objects.values_list('price',flat = True).get(additivename=addn)) * int(am)
         
-        rat.ration_price += newprice
-        try:
-            rat.extras += addn[0] + am + ' '
-        except:
-            rat.extras = addn[0] + am + ' '
-        rat.save()
-        response_data = {}
-        response_data['msg'] = 'it worked'
-        return HttpResponse(
-            json.dumps(response_data),
-            content_type="application/json"
-        )
+        rationprice += newprice
+        pigration.objects.get_or_create(pk=id)
+        
+
+        data = {"it worked"}
+        return JsonResponse(data)
+        
 
 @login_required
 @never_cache
 def addration(request,pigpen):
-
+    
     try:
         piggy = Pigsinpen.objects.values('id').filter(pigpen=pigpen).latest('date')
         pig = Pigsinpen.objects.filter(pigpen=pigpen).latest('date')
@@ -104,30 +109,48 @@ def addration(request,pigpen):
         messages.info(request,'Please add pigs!')
         return  HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 
+    
+    
 
     if request.method == 'POST':
+       
         form = addrationform(request.POST)
 
         if form.is_valid():
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk= pigpen)
             ist.pigsinapen = piggy['id']
-            ist.ration_price = int(Ration.objects.values_list('ration_price', flat = True).get(ration_number=ist.ration)) / 2000 * ist.ration_amount
+
+            for r in Ration.objects.filter(ration_number=ist.ration):
+                for c in Commodity.objects.all():
+                    try:
+                        price += getattr(r, c.name)*c.price
+                    except:
+                        price = getattr(r, c.name)*c.price
+
+            ist.ration_price = price / 2000 * ist.ration_amount
+
+            for i in additives.objects.values_list('additivename',flat= True).all():
+                if i in request.POST and request.POST[i].isnumeric():
+                   k= int(additives.objects.values_list('price',flat = True).get(additivename=i)) * int(request.POST[i])
+                   ist.ration_price += k
+                   try:
+                        ist.extras += ' ' + i[0] + request.POST[i]
+                   except:
+                        ist.extras = i[0] + request.POST[i]
+
             if not ist.date:
                 ist.date = timezone.now()
             ist.save()
-            if 'list' in request.POST:
-
-                return HttpResponseRedirect(reverse('pigs:mixsheet', kwargs={'id':ist.id, 'ration':ist.ration, 'amount':ist.ration_amount, 'pigpen':pigpen}))
-            else:
- 
-                return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
+            
+            return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
 
-            return render(request, 'pigs/rationview.html',{'error':"That did not perform correctly!",'form':form})
+            return render(request, 'pigs/rationview.html',{'error':"That did not perform correctly!",'form':form,'pigpk':pigpk})
 
 
     else:
+       
         try:
             rt = pigration.objects.values('ration').filter(pigpen=pigpen).latest('date')['ration']
             rat = pigration.objects.filter(pigpen=pigpen).filter(ration=rt).aggregate(Sum('ration_amount'))
@@ -173,12 +196,7 @@ def updateration(request,pigpen,rationid):
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk= pigpen)
             ist.save()
-            if 'list' in request.POST:
-                
-                return HttpResponseRedirect(reverse('pigs:mixsheet', kwargs= {'id':ist.id, 'ration':ist.ration, 'amount':ist.ration_amount,'pigpen':pigpen}))
-            else:
-                
-                return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
+            return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:
 
             return render(request, 'pigs/updateration.html',{'error':"That did not perform correctly!",'form':form,'pigpen':pigpen,'rationid':rationid})
@@ -413,7 +431,7 @@ def shippigs(request,pigpen):
 
             pigafter = pigsbefore - form.cleaned_data['pigs']
             pigrations=pigration.objects.values_list('ration','ration_amount','date').filter(pigpen=pigpen).filter(pigsinapen=id)
-            ration = pigration.objects.filter(pigpen=pigpen).filter(pigsinapen=id).aggregate(total=Coalesce(Sum(F('ration__ration_price') * F('ration_amount')),0))['total']
+            ration = pigration.objects.filter(pigpen=pigpen).filter(pigsinapen=id).aggregate(total=Coalesce(Sum(F('ration_price')),0))['total']
             rationcost = ration / pigsbefore * form.cleaned_data['pigs']
             newpigration = defaultdict(int)
 
@@ -438,3 +456,38 @@ def shippigs(request,pigpen):
         form = shippigsform(pigpen=pigpen)
         return render(request, 'pigs/Ship.html', {'form':form, 'pigpen':pigpen, 'pigid':id})
 
+def Chartview(request):
+    pen_list = list(Pigpen.objects.all().values_list('pen',flat = True).order_by('pen'))
+    return render(request, 'pigs/Charts.html',{'pen':pen_list})
+
+@login_required
+def chartdata(request):
+    if 'pen' in request.GET:
+        pen = request.GET['pen']
+
+    prelabel = list(pigration.objects.filter(pigpen=pen).datetimes('date', 'month', order='ASC'))
+    label= [prelabel.month for prelabel in prelabel]
+    items = []
+    items2=[]
+    for i in label:
+        try:
+            a = Pigsinpen.objects.filter(pigpen=pen).filter(date__month=i).values_list('pigs', flat = True).latest('date')
+            
+        except:
+            a = 0
+        items.append(a)
+
+        
+        b = pigration.objects.filter(pigpen=pen).filter(date__month=i).aggregate(Sum('ration_amount'))['ration_amount__sum']
+      
+        items2.append(b)
+    
+
+    data = {
+        "labels": label,
+        "items": items,
+        "items2": items2
+        }
+
+    return JsonResponse(data)
+    

@@ -1,6 +1,11 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils import timezone
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from subprocess import run
+from pigs.models import *
+import uuid
 # Create your models here.
 
 
@@ -10,27 +15,40 @@ class Pigpen(models.Model):
     def __str__(self):
         return self.pen
 
+
+
+class Commodity(models.Model):
+    name = models.CharField(max_length=20,unique=True)
+    price = models.DecimalField(max_digits=19,decimal_places=4)
+    def __str__(self):
+        return self.name
+
 class Ration(models.Model):
 
     ration_number = models.CharField(max_length=15, unique=True)
-    ration_price = models.DecimalField(max_digits=19,decimal_places=4)
     feed_per_pig = models.CharField(max_length=3,default = 55)
-    milo = models.CharField(max_length=4)
-    sbm = models.CharField(max_length=4)
-    dynamin = models.CharField(max_length=3,default = 0)
-    pigpak = models.CharField(max_length=3,default = 0)
-    sixtyeighty = models.CharField(max_length=3,default = 0)
-    control = models.CharField(max_length=3,default = 0)
-    optimax = models.CharField(max_length=3,default = 0)
-    molderase = models.CharField(max_length=3,default = 0)
-    hitpork = models.CharField(max_length=3,default = 0)
-    oats = models.CharField(max_length=3,default = 0)
-    sowonehundred = models.CharField(max_length=3,default = 0)
-    porkperformance = models.CharField(max_length=3,default = 0)
-    spicepak = models.CharField(max_length=3,default = 0)
-    safeguard = models.CharField(max_length=3,default=0)
+    created = False
     def __str__(self):
-        return self.ration_number
+      return self.ration_number
+for i in Commodity.objects.all():
+    Ration.add_to_class(i.name,models.PositiveIntegerField(default=0))
+
+
+   # milo = models.CharField(max_length=4)
+   # sbm = models.CharField(max_length=4)
+   # dynamin = models.CharField(max_length=3,default = 0)
+   # pigpak = models.CharField(max_length=3,default = 0)
+   # sixtyeighty = models.CharField(max_length=3,default = 0)
+   # control = models.CharField(max_length=3,default = 0)
+   # optimax = models.CharField(max_length=3,default = 0)
+   # molderase = models.CharField(max_length=3,default = 0)
+   # hitpork = models.CharField(max_length=3,default = 0)
+   # oats = models.CharField(max_length=3,default = 0)
+   # sowonehundred = models.CharField(max_length=3,default = 0)
+   # porkperformance = models.CharField(max_length=3,default = 0)
+   # spicepak = models.CharField(max_length=3,default = 0)
+   # safeguard = models.CharField(max_length=3,default=0)
+   
 
 class additives(models.Model):
     additivename = models.CharField(max_length=20,unique=True)
@@ -49,6 +67,7 @@ class Pigsinpen(models.Model):
         return str(self.pigs)
 
 class pigration(models.Model):
+   # uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     pigpen = models.ForeignKey(Pigpen, on_delete= models.CASCADE)
     ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_number')
     ration_price = models.DecimalField(max_digits=19, decimal_places=4)

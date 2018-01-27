@@ -59,7 +59,7 @@
     <Compile Include="Thepigapp\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="download.jpeg" />
+    <Content Include="pigs\static\pigs\charts.css" />
     <Content Include="pigs\static\pigs\Generalstyles.css" />
     <Content Include="pigs\static\pigs\indexviewstyles.css" />
     <Content Include="pigs\static\pigs\Mixsheetstyles.css" />
@@ -67,10 +67,12 @@
     <Content Include="pigs\static\pigs\formstyles.css" />
     <Content Include="pigs\static\pigs\pigsforpen.css" />
     <Content Include="pigs\static\pigs\pigupdateviewstyles.css" />
+    <Content Include="pigs\static\pigs\rationviewstyles.css" />
     <Content Include="pigs\static\pigs\registration.css" />
     <Content Include="pigs\static\pigs\shippedstyles.css" />
     <Content Include="pigs\static\pigs\sorttable.js" />
     <Content Include="pigs\static\pigs\touch.js" />
+    <Content Include="pigs\templates\pigs\Charts.html" />
     <Content Include="pigs\templates\pigs\deadcull.html" />
     <Content Include="pigs\templates\pigs\deadculled.html" />
     <Content Include="pigs\templates\pigs\Mixsheet.html" />

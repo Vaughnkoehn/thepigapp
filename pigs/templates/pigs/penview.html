@@ -182,7 +182,6 @@ $(document).bind("mousedown touchstart", function (e) {
                 <h3><a class="nopigs" href="{% url 'pigs:addpigs' pigpen %}">Click to add pigs.</a></h3>
             {%endif%}
             {%empty %}
-                <h3><a class="nostyle" href="{% url 'pigs:dpig' pigpen %}">Clean out Pen?</a></h3>
                 <h3><a class="nopigs" href="{% url 'pigs:addpigs' pigpen %}">Click to add pigs.</a></h3>
             {%endfor%}
         </div>
@@ -231,8 +230,7 @@ $(document).bind("mousedown touchstart", function (e) {
                     {% getfeed pig.ration pig.pigpen pig.pigsinapen pig.date as feed %}
                     <td><a href="{% url 'pigs:updateration' pig.pigpen pig.id %}">{{feed}}</a></td>
                     <td class="custom-menu-table col-2 col-m-2 col-s-3" id="{{forloop.counter}}">
-                         <a class="nostyle" href="{% url 'pigs:mixsheet' pig.id pig.pigpen pig.ration pig.ration_amount %}">MixSheet</a>
-                         <a class="nostyle" href="{% url 'pigs:deleteration' pigpen pig.id %}">Delete</a>
+                        <a class="nostyle" href="{% url 'pigs:deleteration' pigpen pig.id %}">Delete</a>
                     </td>
 
                 </tr>
