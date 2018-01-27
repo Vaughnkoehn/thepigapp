@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'pigs/Generalstyles.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'pigs/charts.css' %}" />
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        $(document).ready(function () {
+            $('#penselect').bind('change', function () {
+                var endpoint = '/pigs/chartjs/'
+                var items = []
+                var labels = []
+
+                $.ajax({
+                    method: "GET",
+                    data: $('#myform').serialize(),
+                    url: endpoint,
+                    success: function (data) {
+                        labels = data.labels
+                        items = data.items
+                        items2 = data.items2
+                        setchart()
+                    },
+                    error: function (error_data) {
+                        console.log("error")
+                        console.log(error_data)
+                    }
+                });
+
+                function setchart() {
+                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Pigs',
+                                data: items,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }, {
+                                label: 'Feed',
+                                data: items2,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                }
+            });
+        $('#penselect').trigger('change')
+        })
+    </script>
+
+    <div class="headerwitharrow">
+        <div class="displaynone">
+            <i class="arrow"></i>
+            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:index' %}">Home</a></h2>
+        </div>
+            <h1>Reports</h1>
+     </div>
+    
+    <form id="myform" action="{% url 'pigs:chart' %}" method="get">
+        <select id="penselect" name="pen">
+            {% for p in pen %}
+                <option>{{p}}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <div class="chart col-6" url-endpoint="{% url 'pigs:chart' %}">
+        <canvas id="myChart" class="col-s-6 col-6"></canvas>
+    </div>
+    
+</body>
+</html>

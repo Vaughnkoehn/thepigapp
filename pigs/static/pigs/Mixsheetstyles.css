@@ -1,0 +1,42 @@
+body
+{ 
+    
+    padding-bottom:70px;
+}
+table#mixsheet, table#mixsheet td, table#mixsheet th{
+    border:.8px solid;
+    border-color:dimgray;
+
+}
+table#mixsheet{
+    position:relative;
+    left:20px;
+    margin-bottom:15px;
+}
+table#mixsheet td{
+    text-align:center;
+}
+h2 {
+    position:relative;
+    top:0px;
+    text-align:center;
+}
+.addselect {
+    position:relative;
+    
+    height:23px;
+    width:65px;
+    
+}
+.addinput {
+    position:relative;
+    left:20px;
+    height:23px;
+    margin-bottom:10px;
+}
+.adddiv {
+  
+}
+.selecttable {
+    
+}

@@ -1,0 +1,32 @@
+body
+{
+    padding-top:170px;
+    
+}
+.mixsheet{
+    position:relative;
+    top:20px;
+    width:100%;
+   
+}
+table.fixedtable{
+    position:fixed;
+    top:70px;
+    left:15px;
+    z-index:4;
+   
+}
+.scroll{
+    position:relative;
+    bottom:0;
+    height:90px;
+}
+.formhide {
+    background: white;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    height:150px;
+    z-index:3;
+}
