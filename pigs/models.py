@@ -3,7 +3,6 @@ from django.core.validators import MinValueValidator
 from django.utils import timezone
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from subprocess import run
 from pigs.models import *
 import uuid
 # Create your models here.
@@ -48,7 +47,7 @@ for i in Commodity.objects.all():
    # porkperformance = models.CharField(max_length=3,default = 0)
    # spicepak = models.CharField(max_length=3,default = 0)
    # safeguard = models.CharField(max_length=3,default=0)
-   
+
 
 class additives(models.Model):
     additivename = models.CharField(max_length=20,unique=True)
