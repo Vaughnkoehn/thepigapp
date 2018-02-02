@@ -195,6 +195,25 @@ def updateration(request,pigpen,rationid):
         if form.is_valid():
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk= pigpen)
+
+            for r in Ration.objects.filter(ration_number=ist.ration):
+                for c in Commodity.objects.all():
+                    try:
+                        price += getattr(r, c.name)*c.price
+                    except:
+                        price = getattr(r, c.name)*c.price
+
+            ist.ration_price = price / 2000 * ist.ration_amount
+
+            for i in additives.objects.values_list('additivename',flat= True).all():
+                if i in request.POST and request.POST[i].isnumeric():
+                   k= int(additives.objects.values_list('price',flat = True).get(additivename=i)) * int(request.POST[i])
+                   ist.ration_price += k
+                   try:
+                        ist.extras += ' ' + i[0] + request.POST[i]
+                   except:
+                        ist.extras = i[0] + request.POST[i]
+
             ist.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:

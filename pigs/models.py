@@ -11,10 +11,11 @@ import uuid
 
 
 class Pigpen(models.Model):
-    pen = models.CharField(max_length=2)
+    pen = models.CharField(max_length=2,primary_key=True)
     def __str__(self):
-        return self.pen
-
+        return str(self.pen)
+    class Meta:
+        ordering = ['pen']
 
 
 class Commodity(models.Model):
@@ -67,7 +68,6 @@ class Pigsinpen(models.Model):
         return str(self.pigs)
 
 class pigration(models.Model):
-   # uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     pigpen = models.ForeignKey(Pigpen, on_delete= models.CASCADE)
     ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_number')
     ration_price = models.DecimalField(max_digits=19, decimal_places=4)
@@ -76,7 +76,7 @@ class pigration(models.Model):
     ration_amount = models.IntegerField()
     date = models.DateTimeField(blank=True)
     def __str__(self):
-        return str(self.pk)
+        return "Pen " + str(self.pigpen)+ " Ration " + str(self.ration)
 
 class deadculled(models.Model):
     pigpen = models.ForeignKey(Pigpen, on_delete=models.CASCADE)

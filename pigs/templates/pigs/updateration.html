@@ -2,12 +2,31 @@
 {% load appfilters %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'pigs/formstyles.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'pigs/rationviewstyles.css'%}" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
      <meta name="viewport" content="width=device-width maximum-scale= 1.0">
     <title></title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+      <script>
+        $(document).ready(function () {
+            $('.fixedtable').bind('change', function (event) {
+                $.ajax({ 
+                    data: $('.rationform').serialize(), 
+                    type: "get", 
+                    dataType: "html",
+                    url: $('.rationform').data('action'),
+                    success: function(data) {
+                        $('div.mixsheet').html(data)
+                    }
+                });
+            });
+        })
+    </script>
 </head>
 <body>
     <div class="headerwitharrow">
@@ -17,17 +36,31 @@
         </div>
       <h1>Change ration</h1>
     </div>
+    <div class="formhide"></div>
     {% if error %}{{error}}{%endif%}
-    <form method="post">
+    <form class="rationform" data-action="{% url 'pigs:mixsheet' pigpen %}" method="post">
         {% csrf_token %}
-        <table>
+        <table class="fixedtable">
             {{form.as_table}}
         </table>
         <nav>
         <input class="navbutton" type="submit" value="Save" />
-        <input class="navbutton" type="submit" value="Mix Sheet" name="list" />
         <button class="navbutton displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
         </nav>
+        <div class="navhide"></div>
+    
+        <div class="mixsheet"></div>
+        <script>
+            $.ajax({ 
+                    data: $('.rationform').serialize(), 
+                    type: "get", 
+                    dataType: "html",
+                    url: $('.rationform').data('action'),
+                    success: function(data) {
+                        $('div.mixsheet').html(data)
+                    }
+            })
+        </script>
     </form>
 
 </body>

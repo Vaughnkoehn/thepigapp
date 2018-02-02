@@ -195,8 +195,8 @@ $(document).bind("mousedown touchstart", function (e) {
                 <div class="dropdown">
                     <button class="headerdropbtn"><h1 id="pen">Pen {{pigpen}}</h1></button>
                     <div class="dropdown-content">
-                        {% for pen in pens %}
-                        <a class="nostyle" href="{% url 'pigs:pen' pen %}">Pen {{pen}}</a>
+                        {% for p in pens %}
+                        <a class="nostyle" href="{% url 'pigs:pen' p %}">Pen {{p}}</a>
                         {%endfor%}
                     </div>
                 </div>
@@ -219,9 +219,8 @@ $(document).bind("mousedown touchstart", function (e) {
                     <th class="col-s-3">Feed</th>
 
                 </tr>
-
                 {% for pig in pigpen.pigration_set.all %}
-
+                
                 <tr class="rightclicktable" id="{{forloop.counter}}">
                     <td><a href="{% url 'pigs:updateration' pig.pigpen pig.id %}">{{pig.ration}}</a></td>
                     <td><a href="{% url 'pigs:updateration' pig.pigpen pig.id %}">{{pig.ration_amount}}</a></td>
