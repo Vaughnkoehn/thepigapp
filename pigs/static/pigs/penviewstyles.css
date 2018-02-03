@@ -297,6 +297,7 @@ td a {
     padding:0;
     text-decoration: none;
     color:black;
+    cursor:pointer;
 }
 th {
     font-size:.96em;

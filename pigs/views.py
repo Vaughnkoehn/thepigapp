@@ -77,7 +77,7 @@ def mixsheet(request,pigpen):
    
         add = additives.objects.all().values_list('additivename').annotate(price=Cast(F('amount_per_ton'),FloatField()) / 2000 * int(amount))
     
-        data = render_to_string('pigs/mixsheet.html',{'rat':rat,'ration':ration, 'amount':amount, 'pigpen':pigpen,'add':add,'pigpk':pigpk})
+        data = render_to_string('pigs/Mixsheet.html',{'rat':rat,'ration':ration, 'amount':amount, 'pigpen':pigpen,'add':add,'pigpk':pigpk})
         return HttpResponse(data)
 
 @login_required
