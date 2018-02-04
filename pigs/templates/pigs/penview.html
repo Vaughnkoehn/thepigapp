@@ -16,7 +16,7 @@ $(document).on("click", ".rightclick", function (event) {
 
         // Show contextmenu
         $(".custom-menu").finish().toggle(100).
-
+        alert('click')
         // In the right position (the mouse)
         css({
             top: event.pageY + "px",
@@ -46,7 +46,8 @@ $(document).bind("mousedown touchstart", function (e) {
          timer = setTimeout(function(){
              longtouch=true
              $(".custom-menu").finish().toggle(100)
-         }, 700);
+             alert('touch')
+         }, 100);
      })
     .on('touchend', ".rightclick", function () {
         clearTimeout(timer);
@@ -64,7 +65,7 @@ $(document).on("contextmenu", ".rightclicktable", function (event) {
         
         // Show contextmenu
         $("#custom-menu-table" + i).finish().toggle(100).
-
+        alert('context')
         // In the right position (the mouse)
         css({
             top: event.pageY + "px",
@@ -86,19 +87,20 @@ $(document).bind("mousedown touchstart", function (e) {
 
 </script>
 <script>
-  //   var timer = null
-  //   var longtouch = false
-  //   $(document).on('touchstart', ".rightclicktable", function(event){
-  //       event.preventDefault();
-         // Show contextmenu
-  //       timer = setTimeout(function(){
-  //           longtouch=true
-  //           $(".custom-menu-table","#" + i).finish().toggle(100)
-  //       }, 1000);
-  //   })
-  //  .on('touchend', ".rightclicktable", function () {
-  //      clearTimeout(timer);
-  //  })
+     var timer = null
+     var longtouch = false
+     $(document).on('touchstart', ".rightclicktable", function(event){
+         event.preventDefault();
+        // Show contextmenu
+         timer = setTimeout(function(){
+             longtouch=true
+             $(".custom-menu-table", "#" + i).finish().toggle(100)
+             alert('touchcontext')
+         }, 700);
+     })
+    .on('touchend', ".rightclicktable", function () {
+        clearTimeout(timer);
+    })
 
 
 </script>
@@ -216,6 +218,7 @@ $(document).bind("mousedown touchstart", function (e) {
                 {% for pig in pigpen.pigration_set.all %}
                 
                 <tr>
+
                     <td><a class="rightclicktable" id="{{forloop.counter}}" href="{% url 'pigs:updateration' pig.pigpen pig.id %}">{{pig.ration}}</a></td>
                     <td><a class="rightclicktable" id="{{forloop.counter}}" href="{% url 'pigs:updateration' pig.pigpen pig.id %}">{{pig.ration_amount}}</a></td>
                     <td class="overflow">{{pig.extras|default_if_none:""}}</td>
