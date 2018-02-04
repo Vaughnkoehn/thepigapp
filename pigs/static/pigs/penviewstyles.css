@@ -106,9 +106,7 @@ label[for="toggle"] {
     height:100%;
     padding-top:10px;
 }
-.rightclick {
-    background-color:gold;
-}
+
 .rightclicktable {
         -webkit-user-select: none !important;
         user-select: none !important;
@@ -116,9 +114,7 @@ label[for="toggle"] {
         cursor: pointer;
         touch-action: none;
     }
-.rightclicktable {
-    background-color:chartreuse;
-}
+
 }
 @media only screen and (min-width: 400px) {
     /* For tablets: */
@@ -314,12 +310,6 @@ td {
     padding:0;
     cursor:pointer;
 }
-td:hover {
-    background-color:red;
-}
-td a:hover{
-    background-color:aquamarine;
-}
 .headerbuttons {
     text-align:right;
     position:fixed;
@@ -412,7 +402,7 @@ td a:hover{
 
 }
 .table-menu a {
-        margin: 5px 10px 5px 10px;
+        margin:5px 0 5px;
         cursor: pointer;
         list-style: none;
 }
