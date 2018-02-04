@@ -62,10 +62,10 @@ $(document).on("contextmenu", ".rightclicktable", function (event) {
         // Avoid the real one
         event.preventDefault();
         i = ($(this).attr('id'));
-        
+        alert('context')
         // Show contextmenu
         $("#custom-menu-table" + i).finish().toggle(100).
-        alert('context')
+        
         // In the right position (the mouse)
         css({
             top: event.pageY + "px",
@@ -85,17 +85,23 @@ $(document).bind("mousedown touchstart", function (e) {
     }
 });
 
-</script>
-<script>
+
      var timer = null
      var longtouch = false
+     var i = null
      $(document).on('touchstart', ".rightclicktable", function(event){
          event.preventDefault();
         // Show contextmenu
+         i = ($(this).attr('id'));
          timer = setTimeout(function(){
-             longtouch=true
-             $("#custom-menu-table" + i).finish().toggle(100)
+             longtouch = true
              alert('touchcontext')
+             $("#custom-menu-table" + i).finish().toggle(100).
+             css({
+                top: event.pageY + "px",
+                left: event.pageX + "px"
+             })
+
          }, 700);
      })
     .on('touchend', ".rightclicktable", function () {
