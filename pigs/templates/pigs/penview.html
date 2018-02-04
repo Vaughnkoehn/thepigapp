@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load appfilters %}
+{% include base.html %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/penviewstyles.css'%}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
@@ -118,10 +119,7 @@ $(document).bind("mousedown touchstart", function (e) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width maximum-scale= 1.0"/>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+<head>   
     <title>Pen {{pigpen}}</title>
 </head>
 <body>
