@@ -94,7 +94,7 @@ $(document).bind("mousedown touchstart", function (e) {
         // Show contextmenu
          timer = setTimeout(function(){
              longtouch=true
-             $(".custom-menu-table", "#" + i).finish().toggle(100)
+             $("#custom-menu-table" + i).finish().toggle(100)
              alert('touchcontext')
          }, 700);
      })
