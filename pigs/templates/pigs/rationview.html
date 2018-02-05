@@ -1,12 +1,7 @@
 ﻿<!DOCTYPE html>
-{%load static%}
-{% include base.html %}
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width maximum-scale= 1.0">
-   
-    <title>Add Ration</title>
+{% extends 'pigs/base.html' %}
+{% block content %}
+{% load static %}
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'pigs/rationviewstyles.css'%}" />    
     <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
@@ -28,9 +23,6 @@
         })
     </script>
    
-    
-</head>
-<body>
     <div class="headerwitharrow">
         <div class="displaynone">
             <i class="arrow"></i>
@@ -64,5 +56,4 @@
             })
         </script>
     </form>   
-</body>
-</html>
+{% endblock %}

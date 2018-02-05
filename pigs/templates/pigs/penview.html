@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
-
-{% load static %}
+{% extends 'pigs/base.html' %}
+{% block content %}
 {% load appfilters %}
-{% include base.html %}
+{% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/penviewstyles.css'%}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
@@ -117,12 +117,8 @@ $(document).bind("mousedown touchstart", function (e) {
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
-<head>   
-    <title>Pen {{pigpen}}</title>
-</head>
-<body>
+
 
 
 
@@ -255,5 +251,5 @@ $(document).bind("mousedown touchstart", function (e) {
 
 
 
-</body>
-</html>
+
+{% endblock %}

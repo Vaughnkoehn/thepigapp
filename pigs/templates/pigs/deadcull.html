@@ -1,13 +1,8 @@
 ﻿<!DOCTYPE html>
-{%load static%}
+{% extends 'pigs/base.html' %}
+{% block content %}
+{% load static %}
 <link rel="stylesheet" type="text/css" href="{%static 'pigs/Generalstyles.css' %}" />
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    
-    <title>Deads and culls</title>
-</head>
-<body>
       <div class="headerhide"></div>
       <div class="headerwitharrow">
         <div class="displaynone">
@@ -35,5 +30,4 @@
     </table>
        
    
-</body>
-</html>
+{% endblock %}

@@ -1,15 +1,9 @@
 ﻿<!DOCTYPE html>
+{% extends 'pigs/base.html' %}
+{% block content %}
 {% load static %}
-{% include base.html %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/formstyles.css' %}" />
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width maximum-scale= 1.0">
-    <title></title>
-</head>
-<body>
     <div class="headerwitharrow">
         <div class="displaynone">
             <i class="arrow"></i>
@@ -26,5 +20,4 @@
         </table>
          <input class="button" type="submit" value="Save" />
      </form>
-</body>
-</html>
+{% endblock %}

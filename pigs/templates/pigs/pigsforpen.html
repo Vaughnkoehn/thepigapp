@@ -1,18 +1,12 @@
 ﻿<!DOCTYPE html>
-{% load static %}
+{% extends 'pigs/base.html' %}
+{% block content %}
 {% load appfilters %}
-{% include base.html %}
+{% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/pigsforpen.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/formstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width">
-    <title>Totals</title>
-</head>
-<body ontouchstart="">
     
     <div class="headerwitharrow">
         <div class="displaynone">
@@ -68,6 +62,7 @@
         </tr>
         {% if forloop.last %}
         <tr>
+
             <td>Total:</td>
             <td>{{pig.p}}</td>
             {% rationtotal pigpen as total%}
@@ -94,5 +89,4 @@
 
         <button class="navbutton displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
         </nav>
-</body>
-</html>
+{% endblock %}

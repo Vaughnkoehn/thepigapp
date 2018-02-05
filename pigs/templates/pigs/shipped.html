@@ -1,18 +1,12 @@
 ﻿<!DOCTYPE html>
+{% extends 'pigs/base.html' %}
+{% block content %}
 {% load static %}
-{% include base.html %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/shippedstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
 
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-     <meta name="viewport" content="width=device-width">
-    <title></title>
-</head>
-<body>
      
     <div class="headerwitharrow">
         <div class="displaynone">
@@ -51,5 +45,4 @@
         </table>
             </div>
             </div>
-</body>
-</html>
+{% endblock %}
