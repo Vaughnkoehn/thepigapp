@@ -11,16 +11,18 @@
      <meta name="viewport" content="width=device-width maximum-scale= 1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <script>
-$( document ).on(
-    "click",
-    "a",
-    function( event ){
-        event.preventDefault();
-        location.href = $( event.target ).attr( "href" );
-
-    }
-    );
-</script>
+$( document ).on("click","a",
+             function( event ){
+                event.preventDefault();
+                var url = $( event.target ).attr( "href" );
+                if (url === undefined) {
+                     location.href = $( event.target ).parent().attr( "href" );
+                }
+                else {
+                    location.href = url
+                }
+             }
+    );</script>
     <title></title>
 </head>
 <body>

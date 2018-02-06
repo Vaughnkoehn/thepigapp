@@ -6,16 +6,18 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <script>
-$( document ).on(
-    "click",
-    "a",
-    function( event ){
-        event.preventDefault();
-        location.href = $( event.target ).attr( "href" );
-
-    }
-    );
-</script>
+$( document ).on("click","a",
+             function( event ){
+                event.preventDefault();
+                var url = $( event.target ).attr( "href" );
+                if (url === undefined) {
+                     location.href = $( event.target ).parent().attr( "href" );
+                }
+                else {
+                    location.href = url
+                }
+             }
+    );</script>
     <meta charset="utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>Deads and culls</title>

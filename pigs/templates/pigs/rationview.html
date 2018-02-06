@@ -8,16 +8,18 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
     <script>
-$( document ).on(
-    "click",
-    "a",
-    function( event ){
-        event.preventDefault();
-        location.href = $( event.target ).attr( "href" );
-
-    }
-    );
-</script>
+$( document ).on("click","a",
+             function( event ){
+                event.preventDefault();
+                var url = $( event.target ).attr( "href" );
+                if (url === undefined) {
+                     location.href = $( event.target ).parent().attr( "href" );
+                }
+                else {
+                    location.href = url
+                }
+             }
+    );</script>
    
     <title>Add Ration</title>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />

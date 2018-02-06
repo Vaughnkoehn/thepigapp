@@ -10,16 +10,18 @@
     <meta charset="utf-8" name="viewport" content="width=device-width" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <script>
-$( document ).on(
-    "click",
-    "a",
-    function( event ){
-        event.preventDefault();
-        location.href = $( event.target ).attr( "href" );
-
-    }
-    );
-</script>
+$( document ).on("click","a",
+             function( event ){
+                event.preventDefault();
+                var url = $( event.target ).attr( "href" );
+                if (url === undefined) {
+                     location.href = $( event.target ).parent().attr( "href" );
+                }
+                else {
+                    location.href = url
+                }
+             }
+    );</script>
     <title>MixSheet</title>
 </head>
 <body>
