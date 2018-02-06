@@ -12,7 +12,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
     <script>
-        $( document ).on("click","a.stay",
+        $( document ).on("click","a",
              function( event ){
                 event.preventDefault();
                 location.href = $( event.target ).attr( "href" );
@@ -38,17 +38,17 @@
         <div class="scroll"></div>
         {% for pen in pigpen_list %}
 
-        <a class="pens" href="{% url 'pigs:pen' pen %}" onclick="disable(this)">
-            <div class="penwrapper">
-                <h4>{{pen}}</h4>
+        <a class="pens" href="{% url 'pigs:pen' pen %}">
+            
+                {{pen}}<br />
                 {% for pig in pen.pigsinpen_set.all %}
                 {% if forloop.last %}
-                <h4>Pigs in pen: {{pig.pigs}} </h4>
+                    Pigs in pen: {{pig.pigs}}<br />
                 {%endif%}
                 {%empty%}
-                <h4>Pigs in pen: 0</h4>
+                    Pigs in pen: 0
                 {%endfor%}
-            </div>
+            
         </a>
             
         {%endfor%}
@@ -70,7 +70,7 @@
         
     }
           function disable(item) {
-              alert(item.href)
+              
               location.href = item.href;
           }
     
