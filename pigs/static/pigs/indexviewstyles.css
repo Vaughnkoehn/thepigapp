@@ -5,10 +5,10 @@
 .header{
     position:fixed;
     background:brown;
-    right:10px;
-    left:10px;
-    top:10px;
-    height:70px;
+    right:0px;
+    left:0px;
+    top:0px;
+    height:80px;
     z-index:3;
     
 }
@@ -54,12 +54,11 @@
     display:none;
 }
 .pens {
-    display:block;
+    display: block;
     text-align: center;
     text-decoration: none;
     color: black;
-    background: rgba(0,0,0,0.1);
-  
+    background-color:gray;
 }
 
 .penwrapper {
