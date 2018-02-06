@@ -5,6 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width maximum-scale= 1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script>
+$( document ).on(
+    "click",
+    "a",
+    function( event ){
+        event.preventDefault();
+        location.href = $( event.target ).attr( "href" );
+
+    }
+    );
+</script>
    
     <title>Add Ration</title>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />

@@ -9,11 +9,15 @@
 <script src="{% static 'pigs/stayInWebApp.js' %}"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 <script>
-   $(document).ready(function () {
-        $(function () {
-            $.stayInWebApp();
-        });
-    });
+$( document ).on(
+    "click",
+    "a",
+    function( event ){
+        event.preventDefault();
+        location.href = $( event.target ).attr( "href" );
+
+    }
+    );
 </script>
 <script>
 

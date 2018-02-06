@@ -10,6 +10,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script>
+$( document ).on(
+    "click",
+    "a",
+    function( event ){
+        event.preventDefault();
+        location.href = $( event.target ).attr( "href" );
+
+    }
+    );
+</script>
     <title>Totals</title>
 </head>
 <body ontouchstart="">
