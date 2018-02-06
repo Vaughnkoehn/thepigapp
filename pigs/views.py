@@ -380,7 +380,7 @@ def movepigs(request,pigpen):
         pigcost = Pigsinpen.objects.values('pig_cost_total').get(id= pigid)
         pigscost = pigcost['pig_cost_total']
         perpigcost = pigscost / pignumber
-        piggypen = Pigpen.objects.get(pen=pigpen)
+        piggypen = Pigpen.objects.get(id=pigpen)
         pigrations = pigration.objects.values_list('ration','ration_amount','date').filter(pigpen=pigpen).filter(pigsinapen = pigid)
 
 

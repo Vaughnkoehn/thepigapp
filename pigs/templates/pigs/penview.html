@@ -1,15 +1,20 @@
 ﻿<!DOCTYPE html>
-{% extends 'pigs/base.html' %}
-{% block content %}
-{% load appfilters %}
+
 {% load static %}
+{% load appfilters %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/penviewstyles.css'%}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
 <script src="{% static 'pigs/touch.js' %}"></script>
-
+<script src="{% static 'pigs/stayInWebApp.js' %}"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
-
+<script>
+   $(document).ready(function () {
+        $(function () {
+            $.stayInWebApp();
+        });
+    });
+</script>
 <script>
 
 $(document).on("click", ".rightclick", function (event) {
@@ -117,8 +122,16 @@ $(document).bind("mousedown touchstart", function (e) {
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
-
+<head>  
+     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width maximum-scale= 1.0"/>
+     <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <title>Pen {{pigpen}}</title>
+</head>
+<body>
 
 
 
@@ -251,5 +264,5 @@ $(document).bind("mousedown touchstart", function (e) {
 
 
 
-
-{% endblock %}
+</body>
+</html>

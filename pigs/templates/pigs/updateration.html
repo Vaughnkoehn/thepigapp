@@ -1,11 +1,16 @@
 ﻿<!DOCTYPE html>
-{% extends 'pigs/base.html' %}
 {% load appfilters %}
-{% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/rationviewstyles.css'%}" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width maximum-scale= 1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title></title>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
       <script>
@@ -23,6 +28,8 @@
             });
         })
     </script>
+</head>
+<body>
     <div class="headerwitharrow">
         <div class="displaynone">
             <i class="arrow"></i>
@@ -57,4 +64,5 @@
         </script>
     </form>
 
-{% endblock %}
+</body>
+</html>
