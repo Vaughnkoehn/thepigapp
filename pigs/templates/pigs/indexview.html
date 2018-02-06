@@ -9,15 +9,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <script>
-$( document ).on(
-    "click",
-    "a",
-    function( event ){
-        event.preventDefault();
-        location.href = $( event.target ).attr( "href" );
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
-    }
+    <script>
+        $( document ).on("click","a.stay",
+             function( event ){
+                event.preventDefault();
+                location.href = $( event.target ).attr( "href" );
+
+             }
     );
 </script>
     <title>Home</title>
@@ -27,10 +27,10 @@ $( document ).on(
     <div class="header">
         <h1>The Pig Farm</h1>
         <ul>
-        <li class="feederpigs"><a class="nostyle" href="#Feeders" onclick="testFunc(this)">Feeders</a></li>
-        <li><a class="nostyle" href="#Sows" onclick="testFunc(this)">Sows</a></li>
-        <li><a class="nostyle" href="{% url 'pigs:shippedpigs' %}">Shipped</a></li>
-        <li><a class="nostyle" href="{% url 'pigs:chartjs' %}">Reports</a></li>
+        <li class="feederpigs"><a class="nostyle stay" href="#Feeders" onclick="testFunc(this)">Feeders</a></li>
+        <li><a class="nostyle stay" href="#Sows" onclick="testFunc(this)">Sows</a></li>
+        <li><a class="nostyle stay" href="{% url 'pigs:shippedpigs' %}">Shipped</a></li>
+        <li><a class="nostyle stay" href="{% url 'pigs:chartjs' %}">Reports</a></li>
         </ul>
     </div>
 
@@ -38,7 +38,7 @@ $( document ).on(
         <div class="scroll"></div>
         {% for pen in pigpen_list %}
 
-        <a class="pens" href="{% url 'pigs:pen' pen %}">
+        <a class="pens" href="{% url 'pigs:pen' pen %}" onclick="disable(this)">
             <div class="penwrapper">
                 <h4>{{pen}}</h4>
                 {% for pig in pen.pigsinpen_set.all %}
@@ -69,6 +69,11 @@ $( document ).on(
         document.getElementById(target[1]).style.display = "block";
         
     }
+          function disable(item) {
+              alert(item.href)
+              location.href = item.href;
+          }
+    
 </script>
 
 

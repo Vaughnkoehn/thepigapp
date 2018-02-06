@@ -6,12 +6,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
 <script src="{% static 'pigs/sorttable.js' %}"></script>
 <script src="{% static 'pigs/touch.js' %}"></script>
-<script src="{% static 'pigs/stayInWebApp.js' %}"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 <script>
-$( document ).on(
-    "click",
-    "a",
+$( document ).on("click","a",
     function( event ){
         event.preventDefault();
         location.href = $( event.target ).attr( "href" );
