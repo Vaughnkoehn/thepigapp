@@ -93,3 +93,24 @@ class Shipped(models.Model):
     pig_ration_cost = models.DecimalField(max_digits=6,decimal_places=2)
     shipped_date = models.DateTimeField(auto_now_add=True)
     notes = models.CharField(max_length=300,blank=True,null=True)
+
+
+class Sows(models.Model):
+    sow_id = models.CharField(max_length=50,primary_key=True)
+    secondary_id = models.CharField(max_length=50)
+    description = models.CharField(max_length=300,null=True,blank=True)
+    birth_date = models.DateField()
+    status = models.CharField(max_length=50,null= True, blank = True)
+    def __str__(self):
+        return self.sow_id
+
+class piglets(models.Model):
+    Sow = models.ForeignKey(Sows,on_delete=models.CASCADE)
+    born_date = models.DateField()
+    born = models.PositiveIntegerField()
+    alive = models.PositiveIntegerField()
+    dead = models.PositiveIntegerField()
+    culled = models.PositiveIntegerField()
+    wean = models.PositiveIntegerField()
+    operation = models.CharField(max_length=50)
+    wean_date = models.DateField()

@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^Mixsheet/(?P<pigpen>[0-9]+)/$', views.mixsheet, name= 'mixsheet'),
     url(r'^additive(?P<pigpen>[0-9]+)/(?P<id>[0-9]+)/(?P<addn>.+)/$', views.additive, name='additive'),
     url(r'^chart/$', views.Chartview, name='chartjs'),
-    url(r'^chartjs/$', views.chartdata, name='chart')
+    url(r'^chartjs/$', views.chartdata, name='chart'),
+    url(r'^sow(?P<pk>[0-9]+)/$', views.sowview.as_view(), name = 'sow')
 ]

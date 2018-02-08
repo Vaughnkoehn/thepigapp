@@ -63,6 +63,7 @@
     <Content Include="pigs\static\pigs\Generalstyles.css" />
     <Content Include="pigs\static\pigs\indexviewstyles.css" />
     <Content Include="pigs\static\pigs\jquery.stayInWebApp.min.js" />
+    <Content Include="pigs\static\pigs\sowviewstyles.css" />
     <Content Include="pigs\static\pigs\stayInWebApp.js" />
     <Content Include="pigs\static\pigs\Mixsheetstyles.css" />
     <Content Include="pigs\static\pigs\penviewstyles.css" />
@@ -87,6 +88,7 @@
     <Content Include="pigs\templates\pigs\rationview.html" />
     <Content Include="pigs\templates\pigs\Ship.html" />
     <Content Include="pigs\templates\pigs\shipped.html" />
+    <Content Include="pigs\templates\pigs\sowview.html" />
     <Content Include="pigs\templates\pigs\updateration.html" />
     <Content Include="pigs\templates\registration\logged_out.html" />
     <Content Include="pigs\templates\registration\password_reset_complete.html" />

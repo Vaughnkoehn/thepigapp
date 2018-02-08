@@ -24,6 +24,10 @@ from django.template.loader import render_to_string
 class indexview(LoginRequiredMixin, generic.ListView):
     model = Pigpen
     template_name = 'pigs/indexview.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sows'] = Sows.objects.all()
+        return context
 
 
 def getlatestpigchange(pigpen,number):
@@ -180,7 +184,7 @@ def addration(request,pigpen):
             total = amount*pigs
             form= addrationform(initial={'ration_amount':total, 'ration':'1'})
         today= date.today()
-        if pigration.objects.filter(pigpen=pigpen, date__month=today.month).count() == 1:
+        if pigration.objects.filter(pigpen=pigpen, date__month=today.month).count() == 0:
              messages.info(request,"Add Pork Performance!")
 
         return render(request, 'pigs/rationview.html',{'form':form,'pigpen':pigpen})
@@ -510,3 +514,16 @@ def chartdata(request):
 
     return JsonResponse(data)
     
+def pigletamount(sow):
+    try:
+        return piglets.objects.filter(Sow = sow).latest('born_date')
+    except:
+        return '1'
+
+class sowview(generic.DetailView):
+    model = Sows
+    template_name = 'pigs/sowview.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['piglets'] = pigletamount(self.kwargs['pk'])
+        return context

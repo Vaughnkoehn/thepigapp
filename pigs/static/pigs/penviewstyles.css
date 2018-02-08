@@ -22,8 +22,7 @@ body{
         display:none;
     }
     .arrowdiv {
-        top:27px;
-
+        top:17px;
         right:30px;
         color:gainsboro;
         background-color:maroon;
@@ -31,7 +30,7 @@ body{
     }
 
     #arrow {
-           border: solid gainsboro;
+        border: solid gainsboro;
         border-width: 0 3px 3px 0;
         display: inline-block;
         padding:4.5px;
@@ -55,13 +54,12 @@ body{
 
 }
 label[for="toggle"] {
-    position:fixed;
+    position:absolute;
     font-size:25px;
-   z-index: 100;
-   display: block;
-
-   color: gainsboro;
-   cursor: pointer;
+    z-index: 100;
+    display: block;
+    color: gainsboro;
+    cursor: pointer;
 }
 
 #toggle:checked ~ .sidebar  {
@@ -230,11 +228,9 @@ a.nopigs {
     position:fixed;
     background-color:maroon;
     color:white;
-    right:10px;
-    left:10px;
-    top:10px;
-
-
+    right:0;
+    left:0;
+    top:0;
     padding:0 10px 0 10px;
     height:65px;
     z-index:99;

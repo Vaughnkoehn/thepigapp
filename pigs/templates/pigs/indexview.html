@@ -9,6 +9,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-transluscent">
+     <meta name="mobile-web-app-capable" content="yes">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
     <script>
@@ -38,9 +40,9 @@
         <li><a class="nostyle stay" href="{% url 'pigs:chartjs' %}">Reports</a></li>
         </ul>
     </div>
-
-        <div class="containers" id="Feeders">
         <div class="scroll"></div>
+        <div class="containers" id="Feeders">
+       
         {% for pen in pigpen_list %}
 
         <a class="pens" href="{% url 'pigs:pen' pen %}">
@@ -58,10 +60,13 @@
             
         {%endfor%}
        </div> 
+
        <div class="containers" id="Sows">
-           sow1
-           sow2
-           sow3
+           {% for sow in sows %}
+                <a class="pens" href="{% url 'pigs:sow' sow.sow_id %}" >
+                    <h4>{{sow.sow_id}}</h4>
+                </a>
+           {% endfor %}
        </div>
       <script>
     function testFunc(item) {
