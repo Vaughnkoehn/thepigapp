@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from pigs.models import *
 import uuid
-# Create your models here.
+
 
 
 
@@ -30,24 +30,8 @@ class Ration(models.Model):
     created = False
     def __str__(self):
       return self.ration_number
-for i in Commodity.objects.all():
-    Ration.add_to_class(i.name,models.PositiveIntegerField(default=0))
-
-
-   # milo = models.CharField(max_length=4)
-   # sbm = models.CharField(max_length=4)
-   # dynamin = models.CharField(max_length=3,default = 0)
-   # pigpak = models.CharField(max_length=3,default = 0)
-   # sixtyeighty = models.CharField(max_length=3,default = 0)
-   # control = models.CharField(max_length=3,default = 0)
-   # optimax = models.CharField(max_length=3,default = 0)
-   # molderase = models.CharField(max_length=3,default = 0)
-   # hitpork = models.CharField(max_length=3,default = 0)
-   # oats = models.CharField(max_length=3,default = 0)
-   # sowonehundred = models.CharField(max_length=3,default = 0)
-   # porkperformance = models.CharField(max_length=3,default = 0)
-   # spicepak = models.CharField(max_length=3,default = 0)
-   # safeguard = models.CharField(max_length=3,default=0)
+for i in Commodity.objects.all(): 
+    Ration.add_to_class(i.name,models.PositiveIntegerField(default=0))   
 
 
 class additives(models.Model):
