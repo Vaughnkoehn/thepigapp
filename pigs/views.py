@@ -175,7 +175,7 @@ def addration(request,pigpen):
 
             form = addrationform(initial={'ration_amount':total,'ration':rt})
         except:
-            amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_number='1'))
+            amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_number='Starter 1'))
             try:
                 pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=piggy['id']).values_list('pigs', flat =True).latest('date'))
             except:
@@ -328,10 +328,10 @@ def dead(request,pigpen):
         if pigsbefore - int(amount) >= 0:
 
             
-            dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),dead = int(amount))
+            dead = models.deadculled(pigpen= Pigpen.objects.get(pen= pigpen),dead = int(amount))
             dead.save()
 
-            pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - int(amount), pig_cost_total=pigscost,date=timezone.now(),notes= amount + " Dead")
+            pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(pen=pigpen),pigs = pigsbefore - int(amount), pig_cost_total=pigscost,date=timezone.now(),notes= amount + " Dead")
             pigdead.save()
 
 
@@ -358,10 +358,10 @@ def culled(request,pigpen):
             amount = request.POST['amount']
 
             if pigsbefore - int(amount) >= 0:
-                dead = models.deadculled(pigpen= Pigpen.objects.get(id= pigpen),culled = int(amount))
+                dead = models.deadculled(pigpen= Pigpen.objects.get(pen= pigpen),culled = int(amount))
                 dead.save()
 
-                pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(id=pigpen),pigs = pigsbefore - int(amount), pig_cost_total=pigscost,date = timezone.now(),notes= "Culled " + amount)
+                pigdead = models.Pigsinpen(pigpen= Pigpen.objects.get(pen=pigpen),pigs = pigsbefore - int(amount), pig_cost_total=pigscost,date = timezone.now(),notes= "Culled " + amount)
                 pigdead.save()
                 return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 

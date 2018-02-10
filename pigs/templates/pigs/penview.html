@@ -165,6 +165,9 @@ $(document).bind("mousedown touchstart", function (e) {
                <form action="{% url 'pigs:ship' pigpen %}" method="get">
                 <input class="killinputs col-s-5" value="Ship" type="submit" />
                </form>
+               <form action="{% url 'pigs:delete' pigpen 'Pigsinpen' %}" method="get">
+                  <input class="killinputs col-s-5" value="Delete" type="submit" />
+               </form>
         </div>
 
 
