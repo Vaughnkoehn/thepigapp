@@ -54,5 +54,9 @@ class shippigsform(forms.ModelForm):
         fields= ['pigs','notes']
         exclude = {'pigpen'}
 
-
+class addpigletsform(forms.ModelForm):
+    class Meta:
+        model = piglets
+        feilds = ['born_date','born','alive','dead','culled','wean','wean_date']
+        exclude = {'Sow'}
             

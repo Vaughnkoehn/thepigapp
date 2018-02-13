@@ -520,6 +520,7 @@ def pigletamount(sow):
     except:
         return '1'
 
+
 class sowview(generic.DetailView):
     model = Sows
     template_name = 'pigs/sowview.html'

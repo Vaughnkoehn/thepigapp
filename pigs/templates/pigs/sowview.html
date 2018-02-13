@@ -36,6 +36,12 @@
         <h1>Sow {{sows}}</h1>
      </div>
    
-    
+    {% if sows.bred %} 
+        <p>bred</p>
+    {%endif%}
+
+    {% if sows.farrowing %} 
+        <p>farrowing</p>
+    {% endif %}
 </body>
 </html>

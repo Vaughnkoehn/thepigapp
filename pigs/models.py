@@ -84,17 +84,43 @@ class Sows(models.Model):
     secondary_id = models.CharField(max_length=50)
     description = models.CharField(max_length=300,null=True,blank=True)
     birth_date = models.DateField()
-    status = models.CharField(max_length=50,null= True, blank = True)
+    bred = models.NullBooleanField(null=True,blank=True)
+    farrowing = models.NullBooleanField(null=True,blank=True)
     def __str__(self):
         return self.sow_id
+
+class boars(models.Model):
+    boar_number = models.PositiveIntegerField()
+    boar_secondaryid = models.CharField(max_length=50,null=True,blank=True)
+    birth_date = models.DateField()
+    def __str__(self):
+        return str(self.boar_number)
+
+class breed(models.Model):
+    Sow = models.ForeignKey(Sows,on_delete=models.CASCADE)
+    by_boar = models.ForeignKey(boars,on_delete=models.CASCADE)
+    date = models.DateField()
+    def __str__(self):
+        return self.status
 
 class piglets(models.Model):
     Sow = models.ForeignKey(Sows,on_delete=models.CASCADE)
     born_date = models.DateField()
     born = models.PositiveIntegerField()
     alive = models.PositiveIntegerField()
-    dead = models.PositiveIntegerField()
-    culled = models.PositiveIntegerField()
-    wean = models.PositiveIntegerField()
-    operation = models.CharField(max_length=50)
-    wean_date = models.DateField()
+    dead = models.PositiveIntegerField(null=True,blank= True)
+    culled = models.PositiveIntegerField(null=True,blank=True)
+    wean = models.PositiveIntegerField(null=True,blank=True)
+    wean_date = models.DateField(null=True,blank=True)
+
+class operation(models.Model):
+    operation_name = models.CharField(max_length=50)
+    def __str__(self):
+        return self.operation_name
+
+class pigletoperation(models.Model):
+    piglet = models.ForeignKey(piglets,on_delete=models.CASCADE)
+    operation = models.ForeignKey(operation,on_delete=models.CASCADE)
+    date = models.DateField()
+    def __str__(self):
+        return self.operation

@@ -4,8 +4,12 @@ from pigs.models import *
 
 class pigsinline(admin.TabularInline):
     model = Pigsinpen
-    
+   
+class pigletinline(admin.TabularInline):
+    model = piglets
 
+class operationiline(admin.TabularInline):
+    model = pigletoperation
 
 class pigpenadmin(admin.ModelAdmin):
     fieldsets = [
@@ -14,10 +18,14 @@ class pigpenadmin(admin.ModelAdmin):
     inlines = [pigsinline]
     search_fields = ['pen']
 
-
 class RationAdmin(admin.ModelAdmin):
     readonly_feilds= ('ration_price',)
     
+class sowadmin(admin.ModelAdmin):
+    inlines = [pigletinline]
+
+class pigletadmin(admin.ModelAdmin):
+    inlines = [operationiline]
 
 admin.site.register(Pigpen,pigpenadmin)
 admin.site.register(Ration,RationAdmin)
@@ -27,4 +35,7 @@ admin.site.register(pigration)
 admin.site.register(deadculled)
 admin.site.register(additives)
 admin.site.register(Commodity)
-admin.site.register(Sows)
+admin.site.register(Sows, sowadmin)
+admin.site.register(piglets,pigletadmin)
+admin.site.register(boars)
+admin.site.register(operation)
