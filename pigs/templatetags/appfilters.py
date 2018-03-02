@@ -50,12 +50,12 @@ def divide(value,key):
 
 @register.simple_tag
 def ration(pigpen,pigs):
-    result = ("; ".join(str(e) for e in list(pigration.objects.values_list('ration').filter(pigpen=pigpen).filter(pigsinapen = pigs).annotate(Sum('ration_amount')))))
+    result = ("; ".join(str(e) for e in list(pigration.objects.values_list('ration').filter(pigpen=pigpen).filter(pigsinapen = pigs).annotate(Sum('ration_amount')).order_by('date'))))
     return result.translate({ord(r): None for r in "(')"})
 
 @register.simple_tag
 def rationtotal(pigpen):
-     result = ("; ".join(str(e) for e in list(pigration.objects.values_list('ration').filter(pigpen=pigpen).annotate(Sum('ration_amount')))))
+     result = ("; ".join(str(e) for e in list(pigration.objects.values_list('ration').order_by('ration').filter(pigpen=pigpen).annotate(Sum('ration_amount')))))
      return result.translate({ord(r): None for r in "(')"})
 
 @register.simple_tag

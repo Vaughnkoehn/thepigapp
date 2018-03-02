@@ -115,7 +115,7 @@ $(document).bind("mousedown touchstart", function (e) {
             });
            
 
-         }, 700);
+         }, 400);
      })
     .on('touchend', ".rightclicktable", function () {
         clearTimeout(timer);
@@ -141,11 +141,11 @@ $(document).bind("mousedown touchstart", function (e) {
 
 
 
-      <div class='custom-menu col-4 col-m-5 col-s-6'>
+      <div class='custom-menu col-4 col-m-5 col-s-9'>
                <form action="{% url 'pigs:deadpigs' pigpen %}" method="post">
                    {%csrf_token%}
                    <input type="submit" value="Dead" class="killinputs col-s-5"/>
-                   <select name="amount" class="killselect col-s-6 col-m-6 col-6">
+                   <select name="amount" class="killselect col-s-4 col-m-6 col-6">
                        {% for i in "xxxxx" %}
                            <option>{{forloop.counter}}</option>
                        {% endfor %}
@@ -155,7 +155,7 @@ $(document).bind("mousedown touchstart", function (e) {
               <form action="{% url 'pigs:culledpigs' pigpen %}" method="post">
                   {%csrf_token%}
                    <input type="submit" value="Culled" class="killinputs col-s-5"/>
-                   <select name="amount" class="killselect col-s-6 col-m-6 col-6">
+                   <select name="amount" class="killselect col-s-4 col-m-6 col-6">
                        {% for i in "xxxxx" %}
                            <option>{{forloop.counter}}</option>
                        {% endfor %}

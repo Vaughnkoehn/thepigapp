@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="{% static 'pigs/Generalstyles.css' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'pigs/charts.css' %}" />
     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width maximum-scale= 1.0">
      <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-transluscent">
      <meta name="mobile-web-app-capable" content="yes">
@@ -16,20 +17,21 @@
 <body>
     <script>
         $(document).ready(function () {
-            $('#penselect').bind('change', function () {
+            $('#allfeed').bind('change', function () {
                 var endpoint = '/pigs/chartjs/'
                 var items = []
                 var labels = []
 
                 $.ajax({
                     method: "GET",
-                    data: $('#myform').serialize(),
+                    data: $('#allfeed').serialize(),
                     url: endpoint,
                     success: function (data) {
                         labels = data.labels
                         items = data.items
                         items2 = data.items2
                         setchart()
+                        
                     },
                     error: function (error_data) {
                         console.log("error")
@@ -38,66 +40,55 @@
                 });
 
                 function setchart() {
-                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var ctx = document.getElementById("allfeedchart").getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: 'Pigs',
-                                data: items,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }, {
                                 label: 'Feed',
                                 data: items2,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
                                 ],
                                 borderColor: [
                                     'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
+                                    'rgba(255,99,132,1)',
+                                    'rgba(255,99,132,1)',
+                                    'rgba(255,99,132,1)',
+                                    'rgba(255,99,132,1)',
                                 ],
                                 borderWidth: 1
-                            }]
+                            },]
                         },
                         options: {
+                            elements: {
+                                line: {
+                                    tension: 1,
+                                }
+                            },
                             scales: {
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero: true
                                     }
+                                }],
+                                xAxes: [{
+                                     time: {
+                                        unit: 'day'
+                                     }
                                 }]
+
                             }
                         }
                     });
                 }
             });
-        $('#penselect').trigger('change')
+        $('#allfeed').trigger('change')
         })
     </script>
 
@@ -108,17 +99,16 @@
         </div>
             <h1>Reports</h1>
      </div>
-    
-    <form id="myform" action="{% url 'pigs:chart' %}" method="get">
-        <select id="penselect" name="pen">
-            {% for p in pen %}
-                <option>{{p}}</option>
-            {% endfor %}
-        </select>
+    <div class="charts">
+    <form id="allfeed" action="{% url 'pigs:chart' %}" method="get">
     </form>
-    <div class="chart col-6" url-endpoint="{% url 'pigs:chart' %}">
-        <canvas id="myChart" class="col-s-6 col-6"></canvas>
+    <div class="chart col-10" url-endpoint="{% url 'pigs:chart' %}">
+        <h3>Total Feed</h3>
+        <canvas id="allfeedchart" class="col-s-10 col-m-10 col-10"></canvas>
     </div>
-    
+    </div>
+    <div class="tables">
+        
+    </div>
 </body>
 </html>

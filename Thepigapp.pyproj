@@ -89,6 +89,7 @@
     <Content Include="pigs\templates\pigs\Ship.html" />
     <Content Include="pigs\templates\pigs\shipped.html" />
     <Content Include="pigs\templates\pigs\sowview.html" />
+    <Content Include="pigs\templates\pigs\tablereport.html" />
     <Content Include="pigs\templates\pigs\updateration.html" />
     <Content Include="pigs\templates\registration\logged_out.html" />
     <Content Include="pigs\templates\registration\password_reset_complete.html" />

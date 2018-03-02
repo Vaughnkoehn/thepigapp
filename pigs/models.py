@@ -24,12 +24,15 @@ class Commodity(models.Model):
         return self.name
 
 class Ration(models.Model):
-
+    id = models.PositiveIntegerField(primary_key=True)
     ration_number = models.CharField(max_length=15, unique=True)
     feed_per_pig = models.CharField(max_length=3,default = 55)
     created = False
     def __str__(self):
       return self.ration_number
+    class Meta:
+        ordering = ['feed_per_pig']
+
 for i in Commodity.objects.all(): 
     Ration.add_to_class(i.name,models.PositiveIntegerField(default=0))   
 
@@ -51,6 +54,7 @@ class Pigsinpen(models.Model):
         return str(self.pigs)
 
 class pigration(models.Model):
+   
     pigpen = models.ForeignKey(Pigpen, on_delete= models.CASCADE)
     ration = models.ForeignKey(Ration, on_delete=models.CASCADE,to_field='ration_number')
     ration_price = models.DecimalField(max_digits=19, decimal_places=4)

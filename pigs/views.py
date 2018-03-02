@@ -15,6 +15,7 @@ from collections import defaultdict
 from django.views.decorators.cache import never_cache
 from datetime import date
 import json
+import calendar
 from django.db.models import FloatField
 from django.db.models.functions import Cast
 from django.template.loader import render_to_string
@@ -157,8 +158,7 @@ def addration(request,pigpen):
        
         try:
             rt = pigration.objects.values('ration').filter(pigpen=pigpen).latest('date')['ration']
-            rat = pigration.objects.filter(pigpen=pigpen).filter(ration=rt).aggregate(Sum('ration_amount'))
-            feed = rat['ration_amount__sum']
+            feed = pigration.objects.filter(pigpen=pigpen).filter(ration=rt).aggregate(Sum('ration_amount'))['ration_amount__sum']
             amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_number=rt))
             try:
                 pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=piggy['id']).values_list('pigs', flat =True).latest('date'))
@@ -169,8 +169,9 @@ def addration(request,pigpen):
 
             if total < 50:
                 total = 2000
-                rt = int(rt) + 1 
-               
+                rt = Ration.objects.values_list('ration_number').get(id = int(Ration.objects.values_list('id',flat = True).get(ration_number=rt)+1))
+            if total > 2499:
+                total = 2000
              
 
             form = addrationform(initial={'ration_amount':total,'ration':rt})
@@ -180,9 +181,9 @@ def addration(request,pigpen):
                 pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=piggy['id']).values_list('pigs', flat =True).latest('date'))
             except:
                 pigs = 0
-
+        
             total = amount*pigs
-            form= addrationform(initial={'ration_amount':total, 'ration':'1'})
+            form= addrationform(initial={'ration_amount':total, 'ration':'Starter 1'})
         today= date.today()
         if pigration.objects.filter(pigpen=pigpen, date__month=today.month).count() == 0:
              messages.info(request,"Add Pork Performance!")
@@ -384,7 +385,7 @@ def movepigs(request,pigpen):
         pigcost = Pigsinpen.objects.values('pig_cost_total').get(id= pigid)
         pigscost = pigcost['pig_cost_total']
         perpigcost = pigscost / pignumber
-        piggypen = Pigpen.objects.get(id=pigpen)
+        piggypen = Pigpen.objects.get(pen=pigpen)
         pigrations = pigration.objects.values_list('ration','ration_amount','date').filter(pigpen=pigpen).filter(pigsinapen = pigid)
 
 
@@ -487,19 +488,16 @@ def Chartview(request):
 def chartdata(request):
     if 'pen' in request.GET:
         pen = request.GET['pen']
+        
 
-    prelabel = list(pigration.objects.filter(pigpen=pen).datetimes('date', 'month', order='ASC'))
-    label= [prelabel.month for prelabel in prelabel]
+    prelabel = list(pigration.objects.filter(pigpen=pen).datetimes('date','month'))
+    loop= [prelabel.month for prelabel in prelabel]
+    label = []
+    for prelabel in prelabel:
+        label.append(str(calendar.month_abbr[prelabel.month]))
     items = []
     items2=[]
-    for i in label:
-        try:
-            a = Pigsinpen.objects.filter(pigpen=pen).filter(date__month=i).values_list('pigs', flat = True).latest('date')
-            
-        except:
-            a = 0
-        items.append(a)
-
+    for i in loop:
         
         b = pigration.objects.filter(pigpen=pen).filter(date__month=i).aggregate(Sum('ration_amount'))['ration_amount__sum']
       
@@ -514,6 +512,30 @@ def chartdata(request):
 
     return JsonResponse(data)
     
+def allpenfeed(request):
+    if 'date' in request.GET:
+        date = request.GET['date']
+
+    prelabel = list(pigration.objects.datetimes('date','month'))
+    loop= [prelabel.month for prelabel in prelabel]
+    label = []
+    for prelabel in prelabel:
+        label.append(str(calendar.month_abbr[prelabel.month]))
+    items2=[]
+    for i in loop:
+        
+        b = pigration.objects.filter(date__month=i).aggregate(Sum('ration_amount'))['ration_amount__sum']
+      
+        items2.append(b)
+    
+
+    data = {
+        "labels": label,
+        "items2": items2
+        }
+
+    return JsonResponse(data)
+
 def pigletamount(sow):
     try:
         return piglets.objects.filter(Sow = sow).latest('born_date')
@@ -528,3 +550,10 @@ class sowview(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['piglets'] = pigletamount(self.kwargs['pk'])
         return context
+
+def tablereport(request):
+    if "pen" in request.GET:
+        pen = request.GET['pen']
+
+    label = list(pigration.objects.filter(Pigpen=pen))
+    rat = pigration.objects.filter(Pigpen=pen).values_list('ration_amount')

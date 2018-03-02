@@ -5,7 +5,15 @@ body
     position:relative;
     top:60px;
 }
-#penselect{
+#penselect {
     position:relative;
     top:50px;
+}
+#dateselect {
+    position: relative;
+    top: 50px;
+    left:30px;
+}
+h3{
+    text-align:center;
 }

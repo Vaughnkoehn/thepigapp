@@ -22,7 +22,7 @@ body{
         display:none;
     }
     .arrowdiv {
-        top:17px;
+        top:27px;
         right:30px;
         color:gainsboro;
         background-color:maroon;
@@ -232,12 +232,12 @@ a.nopigs {
     left:0;
     top:0;
     padding:0 10px 0 10px;
-    height:65px;
+    height:75px;
     z-index:99;
 }
 .header h1 {
     position:relative;
-    top:10px;
+    top:20px;
     line-height:10px;
     color:gainsboro;
 }
@@ -247,7 +247,7 @@ a.nopigs {
     background-color:white;
     top:0;
     position:fixed;
-    height:75px;
+    height:85px;
 }
 .headerdropbtn {
   background-color:maroon;
@@ -309,7 +309,7 @@ td {
 .headerbuttons {
     text-align:right;
     position:fixed;
-    top:30px;
+    top:40px;
     z-index:99;
     right:20px;
 }
@@ -421,7 +421,10 @@ td {
     background-color:#fff;
     font-size:16px;
 }
-
+.killselect{
+    position:relative;
+    left:30px;
+}
 td.overflow {
     overflow: hidden;
     white-space: nowrap;

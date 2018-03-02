@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width maximum-scale= 1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-transluscent">
-     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
     <script>
@@ -48,6 +48,13 @@ $( document ).on("click","a",
     
 </head>
 <body>
+    {% if messages %}
+        <div class="messages">
+            {%for m in messages %}
+               <b>{{m}}</b>
+            {%endfor%}
+        </div>
+    {%endif%}
     <div class="headerwitharrow">
         <div class="displaynone">
             <i class="arrow"></i>
@@ -55,8 +62,13 @@ $( document ).on("click","a",
         </div>
     <h1>Addration</h1>
         </div>
+
     <div class="formhide"></div>
+
     {% if error %}{{error}}{%endif%}
+
+    
+
     <form class="rationform" data-action="{% url 'pigs:mixsheet' pigpen %}" method="post">
         {% csrf_token %}
         <table class="fixedtable">

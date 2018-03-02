@@ -30,3 +30,29 @@ table.fixedtable{
     height:150px;
     z-index:3;
 }
+div.messages {
+    position:fixed;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fde073;
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden;
+    box-shadow: 0 0 5px black;
+    transform: translateY(-50px);
+    animation: slidedown 15s infinite ease-in-out;
+}
+@keyframes slidedown {
+    5%,35% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+    40%, 100% {
+        -webkit-transform: translateY(-50px);
+        transform: translateY(-50px);
+    }
+    
+    
+}

@@ -26,7 +26,7 @@ td.overflow {
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
-    max-width:8ch;
+    max-width:6ch;
 }
 td.overflow:hover, td.overflow:active {
     overflow:visible;
