@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
+{% load static %}
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="{% static 'pigs/Generalstyles.css' %}"/>
     <title></title>
 </head>
 <body>
+<table class="border"id="reporttable">
+    <tr>
+        <th>Ration</th>
+        <th>Amount</th>
+    </tr>
 
+    {% for r,a in rat %}
+        <tr>
+            <td>{{r}}</td>
+            <td>{{a}}</td>
+        </tr>
+    {%endfor%}
+</table>
 </body>
 </html>

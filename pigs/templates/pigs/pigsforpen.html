@@ -41,7 +41,7 @@ $( document ).on("click","a",
     </div>
     <div class="tablewrapper">
     <div class="tablescroll">
-    <table class="col-s-11 col-m-10 col-9 sortable">
+    <table class="col-m-10 col-9 sortable">
 
         <tr>
             <th class="col-s-2">Date</th>
@@ -67,8 +67,7 @@ $( document ).on("click","a",
             {% cost pigpen pig.id pig.pigs as cost %}
             <td>{{cost}}</td>
 
-            {% divide pig.pig_cost_total pig.pigs as pigcost%}
-            <td>{{pigcost}}</td>
+            <td>{{pig.pig_cost_total|divide:pig.pigs}}</td>
             
 
             

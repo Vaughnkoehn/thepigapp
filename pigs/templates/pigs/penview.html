@@ -193,7 +193,8 @@ $(document).bind("mousedown touchstart", function (e) {
 
                 <h3>{{pig.date|date}}</h3>
                 <p>Pigs: {{pig.pigs}}</p>
-                <p class="sidebarp">Cost: {{pig.pig_cost_total}}</p>
+                
+                <p class="sidebarp">Cost: {{pig.pig_cost_total|divide:pig.pigs}}</p>
 
                 {%if pig.notes%}
                 <p class="sidebarp sidebarphover">Notes: {{pig.notes}}</p>{%endif%}

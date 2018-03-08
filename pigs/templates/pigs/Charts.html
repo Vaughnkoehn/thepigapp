@@ -88,7 +88,29 @@
                     });
                 }
             });
-        $('#allfeed').trigger('change')
+            $('#allfeed').trigger('change')
+            $('#tablereport').bind('change', function () {
+                $.ajax({
+                    data: $('#tablereport').serialize(),
+                    type: "get",
+                    dataType: "html",
+                    url: $('#tablereport').data('action'),
+                    success: function(tabledata) {
+                        $('div#report').html(tabledata)
+                    }
+                })
+            })
+            $('#tablereport').trigger('change')
+            function printData(){
+                   var divToPrint=document.getElementById("report");
+                   newWin= window.open("");
+                   newWin.document.write(divToPrint.outerHTML);
+                   newWin.print();
+                   newWin.close();
+            }
+            $('button#print').on('click', function () {
+                printData();
+            })
         })
     </script>
 
@@ -107,8 +129,31 @@
         <canvas id="allfeedchart" class="col-s-10 col-m-10 col-10"></canvas>
     </div>
     </div>
-    <div class="tables">
-        
+    <div id="table">
+        <form id="tablereport" data-action="{% url 'pigs:tablereport' %}" method="get">
+            <select name="pen">
+                <option selected>All</option>
+                {% for i in pen %}
+                <option>{{i}}</option>
+                {%endfor%}
+            </select>
+            <select name="date">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </form>
+        <div id="report"></div>
+        <button id="print">Print</button>
     </div>
 </body>
 </html>

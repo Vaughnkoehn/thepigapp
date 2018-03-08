@@ -41,12 +41,11 @@ def totalcost(pigpen):
    except:
         return 0
 
-@register.simple_tag
+@register.filter
 def divide(value,key):
-    try:
+  
         return round(value / key,2)
-    except:
-        return 0
+    
 
 @register.simple_tag
 def ration(pigpen,pigs):

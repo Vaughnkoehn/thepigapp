@@ -17,3 +17,19 @@ body
 h3{
     text-align:center;
 }
+#table{
+    position:relative;
+    top:70px;
+}
+#tablereport{
+    margin:20px;
+}
+button#print{
+    position:relative;
+    top:20px;
+    left:20px;
+}
+table#reporttable{
+    position:relative;
+    left:20px;
+}

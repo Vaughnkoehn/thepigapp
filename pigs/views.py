@@ -552,8 +552,16 @@ class sowview(generic.DetailView):
         return context
 
 def tablereport(request):
+    if "date" in request.GET:
+        date = request.GET['date']
+
     if "pen" in request.GET:
         pen = request.GET['pen']
 
-    label = list(pigration.objects.filter(Pigpen=pen))
-    rat = pigration.objects.filter(Pigpen=pen).values_list('ration_amount')
+        if pen != 'All':
+            rat = pigration.objects.values_list('ration').filter(pigpen=pen).filter(date__month=date).annotate(Sum(F('ration_amount')))
+        else:
+            rat = pigration.objects.values_list('ration').filter(date__month=date).annotate(Sum(F('ration_amount')))
+    
+        tabledata = render_to_string('pigs/tablereport.html', {'rat':rat})
+        return HttpResponse(tabledata)

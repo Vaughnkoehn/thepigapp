@@ -3,17 +3,12 @@
  
     height:100%;
 }
-table{
-    margin-right:17px;
-    margin-bottom:20px;
-    table-layout:auto;
-}
 table, th, td {
     
     border:1px solid black;
     cursor:default;
     font-size:1em;
-    margin-right:17px;
+    
 }
 
 td {

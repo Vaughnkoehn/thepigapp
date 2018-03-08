@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^additive(?P<pigpen>[0-9]+)/(?P<id>[0-9]+)/(?P<addn>.+)/$', views.additive, name='additive'),
     url(r'^chart/$', views.Chartview, name='chartjs'),
     url(r'^chartjs/$', views.allpenfeed, name='chart'),
-    url(r'^sow(?P<pk>[0-9]+)/$', views.sowview.as_view(), name = 'sow')
+    url(r'^sow(?P<pk>[0-9]+)/$', views.sowview.as_view(), name = 'sow'),
+    url(r'^tablej/$', views.tablereport, name='tablereport')
 ]
