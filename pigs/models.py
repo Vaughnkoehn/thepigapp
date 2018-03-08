@@ -31,7 +31,7 @@ class Ration(models.Model):
     def __str__(self):
       return self.ration_number
     class Meta:
-        ordering = ['feed_per_pig']
+        ordering = ['id']
 
 for i in Commodity.objects.all(): 
     Ration.add_to_class(i.name,models.PositiveIntegerField(default=0))   
