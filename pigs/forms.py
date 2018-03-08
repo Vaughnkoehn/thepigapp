@@ -7,7 +7,7 @@ class addrationform(forms.ModelForm):
         model = pigration
         fields = ['ration', 'ration_amount','date']
         exclude = {'pigpen','pigsinpen'}
-        widgets = {'ration_amount': forms.NumberInput(attrs={'step': '10',}),'date': forms.DateInput(attrs={'type': 'date','default':timezone.now})}
+        widgets = {'ration_amount': forms.NumberInput(),'date': forms.DateInput(attrs={'type': 'date','default':timezone.now})}
         labels = {'ration_amount': 'Amount'}
 
 
