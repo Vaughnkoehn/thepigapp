@@ -96,15 +96,15 @@
                     dataType: "html",
                     url: $('#tablereport').data('action'),
                     success: function(tabledata) {
-                        $('div#report').html(tabledata)
+                        $('div#reportdata').html(tabledata)
                     }
                 })
             })
             $('#tablereport').trigger('change')
-            function printData(){
-                   var divToPrint=document.getElementById("report");
+            function printData() {
+                   prd = $('div#reportdata').html()
                    newWin= window.open("");
-                   newWin.document.write(divToPrint.outerHTML);
+                   newWin.document.write(prd);
                    newWin.print();
                    newWin.close();
             }
@@ -152,7 +152,7 @@
                 <option value="12">December</option>
             </select>
         </form>
-        <div id="report"></div>
+        <div id="reportdata"></div>
         <button id="print">Print</button>
     </div>
 </body>
