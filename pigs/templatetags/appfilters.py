@@ -16,10 +16,15 @@ def getfeed(ration,pigpen,inpen,date):
     feed = rat['ration_amount__sum']
     amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_number=ration))
     try:
-        pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=inpen).values_list('pigs', flat =True).latest('date'))
+        pigs = int(Pigsinpen.objects.values_list('pigs', flat =True).get(id=inpen))
+        total = amount*pigs-feed
+        if total < 50:
+            return 0
+        else:
+            return total
     except:
         pigs = 0
-    return amount*pigs-feed
+        return "No Pigs!"
 
 @register.simple_tag
 def deleteration(instance):

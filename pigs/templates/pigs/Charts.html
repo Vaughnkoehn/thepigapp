@@ -31,7 +31,7 @@
                         items = data.items
                         items2 = data.items2
                         setchart()
-                        
+
                     },
                     error: function (error_data) {
                         console.log("error")
@@ -78,9 +78,9 @@
                                     }
                                 }],
                                 xAxes: [{
-                                     time: {
+                                    time: {
                                         unit: 'day'
-                                     }
+                                    }
                                 }]
 
                             }
@@ -95,23 +95,33 @@
                     type: "get",
                     dataType: "html",
                     url: $('#tablereport').data('action'),
-                    success: function(tabledata) {
+                    success: function (tabledata) {
                         $('div#reportdata').html(tabledata)
                     }
                 })
             })
             $('#tablereport').trigger('change')
-            function printData() {
-                   prd = $('div#reportdata').html()
-                   newWin= window.open("");
-                   newWin.document.write(prd);
-                   newWin.print();
-                   newWin.close();
-            }
+
             $('button#print').on('click', function () {
                 printData();
             })
+
         })
+        function printData() {
+            var prd = $('div#print')[0].outerHTML;
+            window.frames["print_frame"].document.title = document.title;
+            window.frames["print_frame"].document.body.innerHTML = prd;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+
+        }
+        
+              
+
+        };
+
+       
+        
     </script>
 
     <div class="headerwitharrow">
@@ -130,7 +140,8 @@
     </div>
     </div>
     <div id="table">
-        <form id="tablereport" data-action="{% url 'pigs:tablereport' %}" method="get">
+        <div id="print">
+            <form id="tablereport" data-action="{% url 'pigs:tablereport' %}" method="get">
             <select name="pen">
                 <option selected>All</option>
                 {% for i in pen %}
@@ -153,7 +164,12 @@
             </select>
         </form>
         <div id="reportdata"></div>
+            <script>
+                    
+            </script>
+        </div>
         <button id="print">Print</button>
     </div>
+    <iframe id="printing-frame" name="print_frame" src="about:blank" style="display:none;"></iframe>
 </body>
 </html>

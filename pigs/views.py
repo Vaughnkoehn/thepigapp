@@ -137,7 +137,7 @@ def addration(request,pigpen):
 
             for i in additives.objects.values_list('additivename',flat= True).all():
                 if i in request.POST and request.POST[i].isnumeric():
-                   k= int(additives.objects.values_list('price',flat = True).get(additivename=i)) * int(request.POST[i])
+                   k = int(additives.objects.values_list('price',flat = True).get(additivename=i)) * int(request.POST[i])
                    ist.ration_price += k
                    try:
                         ist.extras += ' ' + i[0] + request.POST[i]
@@ -161,30 +161,42 @@ def addration(request,pigpen):
             feed = pigration.objects.filter(pigpen=pigpen).filter(ration=rt).aggregate(Sum('ration_amount'))['ration_amount__sum']
             amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_number=rt))
             try:
-                pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=piggy['id']).values_list('pigs', flat =True).latest('date'))
+                pigs = int(Pigsinpen.objects.values_list('pigs', flat =True).get(id=piggy['id']))
             except:
                 pigs = 0
 
-            total = amount*pigs-feed
+            total = amount * pigs - feed
 
             if total < 50:
-                total = 2000
-                rt = Ration.objects.values_list('ration_number').get(id = int(Ration.objects.values_list('id',flat = True).get(ration_number=rt)+1))
+                
+                 rt = Ration.objects.values_list('ration_number', flat = True).get(id = int(Ration.objects.values_list('id',flat = True).get(ration_number=rt)+1))
+                 newamount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_number=rt))
+                 total = pigs * newamount
+              
+            if total > 2500 and total < 5000:
+                total = int(total / 2)
+        
             if total > 2499:
                 total = 2000
-             
-
+            total = round(total,-1)
             form = addrationform(initial={'ration_amount':total,'ration':rt})
         except:
-            amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(ration_number='Starter 1'))
+            amount = int(Ration.objects.values_list('feed_per_pig', flat = True).get(id=1))
+            rationame = Ration.objects.values_list('ration_number', flat = True).get(id=1)
             try:
-                pigs = int(Pigsinpen.objects.filter(pigpen=pigpen).filter(id=piggy['id']).values_list('pigs', flat =True).latest('date'))
+                pigs = int(Pigsinpen.objects.values_list('pigs', flat =True).get(id=piggy['id']))
             except:
                 pigs = 0
         
-            total = amount*pigs
-            form= addrationform(initial={'ration_amount':total, 'ration':'Starter 1'})
-        today= date.today()
+            total = amount * pigs
+
+            if total > 4200 and total < 5000:
+                total = int(total / 2)
+        
+            if total > 2499:
+                total = 2000
+            form= addrationform(initial={'ration_amount':total, 'ration':rationame})
+        today = date.today()
         if pigration.objects.filter(pigpen=pigpen, date__month=today.month).count() == 0:
              messages.info(request,"Add Pork Performance!")
 
@@ -446,7 +458,7 @@ def shippigs(request,pigpen):
             ist = form.save(commit=False)
             ist.pigpen = Pigpen.objects.get(pk = pigpen)
             ist.pigs = pigsbefore - form.cleaned_data['pigs']
-            ist.pig_cost_total = (pigscost / pigsbefore) * form.cleaned_data['pigs']
+            ist.pig_cost_total = (pigscost / pigsbefore) * ist.pigs
             if ist.notes == "":
                 ist.notes = str(form.cleaned_data['pigs']) + ' Shipped'
 
@@ -454,22 +466,22 @@ def shippigs(request,pigpen):
             ist.save()
 
             pigafter = pigsbefore - form.cleaned_data['pigs']
-            pigrations=pigration.objects.values_list('ration','ration_amount','date').filter(pigpen=pigpen).filter(pigsinapen=id)
+            pigrations=pigration.objects.values_list('ration','ration_price','date').filter(pigpen=pigpen).filter(pigsinapen=id)
             ration = pigration.objects.filter(pigpen=pigpen).filter(pigsinapen=id).aggregate(total=Coalesce(Sum(F('ration_price')),0))['total']
             rationcost = ration / pigsbefore * form.cleaned_data['pigs']
             newpigration = defaultdict(int)
 
             for key,value,date in pigrations:
 
-                    ration = value / pigsbefore * pigafter
-                    newrationamount = int(round(value / pigsbefore * form.cleaned_data['pigs'],1))
-                    pigration.objects.filter(pigpen=pigpen).filter(ration=key).update(ration_amount = ration,pigsinapen = ist.id)
-                    newpigration[key] += newrationamount
+                    cost = value / pigsbefore * pigafter
+                    shippedra= int(round(value / pigsbefore * form.cleaned_data['pigs'],2))
+                    pigration.objects.filter(pigpen=pigpen).filter(ration=key).update(ration_price = cost,pigsinapen = ist.id)
+                    newpigration[key] += shippedra
             newpigration = '; '.join(str(e) for e in newpigration.items())
             newpigration = str(newpigration)
-            newpigration = newpigration.translate({ord(r): None for r in "defaultictns[]{}<>()'"})
+            newpigration = newpigration.translate({ord(r): None for r in "defaulticns[]{}<>()'"})
 
-            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],sold_price= form.cleaned_data['sold_price'], pig_cost = pigscost/pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost)
+            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],sold_price = form.cleaned_data['sold_price'], pig_cost = pigscost / pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost)
             shipped.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:

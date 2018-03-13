@@ -65,6 +65,7 @@ $( document ).on("click","a",
         <nav>
         <input class="navbutton" type="submit" value="Save" />
         <button class="navbutton displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
+        <button class="navbutton"><a class="nostyle block" href="{% url 'pigs:deleteration' pigpen rationid %}">Delete</a></button>
         </nav>
         <div class="navhide"></div>
     
