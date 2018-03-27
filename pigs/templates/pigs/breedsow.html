@@ -9,8 +9,7 @@
      <meta name="mobile-web-app-capable" content="yes">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'pigs/Generalstyles.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'pigs/sowviewstyles.css' %}" />
-
+    <link rel="stylesheet" type="text/css" href="{% static 'pigs/formstyles.css' %}" />
     <script>
         $( document ).on("click","a",
              function( event ){
@@ -25,27 +24,24 @@
              }
         );
     </script>
-    <title>Sow {{sows}}</title>
+    <title>Breed sow {{sow}}</title>
 </head>
 <body>
     <div class="headerwitharrow">
         <div class="displaynone">
             <i class="arrow"></i>
-            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:index' %}">Home</a></h2>
+            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:sow' sow %}">Sow {{sow}}</a></h2>
         </div>
-        <h1>Sow {{sows}}</h1>
-        <h3>{{sows.secondary_id}}</h3>
+        <h1>Breed Sow</h1>
      </div>
-   
-    {% if sows.bred %} 
-        <a class="nostyle">Bred with boar: {{sows.breed.by_boar}}</a>
+        <form method="post">
+        {% csrf_token %}
+        <table>
+        {{form.as_table}}
+        </table>
+        <input class="button" type="submit" value="Save" />
+        <button class="button displaynone-m displaynone-s"><a class="nostyle block" href="{% url 'pigs:sow' sow %}">Back</a></button>
+    </form>
 
-    {% elif sows.farrowing %} 
-        <p>farrowing</p>
-    {% else %}
-    <nav>
-        <button class="navbutton"><a class="nostyle block" href="{% url 'pigs:breedsow' sows %}">Breed sow</a></button>
-    </nav>
-    {% endif %}
 </body>
 </html>

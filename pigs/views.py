@@ -570,7 +570,7 @@ def pigletamount(sow):
     try:
         return piglets.objects.filter(Sow = sow).latest('born_date')
     except:
-        return '1'
+        return ''
 
 
 class sowview(generic.DetailView):
@@ -580,6 +580,23 @@ class sowview(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['piglets'] = pigletamount(self.kwargs['pk'])
         return context
+
+def breedsows(request,sow):
+    if request.method == "POST":
+        form = breedsowform(request.POST)
+        if form.is_valid():
+            ist = form.save(commit=False)
+            ist.Sow = Sows.objects.get(sow_id=sow)
+            if not ist.date:
+                ist.date = timezone.now()
+            ist.save()
+            Sows.objects.filter(sow_id=sow).update(bred=True)
+            return HttpResponseRedirect(reverse('pigs:sow', args=(sow)))
+        else:
+            return render(request,'pigs/breedsow.html',{'sow':sow})
+    else:
+        form = breedsowform()
+        return render(request,'pigs/breedsow.html',{'sow':sow,'form':form})
 
 def tablereport(request):
     if "date" in request.GET:

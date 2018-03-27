@@ -129,3 +129,11 @@ class pigletoperation(models.Model):
     date = models.DateField()
     def __str__(self):
         return self.operation
+
+class weanedpiglets(models.Model):
+    Sowid = models.ForeignKey(Sows,on_delete=models.CASCADE)
+    born_date = models.DateField()
+    weaned = models.PositiveIntegerField()
+    dead = models.PositiveIntegerField()
+    culled = models.PositiveIntegerField()
+    wean_date = models.DateField()

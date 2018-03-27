@@ -59,6 +59,7 @@
     <Compile Include="Thepigapp\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="pigs\templates\pigs\breedsow.html" />
     <Content Include="pigs\static\pigs\charts.css" />
     <Content Include="pigs\static\pigs\Generalstyles.css" />
     <Content Include="pigs\static\pigs\indexviewstyles.css" />

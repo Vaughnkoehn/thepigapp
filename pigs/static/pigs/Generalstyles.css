@@ -250,6 +250,13 @@ table.tablescroll {
     width:100%;
     margin:0 5px 0 5px;
 }
+.headerwitharrow h3 {
+        text-align: center;
+        font-size: 18px;
+        white-space: nowrap;
+        width: 100%;
+        margin: 0 5px 0 5px;
+    }
 nav {
     position:fixed;
     bottom:10px;

@@ -60,4 +60,10 @@ class addpigletsform(forms.ModelForm):
         model = piglets
         feilds = ['born_date','born','alive','dead','culled','wean','wean_date']
         exclude = {'Sow'}
-            
+           
+class breedsowform(forms.ModelForm):
+    class Meta:
+        model = breed
+        feilds = ['by_boar','date']
+        exclude = {'Sow'}
+        widgets = {'date': forms.DateInput(attrs={'type': 'date','default':timezone.now})}
