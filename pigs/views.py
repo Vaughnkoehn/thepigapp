@@ -398,11 +398,11 @@ def movepigs(request,pigpen):
         pigscost = pigcost['pig_cost_total']
         perpigcost = pigscost / pignumber
         piggypen = Pigpen.objects.get(pen=pigpen)
-        pigrations = pigration.objects.values_list('ration','ration_amount','date').filter(pigpen=pigpen).filter(pigsinapen = pigid)
+        pigrations = pigration.objects.values_list('ration','ration_amount','ration_price','date').filter(pigpen=pigpen).filter(pigsinapen = pigid)
 
 
 
-        if request.method =='POST':
+        if request.method == 'POST':
             form = movepigsform(request.POST,pigpen=pigpen)
 
             if form.is_valid():
@@ -415,24 +415,37 @@ def movepigs(request,pigpen):
                     pigs = 0
 
                 ist.pigs = form.cleaned_data['pigs'] + pigs
+
                 if ist.notes == "":
                     ist.notes = str(form.cleaned_data['pigs']) + ' added from pen ' + pigpen
 
                 ist.date = timezone.now()
                 ist.save()
-
+                
                 pigafter = pignumber-form.cleaned_data['pigs']
 
-                newpig = models.Pigsinpen(pigpen=piggypen,pigs=pigafter, pig_cost_total=perpigcost * pigafter, date=timezone.now(), notes='Moved ' + str(form.cleaned_data['pigs']) + ' to ' + str(form.cleaned_data['pigpen']))
-                newpig.save()
+                if pigafter != 0:
+                    newpig = models.Pigsinpen(pigpen=piggypen,pigs=pigafter, pig_cost_total=perpigcost * pigafter, date=timezone.now(), notes='Moved ' + str(form.cleaned_data['pigs']) + ' to ' + str(form.cleaned_data['pigpen']))
+                    newpig.save()
 
-                for key,value,date in pigrations:
-                    ration = value / pignumber * pigafter
-                    newrationamount = value / pignumber * form.cleaned_data['pigs']
-                    pigration.objects.filter(pigpen=pigpen).filter(ration=key).update(ration_amount = ration,pigsinapen = newpig.id)
-                    newration = models.pigration(pigpen= form.cleaned_data['pigpen'], ration=Ration.objects.get(id=key),pigsinapen=ist.id, ration_amount = newrationamount,date = date)
-                    newration.save()
+                    for key,value,price,date in pigrations:
+                        ration = int(value / pignumber * pigafter)
+                        oldprice = price / value * ration
+                        newrationamount = int(value / pignumber * form.cleaned_data['pigs'])
+                        newprice = price / value * newrationamount
+                        pigration.objects.filter(pigpen=pigpen).filter(ration=key).update(ration_amount = ration,pigsinapen = newpig.id,ration_price = oldprice)
+                        newration = models.pigration(pigpen = form.cleaned_data['pigpen'], ration=Ration.objects.get(ration_number=key),ration_price = newprice, pigsinapen=ist.id, ration_amount = newrationamount,date = date)
+                        newration.save()
+                else:
 
+                    for ration,amount,price,date in pigrations:
+                        toration = models.pigration(pigpen= form.cleaned_data['pigpen'], ration= Ration.objects.get(ration_number=ration),ration_price = price, pigsinapen=ist.id, ration_amount=amount,date=date)
+                        toration.save()
+                        
+
+                    Pigsinpen.objects.filter(pigpen=pigpen).delete()
+                    pigration.objects.filter(pigpen=pigpen).delete()
+                    deadculled.objects.filter(pigpen=pigpen).delete()
 
                 return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
 
@@ -477,11 +490,16 @@ def shippigs(request,pigpen):
                     shippedra= int(round(value / pigsbefore * form.cleaned_data['pigs'],2))
                     pigration.objects.filter(pigpen=pigpen).filter(ration=key).update(ration_price = cost,pigsinapen = ist.id)
                     newpigration[key] += shippedra
+
             newpigration = '; '.join(str(e) for e in newpigration.items())
             newpigration = str(newpigration)
             newpigration = newpigration.translate({ord(r): None for r in "defaulticns[]{}<>()'"})
 
-            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],sold_price = form.cleaned_data['sold_price'], pig_cost = pigscost / pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost)
+            if pigafter == 0:
+                de = str(deadculled.objects.filter(pigpen=pigpen).values_list('dead').aggregate(deads = Coalesce(Sum(F('dead')),0))['deads'])
+                cu = str(deadculled.objects.filter(pigpen=pigpen).values_list('culled').aggregate(culls = Coalesce(Sum(F('culled')),0))['culls'])
+
+            shipped = models.Shipped(pigpen=pigpen,pigs = form.cleaned_data['pigs'],sold_price = form.cleaned_data['sold_price'], pig_cost = pigscost / pigsbefore,ration_amount= newpigration,pig_ration_cost = rationcost,deadculls= de + '/' + cu)
             shipped.save()
             return HttpResponseRedirect(reverse('pigs:pen', args=(pigpen)))
         else:

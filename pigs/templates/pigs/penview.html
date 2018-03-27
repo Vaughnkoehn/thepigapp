@@ -192,8 +192,9 @@ $(document).bind("mousedown touchstart", function (e) {
                     <p class="sidebarp sidebarphover">Notes: {{pig.notes}}</p>
                 {%endif%}
             </a>
+     
             {% if pig.pigs == 0 %}
-                <h3><a class="nostyle" href="{% url 'pigs:dpig' pigpen %}">Clean out Pen?</a></h3>
+                <h3><a class="nostyle" href="{% url 'pigs:dpig' pigpen %}">Clean out Pen.</a></h3>
                 <h3><a class="nopigs" href="{% url 'pigs:addpigs' pigpen %}">Click to add pigs.</a></h3>
             {%endif%}
         {%empty %}

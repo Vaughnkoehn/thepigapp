@@ -31,9 +31,9 @@ def deleteration(instance):
    return pigration.objects.get(id=instance).delete()
    
 @register.simple_tag
-def cost(pigpen,pigs,pigs_in_pen):
+def cost(pigs,pigs_in_pen):
     try:
-        return round(pigration.objects.filter(pigpen=pigpen).filter(pigsinapen=pigs).aggregate(total = Sum('ration_price'))['total'] / pigs_in_pen ,2)
+        return round(pigration.objects.filter(pigsinapen=pigs).aggregate(total = Sum('ration_price'))['total'] / pigs_in_pen ,2)
     except:
         return 0
     
@@ -48,13 +48,14 @@ def totalcost(pigpen):
 
 @register.filter
 def divide(value,key):
-  
+    try:
         return round(value / key,2)
-    
+    except:
+        return 0
 
 @register.simple_tag
-def ration(pigpen,pigs):
-    result = ("; ".join(str(e) for e in list(pigration.objects.values_list('ration').filter(pigpen=pigpen).filter(pigsinapen = pigs).annotate(Sum('ration_amount')).order_by('date'))))
+def ration(pigs):
+    result = ("; ".join(str(e) for e in list(pigration.objects.values_list('ration').filter(pigsinapen = pigs).annotate(Sum('ration_amount')).order_by('date'))))
     return result.translate({ord(r): None for r in "(')"})
 
 @register.simple_tag

@@ -3,10 +3,7 @@
     cursor:default;
 }
 body, html {
-    overflow:hidden;
-
 }
-
 .tablewrapper {
     position: relative;
     height: 100%;
@@ -14,10 +11,9 @@ body, html {
 
 .tablescroll {
     height: calc(100% - 100px);
-    width: 100%;
+    width: calc(100% - 27px);
     overflow-y: auto;
     margin-top: 50px;
-    overflow-x: hidden;
     padding-right: 27px;
 }
 td.overflow {

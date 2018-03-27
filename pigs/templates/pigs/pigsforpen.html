@@ -62,9 +62,9 @@ $( document ).on("click","a",
         <tr>
             <td class="col-s-2 cos-m-2 col-2">{{pig.date|date:"m/j"}}</td>
             <td class="col-m-2 col-3 col-s-1">{{pig.pigs}}</td>
-            {% ration pigpen pig.id as ration %}
+            {% ration pig.id as ration %}
             <td class="overflow">{{ration}}</td>
-            {% cost pigpen pig.id pig.pigs as cost %}
+            {% cost pig.id pig.pigs as cost %}
             <td>{{cost}}</td>
 
             <td>{{pig.pig_cost_total|divide:pig.pigs}}</td>
@@ -109,7 +109,7 @@ $( document ).on("click","a",
         <button disabled class="navbutton">Ship</button>
         {%endif%}
 
-        <button class="navbutton displaynone-s displaynone-m"><a class="nostyle block" href="{% url 'pigs:pen' pigpen %}">Back</a></button>
+        
         </nav>
 </body>
 </html>

@@ -14,13 +14,13 @@ body{
         position: fixed;
         top: 0;
         width: 0;
-        height: 0;
+        height:auto;
         opacity: 0;
         right: 0;
         z-index: 54;
         transform: translate(115%);
-        transition: height 1.3s, width 1.3s, opacity 1.3s, transform 1.3s;
-        -webkit-transition: height 1.3s, width 1.3s, opacity 1.3s, transform 1.3s;
+        transition: width 1.3s, opacity 1.3s, transform 1.3s;
+        -webkit-transition: width 1.3s, opacity 1.3s, transform 1.3s;
 
     }
 
@@ -71,7 +71,7 @@ label[for="toggle"] {
 #toggle:checked ~ .sidebar  {
     transform: translate(0);
     z-index:105;
-    height:210px;
+    
     width:55%;
     opacity:1;
 }
@@ -158,11 +158,14 @@ label[for="toggle"] {
 .sidebar {
     background:green;
     top:95px;
-    
     position:fixed;
     right:15px;
     z-index:100;
     padding:0 10px 0 10px;
+}
+.sidebar * {
+    overflow:hidden;
+    white-space:nowrap;
 }
 .sidebar h1 {
     text-align:center;

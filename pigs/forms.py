@@ -39,6 +39,7 @@ class movepigsform(forms.ModelForm):
     class Meta:
         model = Pigsinpen
         fields = ['pigpen','pigs','notes']
+        labels = {'pigpen': "To Pigpen:"}
       
 class shippigsform(forms.ModelForm):
 

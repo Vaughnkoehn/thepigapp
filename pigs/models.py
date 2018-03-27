@@ -79,6 +79,7 @@ class Shipped(models.Model):
     pig_cost = models.DecimalField(max_digits=6, decimal_places=2)
     ration_amount = models.CharField(max_length=500)
     pig_ration_cost = models.DecimalField(max_digits=6,decimal_places=2)
+    deadculls = models.CharField(max_length=40,blank=True,null=True)
     shipped_date = models.DateTimeField(auto_now_add=True)
     notes = models.CharField(max_length=300,blank=True,null=True)
 
