@@ -33,3 +33,7 @@ table#reporttable{
     position:relative;
     left:20px;
 }
+.feedcostdiv{
+    position:relative;
+    top:60px;
+}

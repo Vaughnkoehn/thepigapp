@@ -526,42 +526,60 @@ def chartdata(request):
     for prelabel in prelabel:
         label.append(str(calendar.month_abbr[prelabel.month]))
     items = []
-    items2=[]
     for i in loop:
         
         b = pigration.objects.filter(pigpen=pen).filter(date__month=i).aggregate(Sum('ration_amount'))['ration_amount__sum']
       
-        items2.append(b)
+        items.append(b)
     
 
     data = {
         "labels": label,
         "items": items,
-        "items2": items2
         }
 
     return JsonResponse(data)
-    
-def allpenfeed(request):
-    if 'date' in request.GET:
-        date = request.GET['date']
 
+@login_required
+def feedcostperday(request):
+    
+    if 'pen' in request.GET:
+        pen = request.GET['pen']
+
+    prelabel = list(pigration.objects.filter(pigpen=pen).datetimes('date','day'))
+    loop = [prelabel.day for prelabel in prelabel]
+    labels = []
+    for prelabel in prelabel:
+        labels.append(str(prelabel.month) + "/" + str(prelabel.day))
+    items = []
+    for i in loop:
+        b = pigration.objects.filter(pigpen=pen).filter(date__day=i).aggregate(Sum('ration_amount'))['ration_amount__sum']
+        items.append(b)
+   
+    data = {
+        "labels": labels,
+        "items": items
+        }
+
+    return JsonResponse(data)
+def allpenfeed(request):
+    
     prelabel = list(pigration.objects.datetimes('date','month'))
     loop= [prelabel.month for prelabel in prelabel]
     label = []
     for prelabel in prelabel:
         label.append(str(calendar.month_abbr[prelabel.month]))
-    items2=[]
+    items=[]
     for i in loop:
         
         b = pigration.objects.filter(date__month=i).aggregate(Sum('ration_amount'))['ration_amount__sum']
       
-        items2.append(b)
+        items.append(b)
     
 
     data = {
         "labels": label,
-        "items2": items2
+        "items": items
         }
 
     return JsonResponse(data)
@@ -609,6 +627,7 @@ def tablereport(request):
             rat = pigration.objects.values_list('ration').filter(pigpen=pen).filter(date__month=date).annotate(Sum(F('ration_amount')))
         else:
             rat = pigration.objects.values_list('ration').filter(date__month=date).annotate(Sum(F('ration_amount')))
-    
         tabledata = render_to_string('pigs/tablereport.html', {'rat':rat})
         return HttpResponse(tabledata)
+
+

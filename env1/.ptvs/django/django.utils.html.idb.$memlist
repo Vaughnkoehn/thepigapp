@@ -1,3 +1,4 @@
+escapejs
 conditional_escape
 urlunsplit
 strip_tags
@@ -15,9 +16,9 @@ simple_url_2_re
 RFC3986_SUBDELIMS
 MLStripper
 urlencode
-mark_safe
-simple_email_re
-escapejs
+HTMLParseError
+re
+TRAILING_PUNCTUATION_CHARS
 strip_spaces_between_tags
 linebreaks
 HTMLParser
@@ -31,12 +32,10 @@ avoid_wrapping
 keep_lazy
 simple_url_re
 SafeText
-TRAILING_PUNCTUATION_RE
 Promise
 normalize_newlines
 smart_urlquote
 urlsplit
 word_split_re
 _strip_once
-HTMLParseError
-re
+mark_safe

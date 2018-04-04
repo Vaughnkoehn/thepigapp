@@ -17,20 +17,17 @@
 <body>
     <script>
         $(document).ready(function () {
+           
             $('#allfeed').bind('change', function () {
-                var endpoint = '/pigs/chartjs/'
-                var items = []
-                var labels = []
-
                 $.ajax({
                     method: "GET",
                     data: $('#allfeed').serialize(),
-                    url: endpoint,
+                    url: $('#allfeed').data('action'),
                     success: function (data) {
                         labels = data.labels
                         items = data.items
-                        items2 = data.items2
                         setchart()
+                        console.log(data)
 
                     },
                     error: function (error_data) {
@@ -38,7 +35,6 @@
                         console.log(error_data)
                     }
                 });
-
                 function setchart() {
                     var ctx = document.getElementById("allfeedchart").getContext('2d');
                     var myChart = new Chart(ctx, {
@@ -47,7 +43,7 @@
                             labels: labels,
                             datasets: [{
                                 label: 'Feed',
-                                data: items2,
+                                data: items,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(255, 99, 132, 0.2)',
@@ -88,6 +84,78 @@
                     });
                 }
             });
+
+            $('#feedcostperday').bind('change', function () {
+                
+                $.ajax({
+                    method: "GET",
+                    data: $('#feedcostperday').serialize(),
+                    url: $('#feedcostperday').data('action'),
+                    success: function (data) {
+                        feedlabels = data.labels
+                        feeditems = data.items
+                         for (var i = 0, len = labels.length; i < len; i++) {
+                             background_colors.push(getRandomColor());
+                         };
+                        setfeedchart()
+                        console.log(data)
+
+                    },
+                    error: function (error_data) {
+                        console.log("error")
+                        console.log(error_data)
+                    }
+                });
+                function setfeedchart() {
+                var ctx = document.getElementById("feedcostchart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: feedlabels,
+                        datasets: [{
+                            label: 'Feed',
+                            data: feeditems,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(255,99,132,1)',
+                            ],
+                            borderWidth: 1
+                        },]
+                    },
+                    options: {
+                        elements: {
+                            line: {
+                                tension: 1,
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }],
+                            xAxes: [{
+                                time: {
+                                    unit: 'day'
+                                }
+                            }]
+
+                        }
+                    }
+                });
+            }
+            })
+
             $('#allfeed').trigger('change')
             $('#tablereport').bind('change', function () {
                 $.ajax({
@@ -106,17 +174,14 @@
                 printData();
             })
 
-        })
+        });
+        
         function printData() {
             var prd = $('div#print')[0].outerHTML;
             window.frames["print_frame"].document.title = document.title;
             window.frames["print_frame"].document.body.innerHTML = prd;
             window.frames["print_frame"].window.focus();
             window.frames["print_frame"].window.print();
-
-        }
-        
-              
 
         };
 
@@ -131,13 +196,28 @@
         </div>
             <h1>Reports</h1>
      </div>
+    <div id="debug"></div>
     <div class="charts">
-    <form id="allfeed" action="{% url 'pigs:chart' %}" method="get">
+    <form id="allfeed" data-action="{% url 'pigs:chart' %}" method="get">
     </form>
-    <div class="chart col-10" url-endpoint="{% url 'pigs:chart' %}">
+          
+    <div class="chart col-10">
         <h3>Total Feed</h3>
         <canvas id="allfeedchart" class="col-s-10 col-m-10 col-10"></canvas>
+        
     </div>
+    </div>
+    <div class="feedcostdiv">
+     <form id="feedcostperday" data-action="{% url 'pigs:feedcostperday' %}" method="get">
+            <select name="pen">
+                <option selected>All</option>
+                {% for i in pen %}
+                <option>{{i}}</option>
+                {%endfor%}
+            </select>
+        </form>
+      
+         <canvas id="feedcostchart" class="col-s-10 col-m-10 col-10"></canvas>
     </div>
     <div id="table">
         <div id="print">
@@ -163,6 +243,9 @@
                 <option value="12">December</option>
             </select>
         </form>
+
+       
+
         <div id="reportdata"></div>
             <script>
                     

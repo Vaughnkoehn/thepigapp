@@ -8,7 +8,6 @@ DateTimeField
 Q
 ModelIterable
 operator
-chain
 get_prefetcher
 InstanceCheckMeta
 NamedValuesListIterable
@@ -21,7 +20,7 @@ ValuesIterable
 Trunc
 DateField
 cached_property
-BaseIterable
+settings
 LOOKUP_SEP
 REPR_OUTPUT_SIZE
 OrderedDict
@@ -48,4 +47,4 @@ F
 prefetch_one_level
 RelatedPopulator
 partition
-settings
+BaseIterable
