@@ -553,7 +553,7 @@ def feedcostperday(request):
         labels.append(str(prelabel.month) + "/" + str(prelabel.day))
     items = []
     for i in loop:
-        b = pigration.objects.filter(pigpen=pen).filter(date__day=i).aggregate(Sum('ration_amount'))['ration_amount__sum']
+        b = pigration.objects.filter(pigpen=pen).filter(date__day=i).aggregate(Sum('ration_price'))['ration_price__sum']
         items.append(b)
    
     data = {
