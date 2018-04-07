@@ -5,3 +5,9 @@ table{
     margin:20px 10px 0 10px;
     float:left;
 }
+button#print{
+    position:absolute;
+    right:50px;
+    top:10px;
+    z-index:100;
+}

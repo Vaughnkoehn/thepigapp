@@ -28,11 +28,11 @@ disp_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
    docprint.document.write('<head><title>Rations</title>');
    docprint.document.write('<style type="text/css">body{ margin:20px;');
    docprint.document.write('font-family:verdana,Arial;color:#000;');
-   docprint.document.write('font-family:Verdana, Geneva, sans-serif; font-size:12px;}');
-   docprint.document.write('a{color:#000;text-decoration:none;} table{margin:50px 10px 0 10px;float:left;} </style>');
-   docprint.document.write('</head><body onLoad="self.print()"><center>');
+   docprint.document.write('font-family:Verdana, Geneva, sans-serif; font-size:16px;}');
+   docprint.document.write('a{color:#000;text-decoration:none;} table{margin:50px 10px 0 10px;}table.pagebreak{page-break-after:always;}button{display:none;} </style>');
+   docprint.document.write('</head><body onLoad="self.print()">');
    docprint.document.write(content_vlue);
-   docprint.document.write('</center></body></html>');
+   docprint.document.write('</body></html>');
    docprint.document.close();
    docprint.focus();
 }
@@ -43,14 +43,22 @@ disp_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
             <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:index' %}">Home</a></h2>
         </div>
             <h1>Rations</h1>
+            
      </div>
     <div id="print">
+        <table class="border">
     {% for instance in ration %}
-    <table class="border">
+        {% if forloop.counter|divisibleby:3 %}
+            </table>
+            <table class="border">
+        {%else%}
+            </table>
+            <table class="border">
+        {%endif%}
      {% for r,v in instance.items %}
          {% if r == 'ration_number' %}
         <tr>
-            <td>{{r|capfirst}}</td>
+            <td>Ration</td>
             <td>{{v}}</td>
         </tr>
         {% endif %}
@@ -67,9 +75,9 @@ disp_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
         {% endif %}
         {% endif %}
     {% endfor %}
-    </table>
-    {% endfor %}
+   
     </div>
+    {% endfor %}
     <button id="print" onclick="PrintMe('print')">Print</button>
 </body>
 </html>
