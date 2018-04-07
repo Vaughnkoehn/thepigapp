@@ -643,5 +643,6 @@ def Rations(request):
     else:
   
         data = Ration.objects.all().values()
+        
        
         return render(request,'pigs/Rations.html',{'ration':data})
