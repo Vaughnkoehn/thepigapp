@@ -79,5 +79,6 @@ disp_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
     </div>
     {% endfor %}
     <button id="print" onclick="PrintMe('print')">Print</button>
+    <a href="{% url 'pigs:export' %}">Export</a>
 </body>
 </html>

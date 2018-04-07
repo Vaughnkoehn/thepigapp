@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^tablej/$', views.tablereport, name='tablereport'),
     url(r'^feedcost/$', views.feedcostperday, name='feedcostperday'),
     url(r'^rations/$',views.Rations, name='rations'),
+    url(r'^export/$',views.export, name='export'),
 ]

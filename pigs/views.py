@@ -19,6 +19,7 @@ import calendar
 from django.db.models import FloatField
 from django.db.models.functions import Cast
 from django.template.loader import render_to_string
+import csv
 # Create your views here.
 
 
@@ -646,3 +647,17 @@ def Rations(request):
         
        
         return render(request,'pigs/Rations.html',{'ration':data})
+
+
+def export(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="users.csv"'
+
+    writer = csv.writer(response)
+    
+
+    users = Ration.objects.all().values_list()
+    for user in users:
+        writer.writerow(user)
+
+    return response
