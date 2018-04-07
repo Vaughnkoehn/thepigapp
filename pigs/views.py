@@ -552,6 +552,7 @@ def feedcostperday(request):
     for prelabel in prelabel:
         labels.append(str(prelabel.month) + "/" + str(prelabel.day))
     items = []
+   
     for i in loop:
         b = pigration.objects.filter(pigpen=pen).filter(date__day=i).aggregate(total = Cast(Sum(F('ration_price')),FloatField()) / Cast(Sum(F('ration_amount')),FloatField())*2000)['total']
         items.append(b)
@@ -631,3 +632,16 @@ def tablereport(request):
         return HttpResponse(tabledata)
 
 
+def Rations(request):
+    if request.is_ajax():
+        if 'ration' in request.GET:
+            rat = request.GET['ration']
+
+            ration = list(Ration.objects.get(ration_number= rat).all().values())
+    
+            return JsonResponse(data)
+    else:
+  
+        data = Ration.objects.all().values()
+       
+        return render(request,'pigs/Rations.html',{'ration':data})

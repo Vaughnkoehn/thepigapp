@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="{% static 'pigs/Generalstyles.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'pigs/Rationscss.css' %}" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width maximum-scale= 1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-transluscent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Rations</title>
+</head>
+<body>
+    <div class="headerwitharrow">
+        <div class="displaynone">
+            <i class="arrow"></i>
+            <h2 class="arrowh"><a class="nostyle" href="{% url 'pigs:index' %}">Home</a></h2>
+        </div>
+            <h1>Rations</h1>
+     </div>
+    {% for instance in ration %}
+    <table class="border">
+    {% for r,v in instance.items %}
+        {% if v != 0 %}
+        {% if r != "id" %}
+        <tr>
+            <td>{{r|capfirst}}</td>
+            <td>{{v}}</td>
+        </tr>
+        {% endif %}
+        {% endif %}
+    {% endfor %}
+    </table>
+    {% endfor %}
+</body>
+</html>

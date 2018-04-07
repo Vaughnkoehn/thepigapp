@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^sow(?P<pk>[0-9]+)/$', views.sowview.as_view(), name = 'sow'),
     url(r'^sow(?P<sow>[0-9]+)/breedsow/$', views.breedsows, name = 'breedsow'),
     url(r'^tablej/$', views.tablereport, name='tablereport'),
-    url(r'^feedcost/$', views.feedcostperday, name='feedcostperday')
+    url(r'^feedcost/$', views.feedcostperday, name='feedcostperday'),
+    url(r'^rations/$',views.Rations, name='rations'),
 ]
