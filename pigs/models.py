@@ -34,7 +34,7 @@ class Ration(models.Model):
         ordering = ['id']
 
 for i in Commodity.objects.all(): 
-    Ration.add_to_class(i.name,models.PositiveIntegerField(default=0))   
+    Ration.add_to_class(i.name,models.PositiveIntegerField(default=0,blank=True,null=True))   
 
 
 class additives(models.Model):

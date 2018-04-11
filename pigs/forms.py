@@ -67,3 +67,8 @@ class breedsowform(forms.ModelForm):
         feilds = ['by_boar','date']
         exclude = {'Sow'}
         widgets = {'date': forms.DateInput(attrs={'type': 'date','default':timezone.now})}
+
+class Rationform(forms.ModelForm):
+    class Meta:
+        model = Ration
+        fields= '__all__'

@@ -1,13 +1,22 @@
 body
 { margin:40px;
 }
-table{
+.float{
     margin:20px 10px 0 10px;
     float:left;
+}
+table{
+    margin-top:20px;
 }
 button#print{
     position:absolute;
     right:50px;
+    top:10px;
+    z-index:100;
+}
+button#export{
+    position:absolute;
+    right:100px;
     top:10px;
     z-index:100;
 }

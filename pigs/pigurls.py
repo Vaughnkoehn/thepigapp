@@ -31,4 +31,5 @@ urlpatterns = [
     url(r'^feedcost/$', views.feedcostperday, name='feedcostperday'),
     url(r'^rations/$',views.Rations, name='rations'),
     url(r'^export/$',views.export, name='export'),
+    url(r'^rationupdate/$', views.rationupdate, name='rationupdate')
 ]

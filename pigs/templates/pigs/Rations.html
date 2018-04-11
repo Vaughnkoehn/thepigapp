@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <link type="text/css" rel="stylesheet" href="{% static 'pigs/Generalstyles.css' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'pigs/Rationscss.css' %}" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width maximum-scale= 1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -35,7 +36,28 @@ disp_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
    docprint.document.write('</body></html>');
    docprint.document.close();
    docprint.focus();
-}
+        }
+
+        $(document).ready(function () {
+            $('form').bind('change', function () {
+                ist = $(this).data('ist')
+                console.log(ist)
+                console.log($('form#' + ist))
+                $.ajax({
+                    method: "GET",
+                    data: $('form#' + ist).serialize(),
+                    url: $('form#' + ist).data('action'),
+                    
+                    success: function (data) {
+                        $('div#div' + ist).html("Succesfully Saved!")                       
+                    },
+                    error: function (error_data) {
+                       $('div#div' + ist).html("There was an error!")   
+                    },
+                    
+                });
+            });
+        });
 </script>
     <div class="headerwitharrow">
         <div class="displaynone">
@@ -45,21 +67,42 @@ disp_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
             <h1>Rations</h1>
             
      </div>
+
+
+
     <div id="print">
-        <table class="border">
+       
     {% for instance in ration %}
-        {% if forloop.counter|divisibleby:3 %}
+       
+        {% if forloop.first %}
+            <div class="float">
+            <div id="div{{instance.id}}"></div>
+            <form id="{{instance.id}}" data-ist="{{instance.id}}" data-action="{% url 'pigs:rationupdate'%}">
+            <table class="border">
+        {% elif forloop.counter|divisibleby:3 %}
+            
             </table>
+            </form>
+            </div>
+            <div class="float">
+            <div id="div{{instance.id}}"></div>
+            <form id="{{instance.id}}" data-ist="{{instance.id}}" data-action="{% url 'pigs:rationupdate'%}">
             <table class="border">
         {%else%}
+            
             </table>
+            </form>
+            </div>
+            <div class="float">
+            <div id="div{{instance.id}}"></div>
+            <form id="{{instance.id}}" data-ist="{{instance.id}}" data-action="{% url 'pigs:rationupdate'%}">
             <table class="border">
         {%endif%}
      {% for r,v in instance.items %}
          {% if r == 'ration_number' %}
         <tr>
             <td>Ration</td>
-            <td>{{v}}</td>
+            <td><input type="text" name="ration_number" value="{{v}}"/></td>
         </tr>
         {% endif %}
         {%endfor%}
@@ -69,16 +112,24 @@ disp_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
         {% if r != 'ration_number' %}
         <tr>
             <td>{{r|capfirst}}</td>
-            <td>{{v}}</td>
+            <td><input type="text" name="{{r}}" value="{{v}}"/></td>
         </tr>
         {% endif %}
+        {% else %}
+                
+                   <input type="hidden" name="id" value="{{v}}" /></td>
+                
         {% endif %}
         {% endif %}
     {% endfor %}
    
-    </div>
+    
     {% endfor %}
+    </div>
+    </table>
+    </form>
+    </div>
     <button id="print" onclick="PrintMe('print')">Print</button>
-    <a href="{% url 'pigs:export' %}">Export</a>
+    <button id="export"><a class="nostyle" href="{% url 'pigs:export' %}">Export</a></button>
 </body>
 </html>

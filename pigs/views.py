@@ -648,16 +648,33 @@ def Rations(request):
        
         return render(request,'pigs/Rations.html',{'ration':data})
 
-
 def export(request):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="users.csv"'
+    response['Content-Disposition'] = 'attachment; filename="Ration.csv"'
+    rat = [k.name for k in Ration._meta.__dict__.get("fields")]
+    key=[]
+    for k in rat:
+        key.append(k.__str__())
 
     writer = csv.writer(response)
-    
+    writer.writerow(rat)
 
     users = Ration.objects.all().values_list()
     for user in users:
         writer.writerow(user)
 
     return response
+
+def rationupdate(request):
+    data = request.GET
+    istid = get_object_or_404(Ration,id = request.GET['id'])
+    form = Rationform(request.GET, instance = istid)
+    if form.is_valid():
+
+        form.save()
+
+
+        return JsonResponse(data)
+    else:
+        return JsonResponse(form.errors)
+   
